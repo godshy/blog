@@ -7,3 +7,5 @@ category: commands
 
 ## Basic linux cmds
 ### To Create a post
+
+## modified something on other computers
