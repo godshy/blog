@@ -5,7 +5,30 @@ tags: Linux
 category: commands
 ---
 
-## Basic linux cmds
-### To Create a post
+# Basic linux cmds
 
-## modified something on other computers
+## System check related commands
+
+- Check CPU info
+
+``` bash
+cat /proc/cpuinfo
+```
+
+or 
+
+``` bash
+ls cpu
+```
+
+- Check memory
+
+``` bash
+grep MemTotal /proc/meminfo
+```
+
+- Check Virtual memory
+
+``` bash
+grep VmallocTotal /procm/meminfo 
+```
