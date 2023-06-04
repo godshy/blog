@@ -32,3 +32,27 @@ grep MemTotal /proc/meminfo
 ``` bash
 grep VmallocTotal /procm/meminfo 
 ```
+
+- Check devices
+
+``` bash
+ls -la /sys/devices
+```
+
+## Syscall related commands
+
+- Follow syscall
+
+``` bash
+strace + syscall_cmd
+```
+
+> -c summary only
+
+- Check kernel machine and kernel release
+
+``` bash
+uname -srm
+```
+
+
