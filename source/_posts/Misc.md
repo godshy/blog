@@ -28,6 +28,12 @@ Generate it
 ``` bash
 $ npx hexo generate
 ```
+
+Install deploy manager
+``` bash
+npm install hexo-deployer-git --save
+```
+
 Deploy it 
 ``` bash
 $ npx hexo deploy
