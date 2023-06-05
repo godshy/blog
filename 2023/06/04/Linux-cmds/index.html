@@ -6,15 +6,15 @@
   
   <title>Linux cmds | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Basic linux cmdsTo Create a postmodified something on other computers">
+  <meta name="description" content="Basic linux cmdsSystem check related commands Check CPU info  1cat &#x2F;proc&#x2F;cpuinfo  or  1ls cpu   Check memory  1grep MemTotal &#x2F;proc&#x2F;meminfo   Check Virtual memory  1grep VmallocTotal &#x2F;procm&#x2F;meminfo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux cmds">
 <meta property="og:url" content="https://godshy.github.io/blog/2023/06/04/Linux-cmds/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Basic linux cmdsTo Create a postmodified something on other computers">
+<meta property="og:description" content="Basic linux cmdsSystem check related commands Check CPU info  1cat &#x2F;proc&#x2F;cpuinfo  or  1ls cpu   Check memory  1grep MemTotal &#x2F;proc&#x2F;meminfo   Check Virtual memory  1grep VmallocTotal &#x2F;procm&#x2F;meminfo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-04T10:18:25.000Z">
-<meta property="article:modified_time" content="2023-06-04T10:32:28.333Z">
+<meta property="article:modified_time" content="2023-06-05T02:41:46.053Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -102,11 +102,48 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Basic-linux-cmds"><a href="#Basic-linux-cmds" class="headerlink" title="Basic linux cmds"></a>Basic linux cmds</h2><h3 id="To-Create-a-post"><a href="#To-Create-a-post" class="headerlink" title="To Create a post"></a>To Create a post</h3><h2 id="modified-something-on-other-computers"><a href="#modified-something-on-other-computers" class="headerlink" title="modified something on other computers"></a>modified something on other computers</h2>
+        <h1 id="Basic-linux-cmds"><a href="#Basic-linux-cmds" class="headerlink" title="Basic linux cmds"></a>Basic linux cmds</h1><h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><ul>
+<li>Check CPU info</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure>
+
+<p>or </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> cpu</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check memory</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep MemTotal /proc/meminfo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check Virtual memory</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep VmallocTotal /procm/meminfo </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check devices</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -la /sys/devices</span><br></pre></td></tr></table></figure>
+
+<h2 id="Syscall-related-commands"><a href="#Syscall-related-commands" class="headerlink" title="Syscall related commands"></a>Syscall related commands</h2><ul>
+<li>Follow syscall</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace + syscall_cmd</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-c summary only</p>
+</blockquote>
+<ul>
+<li>Check kernel machine and kernel release</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -srm</span><br></pre></td></tr></table></figure>
+
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cliha9wwx0000zxke6yy91s9a" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cliimpjep0000y5ke1m9i7nag" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -117,6 +154,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/blog/2023/06/05/K8s-cmds/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          K8s cmds
+        
+      </div>
+    </a>
   
   
     <a href="/blog/2023/06/04/Misc/" id="article-nav-older" class="article-nav-link-wrap">
@@ -138,7 +184,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Basic-Commands/">Basic_Commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
     </div>
   </div>
 
@@ -148,7 +194,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
     </div>
   </div>
 
@@ -158,7 +204,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a>
+      <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a>
     </div>
   </div>
 
@@ -180,15 +226,23 @@
       <ul>
         
           <li>
+            <a href="/blog/2023/06/05/k8s-templates/">k8s templates</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
+          </li>
+        
+          <li>
             <a href="/blog/2023/06/04/Linux-cmds/">Linux cmds</a>
           </li>
         
           <li>
             <a href="/blog/2023/06/04/Misc/">Misc</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/06/04/hello-world/">Hello World</a>
           </li>
         
       </ul>

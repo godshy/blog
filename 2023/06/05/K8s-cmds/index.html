@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>K8s cmds | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Basic K8s-CommandsETCD related commands ETCDCTL version 2 12345etcdctl backupetcdctl cluster-healthetcdctl mketcdctl mkdiretcdctl set  ETCDCTL version 3 1234etcdctl snapshot save etcdctl endpoint heal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K8s cmds">
+<meta property="og:url" content="https://godshy.github.io/blog/2023/06/05/K8s-cmds/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Basic K8s-CommandsETCD related commands ETCDCTL version 2 12345etcdctl backupetcdctl cluster-healthetcdctl mketcdctl mkdiretcdctl set  ETCDCTL version 3 1234etcdctl snapshot save etcdctl endpoint heal">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-05T01:57:16.000Z">
+<meta property="article:modified_time" content="2023-06-05T09:01:01.593Z">
+<meta property="article:author" content="Hongyi Shen">
+<meta property="article:tag" content="K8s">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/blog/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://godshy.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-K8s-cmds" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2023/06/05/K8s-cmds/" class="article-date">
+  <time class="dt-published" datetime="2023-06-05T01:57:16.000Z" itemprop="datePublished">2023-06-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Basic-Commands/">Basic_Commands</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      K8s cmds
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Basic-K8s-Commands"><a href="#Basic-K8s-Commands" class="headerlink" title="Basic K8s-Commands"></a>Basic K8s-Commands</h1><h2 id="ETCD-related-commands"><a href="#ETCD-related-commands" class="headerlink" title="ETCD related commands"></a>ETCD related commands</h2><ul>
+<li><p>ETCDCTL version 2</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl backup</span><br><span class="line">etcdctl cluster-health</span><br><span class="line">etcdctl mk</span><br><span class="line">etcdctl <span class="built_in">mkdir</span></span><br><span class="line">etcdctl <span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ETCDCTL version 3</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">etcdctl snapshot save </span><br><span class="line">etcdctl endpoint health</span><br><span class="line">etcdctl get</span><br><span class="line">etcdctl put</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Set version of version</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ETCDCTL_API = 3</span><br></pre></td></tr></table></figure>
+<p><strong>When API version is not set, it is assumed to be set to version 2.</strong></p>
+</li>
+<li><p>For ETCDCTL to authenticate to the ETCD API server, the certificate files are available in the etcd-master.</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--cacert /etc/kubernetes/pki/etcd/ca.crt     </span><br><span class="line">--cert /etc/kubernetes/pki/etcd/server.crt     </span><br><span class="line">--key /etc/kubernetes/pki/etcd/server.key</span><br></pre></td></tr></table></figure>
+
+<p>In total:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> etcd-master -n kube-system -- sh -c <span class="string">&quot;ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Kube-API-commands"><a href="#Kube-API-commands" class="headerlink" title="Kube-API commands"></a>Kube-API commands</h2><ul>
+<li>View api-server thru kubeadm, kubeadm deploys kube-api as a pod in the kube-system namespace on the master node.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n kube-system</span><br></pre></td></tr></table></figure>
+<ul>
+<li>view api-server options with kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernets/manifests/kube-apiserver.yaml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>view api-server options without kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/systemd/system/kube-apiserver.service</span><br></pre></td></tr></table></figure>
+<p>checking active process of apiserver by</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-apiserver</span><br></pre></td></tr></table></figure>
+
+<h2 id="Kube-controller-manager"><a href="#Kube-controller-manager" class="headerlink" title="Kube controller manager"></a>Kube controller manager</h2><ul>
+<li>check status with the deployment by kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kube get pods -n kube-system</span><br></pre></td></tr></table></figure>
+<ul>
+<li>view options with kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernetes/manifests/kube-controller-manager.yaml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>view options without kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/systemd/system/kube-controller-manaer.service</span><br></pre></td></tr></table></figure>
+<ul>
+<li>check process of kube controller manager</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-controller-manager</span><br></pre></td></tr></table></figure>
+
+<h2 id="Kube-scheduler"><a href="#Kube-scheduler" class="headerlink" title="Kube-scheduler"></a>Kube-scheduler</h2><ul>
+<li>View kube scheduler thru kubeadm</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernetes/manifests/kube-scheduler.yaml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Check thru process</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-scheduler</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Run-pods"><a href="#Run-pods" class="headerlink" title="Run pods"></a>Run pods</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run //name --image=//image_name</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Check pods location</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o wide</span><br></pre></td></tr></table></figure></li>
+<li><p>Check pods manifest (able to export as yaml) </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods pods_name -o yaml</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>apply changes to pod (not verified)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Work-with-replicasets"><a href="#Work-with-replicasets" class="headerlink" title="Work with replicasets"></a>Work with replicasets</h2><ul>
+<li>Create replicaset</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f desfilename.yaml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check status of replicaset</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset</span><br><span class="line">kubectl describe replicaset name_of_replicaset</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>scale up&#x2F;down without modifying the yaml file.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale --replicas=6 replicaset (<span class="built_in">type</span>) myapp-replicaset (name <span class="keyword">in</span> the metadata) <span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">kubectl scale --replicas=6 -f desfilename.yaml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>scale up&#x2F;down by modifying the yaml file first <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset -o yaml &gt;&gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cliimpjes0001y5kecr3i1gdo" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2023/06/05/K8s-TS-hints/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          K8s TS hints
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2023/06/04/Linux-cmds/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux cmds</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Basic-Commands/">Basic_Commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2023/06/05/k8s-templates/">k8s templates</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/06/04/Linux-cmds/">Linux cmds</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/06/04/Misc/">Misc</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Hongyi Shen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/blog/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

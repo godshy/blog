@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Misc | Hexo</title>
+  <title>K8s TS hints | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="ProcessTo Create a postUnder source&#x2F;_posts 1$ npx hexo new post &quot;NAME&quot; Under source&#x2F;_draft 1$ npx hexo new draft &quot;NAME&quot; Under source 1$ npx hexo new page &quot;NAME&quot;">
+  <meta name="description" content="Provide some basic point of view for troubleshooting K8sImagePullBackoff This usually indicates something wrong with the pod description yaml file. Check name under image: 12345spec:  containers:  - n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Misc">
-<meta property="og:url" content="https://godshy.github.io/blog/2023/06/04/Misc/index.html">
+<meta property="og:title" content="K8s TS hints">
+<meta property="og:url" content="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ProcessTo Create a postUnder source&#x2F;_posts 1$ npx hexo new post &quot;NAME&quot; Under source&#x2F;_draft 1$ npx hexo new draft &quot;NAME&quot; Under source 1$ npx hexo new page &quot;NAME&quot;">
+<meta property="og:description" content="Provide some basic point of view for troubleshooting K8sImagePullBackoff This usually indicates something wrong with the pod description yaml file. Check name under image: 12345spec:  containers:  - n">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-06-04T06:50:22.000Z">
-<meta property="article:modified_time" content="2023-06-05T02:41:47.063Z">
+<meta property="article:published_time" content="2023-06-05T07:00:30.000Z">
+<meta property="article:modified_time" content="2023-06-05T09:01:32.893Z">
 <meta property="article:author" content="Hongyi Shen">
+<meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -75,12 +76,16 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Misc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-K8s-TS-hints" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/blog/2023/06/04/Misc/" class="article-date">
-  <time class="dt-published" datetime="2023-06-04T06:50:22.000Z" itemprop="datePublished">2023-06-04</time>
+    <a href="/blog/2023/06/05/K8s-TS-hints/" class="article-date">
+  <time class="dt-published" datetime="2023-06-05T07:00:30.000Z" itemprop="datePublished">2023-06-05</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/troubleshooting/">troubleshooting</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -89,7 +94,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Misc
+      K8s TS hints
     </h1>
   
 
@@ -97,47 +102,45 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h2><h3 id="To-Create-a-post"><a href="#To-Create-a-post" class="headerlink" title="To Create a post"></a>To Create a post</h3><p>Under source&#x2F;_posts</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx hexo new post <span class="string">&quot;NAME&quot;</span></span><br></pre></td></tr></table></figure>
-<p>Under source&#x2F;_draft</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx hexo new draft <span class="string">&quot;NAME&quot;</span></span><br></pre></td></tr></table></figure>
-<p>Under source</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx hexo new page <span class="string">&quot;NAME&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>Test it</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx hexo server</span><br></pre></td></tr></table></figure>
-
-<p>Generate it </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>Install deploy manager</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>Deploy it </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx hexo deploy</span><br></pre></td></tr></table></figure>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+        <h1 id="Provide-some-basic-point-of-view-for-troubleshooting-K8s"><a href="#Provide-some-basic-point-of-view-for-troubleshooting-K8s" class="headerlink" title="Provide some basic point of view for troubleshooting K8s"></a>Provide some basic point of view for troubleshooting K8s</h1><h3 id="ImagePullBackoff"><a href="#ImagePullBackoff" class="headerlink" title="ImagePullBackoff"></a>ImagePullBackoff</h3><ol>
+<li>This usually indicates something wrong with the pod description yaml file. Check name under <code>image: </code><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis123</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="unable-to-recognize-“something-yaml”"><a href="#unable-to-recognize-“something-yaml”" class="headerlink" title="unable to recognize “something.yaml”"></a>unable to recognize “something.yaml”</h3><ol>
+<li>if “no matches for &#x2F; , kind&#x3D;ReplicaSet” . Possibly the apiVersion problem. Make sure it is <code>apps/v1</code><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="please-apply-your-changes-to-the-latest-version-and-try-again-error"><a href="#please-apply-your-changes-to-the-latest-version-and-try-again-error" class="headerlink" title="please apply your changes to the latest version and try again error"></a>please apply your changes to the latest version and try again error</h3><ol>
+<li>This error after <code>kubectl apply</code> indicates that you should acquire the newest yaml file after you did some changes to the parts without modyfing the yaml file.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset -o yaml &gt;&gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cliimpjf1000by5ke38aw5n6d" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cliimpjf0000ay5ke6bhr68en" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/blog/2023/06/04/Linux-cmds/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2023/06/05/k8s-templates/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Linux cmds
+          k8s templates
         
       </div>
     </a>
   
+  
+    <a href="/blog/2023/06/05/K8s-cmds/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">K8s cmds</div>
+    </a>
   
 </nav>
 

@@ -73,6 +73,238 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-k8s-templates" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2023/06/05/k8s-templates/" class="article-date">
+  <time class="dt-published" datetime="2023-06-05T09:07:29.000Z" itemprop="datePublished">2023-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/blog/2023/06/05/k8s-templates/">k8s templates</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Config-templates-for-K8s"><a href="#Config-templates-for-K8s" class="headerlink" title="Config templates for K8s"></a>Config templates for K8s</h1><h3 id="YAML-description-file-for-pods"><a href="#YAML-description-file-for-pods" class="headerlink" title="YAML description file for pods"></a>YAML description file for pods</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="YAML-description-file-for-replication-controllers"><a href="#YAML-description-file-for-replication-controllers" class="headerlink" title="YAML description file for replication-controllers"></a>YAML description file for replication-controllers</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicationController</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">myrc</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">	<span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">	  <span class="attr">name:</span> <span class="string">myapp-pod</span></span><br><span class="line">	  <span class="attr">labels:</span> </span><br><span class="line">	    <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">		<span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line">	<span class="attr">spec:</span></span><br><span class="line">	  <span class="attr">containers:</span></span><br><span class="line">	  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-containers</span></span><br><span class="line">		<span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="YAML-description-file-for-replication-sets"><a href="#YAML-description-file-for-replication-sets" class="headerlink" title="YAML description file for replication-sets"></a>YAML description file for replication-sets</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span>  <span class="comment"># error: unable to recognize &quot;filename.yml&quot;: no matches for /, kind=ReplicaSet appears if apiVersion was set to v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicaSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">myrs</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">	<span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">	  <span class="attr">name:</span> <span class="string">myapp-pod</span></span><br><span class="line">	  <span class="attr">labels:</span> </span><br><span class="line">	    <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">		<span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line">	<span class="attr">spec:</span></span><br><span class="line">	  <span class="attr">containers:</span></span><br><span class="line">	  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-containers</span></span><br><span class="line">		<span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span> </span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">front-end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cliimpjf2000ey5ke7lvgazw8" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-K8s-TS-hints" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2023/06/05/K8s-TS-hints/" class="article-date">
+  <time class="dt-published" datetime="2023-06-05T07:00:30.000Z" itemprop="datePublished">2023-06-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/troubleshooting/">troubleshooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Provide-some-basic-point-of-view-for-troubleshooting-K8s"><a href="#Provide-some-basic-point-of-view-for-troubleshooting-K8s" class="headerlink" title="Provide some basic point of view for troubleshooting K8s"></a>Provide some basic point of view for troubleshooting K8s</h1><h3 id="ImagePullBackoff"><a href="#ImagePullBackoff" class="headerlink" title="ImagePullBackoff"></a>ImagePullBackoff</h3><ol>
+<li>This usually indicates something wrong with the pod description yaml file. Check name under <code>image: </code><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis123</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="unable-to-recognize-“something-yaml”"><a href="#unable-to-recognize-“something-yaml”" class="headerlink" title="unable to recognize “something.yaml”"></a>unable to recognize “something.yaml”</h3><ol>
+<li>if “no matches for &#x2F; , kind&#x3D;ReplicaSet” . Possibly the apiVersion problem. Make sure it is <code>apps/v1</code><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="please-apply-your-changes-to-the-latest-version-and-try-again-error"><a href="#please-apply-your-changes-to-the-latest-version-and-try-again-error" class="headerlink" title="please apply your changes to the latest version and try again error"></a>please apply your changes to the latest version and try again error</h3><ol>
+<li>This error after <code>kubectl apply</code> indicates that you should acquire the newest yaml file after you did some changes to the parts without modyfing the yaml file.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset -o yaml &gt;&gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cliimpjf0000ay5ke6bhr68en" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-K8s-cmds" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2023/06/05/K8s-cmds/" class="article-date">
+  <time class="dt-published" datetime="2023-06-05T01:57:16.000Z" itemprop="datePublished">2023-06-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Basic-Commands/">Basic_Commands</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Basic-K8s-Commands"><a href="#Basic-K8s-Commands" class="headerlink" title="Basic K8s-Commands"></a>Basic K8s-Commands</h1><h2 id="ETCD-related-commands"><a href="#ETCD-related-commands" class="headerlink" title="ETCD related commands"></a>ETCD related commands</h2><ul>
+<li><p>ETCDCTL version 2</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl backup</span><br><span class="line">etcdctl cluster-health</span><br><span class="line">etcdctl mk</span><br><span class="line">etcdctl <span class="built_in">mkdir</span></span><br><span class="line">etcdctl <span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ETCDCTL version 3</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">etcdctl snapshot save </span><br><span class="line">etcdctl endpoint health</span><br><span class="line">etcdctl get</span><br><span class="line">etcdctl put</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Set version of version</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ETCDCTL_API = 3</span><br></pre></td></tr></table></figure>
+<p><strong>When API version is not set, it is assumed to be set to version 2.</strong></p>
+</li>
+<li><p>For ETCDCTL to authenticate to the ETCD API server, the certificate files are available in the etcd-master.</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--cacert /etc/kubernetes/pki/etcd/ca.crt     </span><br><span class="line">--cert /etc/kubernetes/pki/etcd/server.crt     </span><br><span class="line">--key /etc/kubernetes/pki/etcd/server.key</span><br></pre></td></tr></table></figure>
+
+<p>In total:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> etcd-master -n kube-system -- sh -c <span class="string">&quot;ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Kube-API-commands"><a href="#Kube-API-commands" class="headerlink" title="Kube-API commands"></a>Kube-API commands</h2><ul>
+<li>View api-server thru kubeadm, kubeadm deploys kube-api as a pod in the kube-system namespace on the master node.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n kube-system</span><br></pre></td></tr></table></figure>
+<ul>
+<li>view api-server options with kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernets/manifests/kube-apiserver.yaml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>view api-server options without kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/systemd/system/kube-apiserver.service</span><br></pre></td></tr></table></figure>
+<p>checking active process of apiserver by</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-apiserver</span><br></pre></td></tr></table></figure>
+
+<h2 id="Kube-controller-manager"><a href="#Kube-controller-manager" class="headerlink" title="Kube controller manager"></a>Kube controller manager</h2><ul>
+<li>check status with the deployment by kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kube get pods -n kube-system</span><br></pre></td></tr></table></figure>
+<ul>
+<li>view options with kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernetes/manifests/kube-controller-manager.yaml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>view options without kubeadmin</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/systemd/system/kube-controller-manaer.service</span><br></pre></td></tr></table></figure>
+<ul>
+<li>check process of kube controller manager</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-controller-manager</span><br></pre></td></tr></table></figure>
+
+<h2 id="Kube-scheduler"><a href="#Kube-scheduler" class="headerlink" title="Kube-scheduler"></a>Kube-scheduler</h2><ul>
+<li>View kube scheduler thru kubeadm</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernetes/manifests/kube-scheduler.yaml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Check thru process</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-scheduler</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Run-pods"><a href="#Run-pods" class="headerlink" title="Run pods"></a>Run pods</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run //name --image=//image_name</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Check pods location</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o wide</span><br></pre></td></tr></table></figure></li>
+<li><p>Check pods manifest (able to export as yaml) </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods pods_name -o yaml</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>apply changes to pod (not verified)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Work-with-replicasets"><a href="#Work-with-replicasets" class="headerlink" title="Work with replicasets"></a>Work with replicasets</h2><ul>
+<li>Create replicaset</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f desfilename.yaml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check status of replicaset</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset</span><br><span class="line">kubectl describe replicaset name_of_replicaset</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>scale up&#x2F;down without modifying the yaml file.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale --replicas=6 replicaset (<span class="built_in">type</span>) myapp-replicaset (name <span class="keyword">in</span> the metadata) <span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">kubectl scale --replicas=6 -f desfilename.yaml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>scale up&#x2F;down by modifying the yaml file first <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset -o yaml &gt;&gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cliimpjes0001y5kecr3i1gdo" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Linux-cmds" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/blog/2023/06/04/Linux-cmds/" class="article-date">
@@ -99,11 +331,48 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Basic-linux-cmds"><a href="#Basic-linux-cmds" class="headerlink" title="Basic linux cmds"></a>Basic linux cmds</h2><h3 id="To-Create-a-post"><a href="#To-Create-a-post" class="headerlink" title="To Create a post"></a>To Create a post</h3><h2 id="modified-something-on-other-computers"><a href="#modified-something-on-other-computers" class="headerlink" title="modified something on other computers"></a>modified something on other computers</h2>
+        <h1 id="Basic-linux-cmds"><a href="#Basic-linux-cmds" class="headerlink" title="Basic linux cmds"></a>Basic linux cmds</h1><h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><ul>
+<li>Check CPU info</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure>
+
+<p>or </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> cpu</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check memory</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep MemTotal /proc/meminfo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check Virtual memory</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep VmallocTotal /procm/meminfo </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check devices</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -la /sys/devices</span><br></pre></td></tr></table></figure>
+
+<h2 id="Syscall-related-commands"><a href="#Syscall-related-commands" class="headerlink" title="Syscall related commands"></a>Syscall related commands</h2><ul>
+<li>Follow syscall</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace + syscall_cmd</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-c summary only</p>
+</blockquote>
+<ul>
+<li>Check kernel machine and kernel release</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -srm</span><br></pre></td></tr></table></figure>
+
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cliha9wwx0000zxke6yy91s9a" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cliimpjep0000y5ke1m9i7nag" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -153,7 +422,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx hexo generate</span><br></pre></td></tr></table></figure>
 
 <p>Install deploy manager</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
 <p>Deploy it </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx hexo deploy</span><br></pre></td></tr></table></figure>
@@ -161,58 +430,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cliha9wx00001zxkecmolad4k" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/blog/2023/06/04/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2023-06-04T06:31:45.384Z" itemprop="datePublished">2023-06-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/blog/2023/06/04/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/hello-world/" data-id="cliha9wx90006zxke7nus3bho" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cliimpjf1000by5ke38aw5n6d" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -234,7 +452,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Basic-Commands/">Basic_Commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
     </div>
   </div>
 
@@ -244,7 +462,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
     </div>
   </div>
 
@@ -254,7 +472,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a>
+      <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a>
     </div>
   </div>
 
@@ -276,15 +494,23 @@
       <ul>
         
           <li>
+            <a href="/blog/2023/06/05/k8s-templates/">k8s templates</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
+          </li>
+        
+          <li>
             <a href="/blog/2023/06/04/Linux-cmds/">Linux cmds</a>
           </li>
         
           <li>
             <a href="/blog/2023/06/04/Misc/">Misc</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/06/04/hello-world/">Hello World</a>
           </li>
         
       </ul>
