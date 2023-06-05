@@ -12,31 +12,31 @@ category: commands
 - Check CPU info
 
 ``` bash
-cat /proc/cpuinfo
+    cat /proc/cpuinfo
 ```
 
 or 
 
 ``` bash
-ls cpu
+    ls cpu
 ```
 
 - Check memory
 
 ``` bash
-grep MemTotal /proc/meminfo
+    grep MemTotal /proc/meminfo
 ```
 
 - Check Virtual memory
 
 ``` bash
-grep VmallocTotal /procm/meminfo 
+    grep VmallocTotal /procm/meminfo 
 ```
 
 - Check devices
 
 ``` bash
-ls -la /sys/devices
+    ls -la /sys/devices
 ```
 
 ## Syscall related commands
@@ -44,7 +44,7 @@ ls -la /sys/devices
 - Follow syscall
 
 ``` bash
-strace + syscall_cmd
+    strace + syscall_cmd
 ```
 
 > -c summary only
@@ -52,7 +52,7 @@ strace + syscall_cmd
 - Check kernel machine and kernel release
 
 ``` bash
-uname -srm
+    uname -srm
 ```
 
 

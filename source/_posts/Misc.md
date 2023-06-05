@@ -31,7 +31,7 @@ $ npx hexo generate
 
 Install deploy manager
 ``` bash
-npm install hexo-deployer-git --save
+$ npm install hexo-deployer-git --save
 ```
 
 Deploy it 
