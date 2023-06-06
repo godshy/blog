@@ -117,7 +117,7 @@ checking active process of apiserver by
 ```
 - Check pods manifest (able to export as yaml) 
 ``` bash
-    kubectl get pods pods_name -o yaml
+    kubectl get pods <pods_name> -o yaml
 ```
 
 - apply changes to pod (not verified)
@@ -136,7 +136,7 @@ checking active process of apiserver by
 - Check status of replicaset
 
 ``` bash
-    kubectl get replicaset name_of_replicaset
+    kubectl get replicaset <name_of_replicaset>
     kubectl describe replicaset name_of_replicaset
 ```
 
@@ -150,7 +150,7 @@ checking active process of apiserver by
 
 - scale up/down by modifying the yaml file first 
 ``` bash
-    kubectl get replicaset name_of_replicaset -o yaml >> something.yaml
+    kubectl get replicaset <name_of_replicaset> -o yaml > something.yaml
     
     kubectl replace/apply -f something.yaml
 ```
@@ -165,11 +165,11 @@ checking active process of apiserver by
 
 - POD manifest
 ``` bash
-    kubectl run nginx --image=nginx --dry-run=client -o yaml
+    kubectl run <pod_name> --image=<image_name> --dry-run=client -o yaml
 ```
 
 - Create Deployment YAML file
 
 ``` bash
-    kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+    kubectl create deployment <deployment_name> --image=<image_name> --dry-run=client -o yaml
 ```
