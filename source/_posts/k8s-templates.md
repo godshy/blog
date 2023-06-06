@@ -28,21 +28,21 @@ spec:
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: myrc
+  name: myrs
   labels: 
     app: myapp
-	type: front-end
+	  type: front-end
 spec:
   template:
     metadata:
-	  name: myapp-pod
-	  labels: 
-	    app: myapp
-		type: front-end
-	spec:
-	  containers:
-	  - name: nginx-containers
-		image: nginx
+      name: myapp-pod
+	    labels: 
+	      app: myapp
+		    type: front-end
+	  spec:
+	    containers:
+	    - name: nginx-containers
+		    image: nginx
   replicas: 3
 ```
 
@@ -56,18 +56,18 @@ metadata:
   name: myrs
   labels: 
     app: myapp
-	type: front-end
+	  type: front-end
 spec:
   template:
     metadata:
-	  name: myapp-pod
-	  labels: 
-	    app: myapp
-		type: front-end
-	spec:
-	  containers:
-	  - name: nginx-containers
-		image: nginx
+      name: myapp-pod
+	    labels: 
+	      app: myapp
+		    type: front-end
+	  spec:
+	    containers:
+	    - name: nginx-containers
+		    image: nginx
   replicas: 3
   selector: 
     matchLabels:

@@ -127,7 +127,7 @@ checking active process of apiserver by
 
 ## Work with replicasets
 
-- Create replicaset
+- Create/update replicaset
 
 ``` bash
     kubectl create -f desfilename.yaml
@@ -155,4 +155,21 @@ checking active process of apiserver by
     kubectl replace/apply -f something.yaml
 ```
 
+## Deployment
 
+``` bash
+    kubectl create -f deploy_des_file.yml
+    kubectl get deployments
+```
+### Generate deployment yaml file without creating it
+
+- POD manifest
+``` bash
+    kubectl run nginx --image=nginx --dry-run=client -o yaml
+```
+
+- Create Deployment YAML file
+
+``` bash
+    kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+```
