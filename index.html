@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>Hongyi&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Hongyi&#39;s blog">
 <meta property="og:url" content="https://godshy.github.io/blog/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Hongyi&#39;s blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Hongyi Shen">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/blog/atom.xml" title="Hongyi's blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/blog/favicon.png">
@@ -43,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/blog/" id="logo">Hexo</a>
+        <a href="/blog/" id="logo">Hongyi&#39;s blog</a>
       </h1>
       
     </div>
@@ -95,16 +95,33 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Config-templates-for-K8s"><a href="#Config-templates-for-K8s" class="headerlink" title="Config templates for K8s"></a>Config templates for K8s</h1><h3 id="YAML-description-file-for-pods"><a href="#YAML-description-file-for-pods" class="headerlink" title="YAML description file for pods"></a>YAML description file for pods</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Config-templates-for-K8s"><a href="#Config-templates-for-K8s" class="headerlink" title="Config templates for K8s"></a>Config templates for K8s</h1><h3 id="YAML-description-file-for-pods"><a href="#YAML-description-file-for-pods" class="headerlink" title="YAML description file for pods"></a>YAML description file for pods</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="YAML-description-file-for-replication-controllers"><a href="#YAML-description-file-for-replication-controllers" class="headerlink" title="YAML description file for replication-controllers"></a>YAML description file for replication-controllers</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicationController</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">myrs</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">	  <span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">myapp-pod</span></span><br><span class="line">	    <span class="attr">labels:</span> </span><br><span class="line">	      <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">		    <span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line">	  <span class="attr">spec:</span></span><br><span class="line">	    <span class="attr">containers:</span></span><br><span class="line">	    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-containers</span></span><br><span class="line">		    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
 
 
 <h3 id="YAML-description-file-for-replication-sets"><a href="#YAML-description-file-for-replication-sets" class="headerlink" title="YAML description file for replication-sets"></a>YAML description file for replication-sets</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span>  <span class="comment"># error: unable to recognize &quot;filename.yml&quot;: no matches for /, kind=ReplicaSet appears if apiVersion was set to v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicaSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">myrs</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">	  <span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">myapp-pod</span></span><br><span class="line">	    <span class="attr">labels:</span> </span><br><span class="line">	      <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">		    <span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line">	  <span class="attr">spec:</span></span><br><span class="line">	    <span class="attr">containers:</span></span><br><span class="line">	    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-containers</span></span><br><span class="line">		    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span> </span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">front-end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="YAML-description-file-for-deployments"><a href="#YAML-description-file-for-deployments" class="headerlink" title="YAML description file for deployments"></a>YAML description file for deployments</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">my_deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">myapp-pod</span></span><br><span class="line">	    <span class="attr">labels:</span> </span><br><span class="line">	      <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">		    <span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line">	  <span class="attr">spec:</span></span><br><span class="line">	    <span class="attr">containers:</span></span><br><span class="line">	    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-containers</span></span><br><span class="line">		    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">front-end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="YAML-description-file-for-Services"><a href="#YAML-description-file-for-Services" class="headerlink" title="YAML description file for Services"></a>YAML description file for Services</h3><ul>
+<li><p>Nodeport</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVsersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">myapp-service</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">NodePort</span> <span class="comment"># type of service</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">targetPort:</span> <span class="number">80</span> <span class="comment"># port want to access on the pod</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">80</span> <span class="comment"># mapping port on service</span></span><br><span class="line">    <span class="attr">nodePort:</span> <span class="number">30008</span> <span class="comment"># port expose to outside</span></span><br><span class="line">  <span class="attr">selector:</span> <span class="comment"># links the service to the pod by pod labels</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">	  <span class="attr">type:</span> <span class="string">front-end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Clusterip</p>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVsersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">back-end</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span> <span class="comment"># type of service</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">targetPort:</span> <span class="number">80</span> <span class="comment"># port exposed from backends</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">80</span> <span class="comment"># mapping port from service</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">selector:</span> <span class="comment"># links the service to the pod by pod labels</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">	  <span class="attr">type:</span> <span class="string">front-end</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="YAML-description-file-for-NameSpace"><a href="#YAML-description-file-for-NameSpace" class="headerlink" title="YAML description file for NameSpace"></a>YAML description file for NameSpace</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Namespace</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="YAML-description-file-for-NameSpace-quota"><a href="#YAML-description-file-for-NameSpace-quota" class="headerlink" title="YAML description file for NameSpace quota"></a>YAML description file for NameSpace quota</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ResourceQuota</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">compute-quota</span></span><br><span class="line">  <span class="attr">namespace:</span> [<span class="string">ns_name</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">hard:</span></span><br><span class="line">    <span class="attr">pods:</span> <span class="string">&quot;10&quot;</span></span><br><span class="line">    <span class="attr">requests.cpu:</span> <span class="string">&quot;4&quot;</span></span><br><span class="line">    <span class="attr">requests.memory:</span> <span class="string">5Gi</span></span><br><span class="line">    <span class="attr">limits.cpu:</span> <span class="string">&quot;10&quot;</span></span><br><span class="line">    <span class="attr">limits.memory:</span> <span class="string">10Gi</span></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clijnsz8s0006ktke8gqa963l" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="climvi55y000gcoke04scarny" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -154,10 +171,12 @@
 <li>This error after <code>kubectl apply</code> indicates that you should acquire the newest yaml file after you did some changes to the parts without modyfing the yaml file.</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset -o yaml &gt;&gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="Do-not-add-extra-name-after-pods-name-when-creating-pods-imperatively"><a href="#Do-not-add-extra-name-after-pods-name-when-creating-pods-imperatively" class="headerlink" title="Do not add extra name after [pods_name] when creating pods imperatively"></a>Do not add extra name after [pods_name] when creating pods imperatively</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;pods_name&gt; &lt;args&gt; --image=&lt;image_name&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clijnsz8k0000ktke8jdaf6lg" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="climvi55l0000coke9b1t4wyb" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -259,14 +278,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-scheduler</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="Run-pods"><a href="#Run-pods" class="headerlink" title="Run pods"></a>Run pods</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run //name --image=//image_name</span><br></pre></td></tr></table></figure>
+<h2 id="Run-pods"><a href="#Run-pods" class="headerlink" title="Run pods"></a>Run pods</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;name&gt; --image=&lt;image_name&gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>Check pods location</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o wide</span><br></pre></td></tr></table></figure></li>
 <li><p>Check pods manifest (able to export as yaml) </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods pods_name -o yaml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods &lt;pods_name&gt; -o yaml</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>apply changes to pod (not verified)</p>
+<li><p>apply changes to pod </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f </span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="Work-with-replicasets"><a href="#Work-with-replicasets" class="headerlink" title="Work with replicasets"></a>Work with replicasets</h2><ul>
@@ -277,7 +296,7 @@
 <ul>
 <li>Check status of replicaset</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset</span><br><span class="line">kubectl describe replicaset name_of_replicaset</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset &lt;name_of_replicaset&gt;</span><br><span class="line">kubectl describe replicaset name_of_replicaset</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>scale up&#x2F;down without modifying the yaml file.</li>
@@ -285,22 +304,54 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale --replicas=6 replicaset (<span class="built_in">type</span>) myapp-replicaset (name <span class="keyword">in</span> the metadata) <span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">kubectl scale --replicas=6 -f desfilename.yaml</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>scale up&#x2F;down by modifying the yaml file first <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset -o yaml &gt;&gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure></li>
+<li>scale up&#x2F;down by modifying the yaml file first <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset &lt;name_of_replicaset&gt; -o yaml &gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f deploy_des_file.yml</span><br><span class="line">kubectl get deployments</span><br></pre></td></tr></table></figure>
+<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment --image=&lt;image_name&gt; &lt;deploy_name&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f deploy_des_file.yml</span><br><span class="line">kubectl get deployments</span><br></pre></td></tr></table></figure>
 <h3 id="Generate-deployment-yaml-file-without-creating-it"><a href="#Generate-deployment-yaml-file-without-creating-it" class="headerlink" title="Generate deployment yaml file without creating it"></a>Generate deployment yaml file without creating it</h3><ul>
 <li><p>POD manifest</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run nginx --image=nginx --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;pod_name&gt; --image=&lt;image_name&gt; --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Create Deployment YAML file</p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment --image=nginx nginx --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment &lt;deployment_name&gt; --image=&lt;image_name&gt; --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
+<h2 id="Service-creation"><a href="#Service-creation" class="headerlink" title="Service creation"></a>Service creation</h2><ul>
+<li><p>Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml <span class="comment"># automatically use pods labels as selectors</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create a Service named nginx of type NodePort to expose pod nginx’s port 80 on port 30080 on the nodes:</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose pod nginx --<span class="built_in">type</span>=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>create service in a imperative way</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose deployment &lt;deploy_name&gt; --port 80</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>able to enable service while creating pods</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;name&gt; --image=&lt;image_name&gt; --port=&lt;port_name&gt; --expose</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Namaespaces"><a href="#Namaespaces" class="headerlink" title="Namaespaces"></a>Namaespaces</h2><ul>
+<li>To create namespace</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create namespace dev <span class="comment"># or</span></span><br><span class="line">kubectl create -f [namespace_definition.yml]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>To add pod in the certain namespace:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--namespace=[namespace_name]</span><br></pre></td></tr></table></figure>
+
+<p> Or to add <code>namespace:</code> under  <code>metadata: </code> in the pod definition file.</p>
+<ul>
+<li>To change to other namespace so that no need to add <code>-n [namespace]</code> to see the pods<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace=dev</span><br></pre></td></tr></table></figure></li>
+<li>To see all the pods in all name space</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods --all-namespaces</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clijnsz8p0001ktke89qtdv1d" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="climvi55p0001cokeaz4d1edu" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -381,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clijnsz8r0004ktkeclrh0uc8" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="climvi55s0004coke011n69zz" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -439,7 +490,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clijnsz8s0005ktkec8pj11w8" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="climvi55u0005coke9dx96ldr" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
