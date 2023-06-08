@@ -109,7 +109,7 @@ checking active process of apiserver by
 
 ## Run pods 
 ``` bash
-    kubectl run //name --image=//image_name
+    kubectl run <name> --image=<image_name>
 ```
 - Check pods location
 ``` bash
@@ -120,7 +120,7 @@ checking active process of apiserver by
     kubectl get pods <pods_name> -o yaml
 ```
 
-- apply changes to pod (not verified)
+- apply changes to pod 
 ``` bash
     kubectl apply -f 
 ```
@@ -158,6 +158,9 @@ checking active process of apiserver by
 ## Deployment
 
 ``` bash
+    kubectl create deployment --image=<image_name> <deploy_name>
+```
+``` bash
     kubectl create -f deploy_des_file.yml
     kubectl get deployments
 ```
@@ -172,4 +175,51 @@ checking active process of apiserver by
 
 ``` bash
     kubectl create deployment <deployment_name> --image=<image_name> --dry-run=client -o yaml
+```
+## Service creation
+
+- Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379
+``` bash
+    kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml # automatically use pods labels as selectors
+```
+
+- Create a Service named nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes:
+
+``` bash
+    kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml
+```
+
+- create service in a imperative way
+``` bash
+    kubectl expose deployment <deploy_name> --port 80
+```
+
+- able to enable service while creating pods
+``` bash
+    kubectl run <name> --image=<image_name> --port=<port_name> --expose
+```
+## Namaespaces
+
+- To create namespace
+
+``` bash
+    kubectl create namespace dev # or
+    kubectl create -f [namespace_definition.yml]
+```
+- To add pod in the certain namespace:
+
+``` bash
+    --namespace=[namespace_name]
+```
+
+ Or to add ```namespace:``` under  ```metadata: ``` in the pod definition file.
+
+- To change to other namespace so that no need to add ``` -n [namespace] ``` to see the pods
+``` bash
+    kubectl config set-context $(kubectl config current-context) --namespace=dev
+```
+- To see all the pods in all name space
+
+``` bash
+    kubectl get pods --all-namespaces
 ```

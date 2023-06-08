@@ -33,3 +33,9 @@ spec:
     
     kubectl replace/apply -f something.yaml
 ```
+
+### Do not add extra name after [pods_name] when creating pods imperatively
+
+``` bash
+  kubectl run <pods_name> <args> --image=<image_name>
+```
