@@ -43,7 +43,7 @@ __When API version is not set, it is assumed to be set to version 2.__
 In total:
 
 ``` bash
-kubectl exec etcd-master -n kube-system -- sh -c "ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key"
+    kubectl exec etcd-master -n kube-system -- sh -c "ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key"
 ```
 
 ## Kube-API commands
@@ -152,7 +152,7 @@ checking active process of apiserver by
 ``` bash
     kubectl get replicaset <name_of_replicaset> -o yaml > something.yaml
     
-    kubectl replace/apply -f something.yaml
+    kubectl replace/apply -f something.yaml # able to recreate node
 ```
 
 ## Deployment
@@ -222,4 +222,11 @@ checking active process of apiserver by
 
 ``` bash
     kubectl get pods --all-namespaces
+```
+
+## Schedulers
+
+- Filter objects by specifying selectors
+``` bash
+    kubectl get [sth.] --selector [sth.]
 ```
