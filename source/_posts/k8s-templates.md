@@ -33,9 +33,8 @@ apiVersion: apps/v1  # error: unable to recognize "filename.yml": no matches for
 kind: ReplicaSet
 metadata:
   name: myrs
-  labels: 
-    app: myapp
-	  type: front-end
+  namespace: [ns]
+
 spec:
   template:
     metadata:
@@ -60,6 +59,7 @@ apiVersion: v1
 kind: Deployment
 metadata:
   name: my_deploy
+  namespace: [ns]
 
 spec:
   template:
@@ -79,6 +79,31 @@ spec:
       type: front-end
 ```
 
+### YAML description file for DaemonSet
+
+``` yaml
+apiVsesion: apps/v1
+kind: DaemonSet
+metadata:
+  name: myrs
+  namespace: [ns]
+
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+	    labels: 
+	      app: myapp
+		    type: front-end
+	  spec:
+	    containers:
+	    - name: monitoring-agent
+		    image: monitoring-agent
+  selector: 
+    matchLabels:
+      type: front-end
+
+```
 ### YAML description file for Services
 
 - Nodeport
@@ -146,3 +171,23 @@ spec:
     limits.memory: 10Gi
 ```
 
+### Limit range for resource management
+
+__only affect on creation__
+``` yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: [name]
+spec:
+  limits:
+  - default:
+      cpu:
+    defaultRequest:
+      cpu: 
+    max:
+      cpu:
+    min:
+      cpu:
+    type: Container  
+```

@@ -157,13 +157,23 @@ checking active process of apiserver by
 
 ## Deployment
 
+- create deployment by commands
+
 ``` bash
     kubectl create deployment --image=<image_name> <deploy_name>
 ```
+
+- by configuration file
 ``` bash
     kubectl create -f deploy_des_file.yml
     kubectl get deployments
 ```
+
+- edit deployment
+``` bash
+    kubectl edit deployement <name>
+```
+
 ### Generate deployment yaml file without creating it
 
 - POD manifest
@@ -204,17 +214,17 @@ checking active process of apiserver by
 
 ``` bash
     kubectl create namespace dev # or
-    kubectl create -f [namespace_definition.yml]
+    kubectl create -f <namespace_definition.yml>
 ```
 - To add pod in the certain namespace:
 
 ``` bash
-    --namespace=[namespace_name]
+    --namespace=<namespace_name>
 ```
 
  Or to add ```namespace:``` under  ```metadata: ``` in the pod definition file.
 
-- To change to other namespace so that no need to add ``` -n [namespace] ``` to see the pods
+- To change to other namespace so that no need to add ``` -n <namespace> ``` to see the pods
 ``` bash
     kubectl config set-context $(kubectl config current-context) --namespace=dev
 ```
@@ -228,5 +238,64 @@ checking active process of apiserver by
 
 - Filter objects by specifying selectors
 ``` bash
-    kubectl get [sth.] --selector [sth.]
+    kubectl get <sth> --selector <sth.>
+```
+
+## Taint - Node 
+- add taints to nodes
+``` bash
+    kubectl taint nodes <node_name> <keys=values>:<taint-effect{NoSchedule|PreferNoSchedule|NoExecute}>
+```
+
+- add tolerations on pods
+
+``` yaml
+spec:
+  tolerations:
+  - key: "<key>"
+    operator: "Equal"
+    value: "<value>"
+    effect: "<taint-effec>t"
+```
+## Node affinity
+
+### Node selector:
+- one way to assign nodes for specific pods by setting label on nodes 
+``` yaml
+<pod>
+spec:
+  nodeSelector:
+    size: Large
+```
+- then label a node by
+``` bash
+    kubectl label nodes <node-name> <label-key>=<label-value>
+```
+
+- Node affinity provide more complicated assignment and placement for nodes 
+
+__Values can be set to blank if operator uses Exists.__
+``` yaml 
+# pod definition
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExectuion:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In  # placed on any nodes with values under in 
+            values:
+            - Large
+```
+
+### Resource requests
+
+- allocate resources desirable for pods:
+``` yaml
+spec:
+  resources:
+    requests:
+      memory: "4Gi"
+      cpu: 2
 ```
