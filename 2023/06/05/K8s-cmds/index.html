@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic K8s-CommandsETCD related commands ETCDCTL version 2 12345etcdctl backupetcdctl cluster-healthetcdctl mketcdctl mkdiretcdctl set  ETCDCTL version 3 1234etcdctl snapshot save etcdctl endpoint heal">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T01:57:16.000Z">
-<meta property="article:modified_time" content="2023-06-13T07:48:49.155Z">
+<meta property="article:modified_time" content="2023-06-15T07:29:30.158Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -192,8 +192,18 @@
 <ul>
 <li>scale up&#x2F;down by modifying the yaml file first <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset &lt;name_of_replicaset&gt; -o yaml &gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml <span class="comment"># able to recreate node</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment --image=&lt;image_name&gt; &lt;deploy_name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><ul>
+<li>create deployment by commands</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment --image=&lt;image_name&gt; &lt;deploy_name&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>by configuration file</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f deploy_des_file.yml</span><br><span class="line">kubectl get deployments</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>edit deployment</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit deployement &lt;name&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h3 id="Generate-deployment-yaml-file-without-creating-it"><a href="#Generate-deployment-yaml-file-without-creating-it" class="headerlink" title="Generate deployment yaml file without creating it"></a>Generate deployment yaml file without creating it</h3><ul>
 <li><p>POD manifest</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;pod_name&gt; --image=&lt;image_name&gt; --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
@@ -221,27 +231,50 @@
 <h2 id="Namaespaces"><a href="#Namaespaces" class="headerlink" title="Namaespaces"></a>Namaespaces</h2><ul>
 <li>To create namespace</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create namespace dev <span class="comment"># or</span></span><br><span class="line">kubectl create -f [namespace_definition.yml]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create namespace dev <span class="comment"># or</span></span><br><span class="line">kubectl create -f &lt;namespace_definition.yml&gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>To add pod in the certain namespace:</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--namespace=[namespace_name]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--namespace=&lt;namespace_name&gt;</span><br></pre></td></tr></table></figure>
 
 <p> Or to add <code>namespace:</code> under  <code>metadata: </code> in the pod definition file.</p>
 <ul>
-<li>To change to other namespace so that no need to add <code>-n [namespace]</code> to see the pods<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace=dev</span><br></pre></td></tr></table></figure></li>
+<li>To change to other namespace so that no need to add <code>-n &lt;namespace&gt;</code> to see the pods<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace=dev</span><br></pre></td></tr></table></figure></li>
 <li>To see all the pods in all name space</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods --all-namespaces</span><br></pre></td></tr></table></figure>
 
 <h2 id="Schedulers"><a href="#Schedulers" class="headerlink" title="Schedulers"></a>Schedulers</h2><ul>
-<li>Filter objects by specifying selectors<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get [sth.] --selector [sth.]</span><br></pre></td></tr></table></figure></li>
+<li>Filter objects by specifying selectors<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get &lt;sth&gt; --selector &lt;sth.&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Taint-Node"><a href="#Taint-Node" class="headerlink" title="Taint - Node"></a>Taint - Node</h2><ul>
+<li><p>add taints to nodes</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes &lt;node_name&gt; &lt;keys=values&gt;:&lt;taint-effect&#123;NoSchedule|PreferNoSchedule|NoExecute&#125;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>add tolerations on pods</p>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">tolerations:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;&lt;key&gt;&quot;</span></span><br><span class="line">    <span class="attr">operator:</span> <span class="string">&quot;Equal&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;&lt;value&gt;&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;&lt;taint-effec&gt;t&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Node-affinity"><a href="#Node-affinity" class="headerlink" title="Node affinity"></a>Node affinity</h2><h3 id="Node-selector"><a href="#Node-selector" class="headerlink" title="Node selector:"></a>Node selector:</h3><ul>
+<li><p>one way to assign nodes for specific pods by setting label on nodes </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;pod&gt;</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">nodeSelector:</span></span><br><span class="line">    <span class="attr">size:</span> <span class="string">Large</span></span><br></pre></td></tr></table></figure></li>
+<li><p>then label a node by</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl label nodes &lt;node-name&gt; &lt;label-key&gt;=&lt;label-value&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Node affinity provide more complicated assignment and placement for nodes</p>
+</li>
+</ul>
+<p><strong>Values can be set to blank if operator uses Exists.</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pod definition</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">affinity:</span></span><br><span class="line">    <span class="attr">nodeAffinity:</span></span><br><span class="line">      <span class="attr">requiredDuringSchedulingIgnoredDuringExectuion:</span></span><br><span class="line">        <span class="attr">nodeSelectorTerms:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">matchExpressions:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">size</span></span><br><span class="line">            <span class="attr">operator:</span> <span class="string">In</span>  <span class="comment"># placed on any nodes with values under in </span></span><br><span class="line">            <span class="attr">values:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Large</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Resource-requests"><a href="#Resource-requests" class="headerlink" title="Resource requests"></a>Resource requests</h3><ul>
+<li>allocate resources desirable for pods:<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">&quot;4Gi&quot;</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">2</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cliu121m60004lkke9tvm9ahr" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cliwxa6450005hokee9smcuxi" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
