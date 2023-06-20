@@ -298,4 +298,15 @@ spec:
     requests:
       memory: "4Gi"
       cpu: 2
+    limits:
+      memory:
+      cpu:
+```
+
+
+## Node execution
+
+- enable shell in kubernetes
+``` bash
+    kubectl exec --stdin --tty <pod_name> <container_name> -n <namespace> -- /bin./bash
 ```
