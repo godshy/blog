@@ -20,6 +20,8 @@ spec:
   containers:
   - name: nginx
     image: nginx
+    command:
+    - sleep 100
     ports:
     - containerPort: 8080
 ```
