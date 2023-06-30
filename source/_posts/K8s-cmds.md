@@ -310,3 +310,13 @@ spec:
 ``` bash
     kubectl exec --stdin --tty <pod_name> <container_name> -n <namespace> -- /bin./bash
 ```
+
+- copy files from local to pods vice versa.
+
+``` bash
+# Copy file from pods to local director
+kubectl cp <namespace>/<pod_name>:/PATH/FILE /LOCAL_PATH/FILE_NAME
+
+# Copy file from local to pods
+kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE 
+```
