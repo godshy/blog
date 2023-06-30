@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic K8s-CommandsETCD related commands ETCDCTL version 2 12345etcdctl backupetcdctl cluster-healthetcdctl mketcdctl mkdiretcdctl set  ETCDCTL version 3 1234etcdctl snapshot save etcdctl endpoint heal">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T01:57:16.000Z">
-<meta property="article:modified_time" content="2023-06-20T01:41:09.633Z">
+<meta property="article:modified_time" content="2023-06-30T06:47:07.418Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -271,13 +271,17 @@
 <li>allocate resources desirable for pods:<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">&quot;4Gi&quot;</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">2</span></span><br><span class="line">    <span class="attr">limits:</span></span><br><span class="line">      <span class="attr">memory:</span></span><br><span class="line">      <span class="attr">cpu:</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="Node-execution"><a href="#Node-execution" class="headerlink" title="Node execution"></a>Node execution</h2><ul>
-<li>enable shell in kubernetes<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> --stdin --<span class="built_in">tty</span> &lt;pod_name&gt; &lt;container_name&gt; -n &lt;namespace&gt; -- /bin./bash</span><br></pre></td></tr></table></figure></li>
+<li><p>enable shell in kubernetes</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> --stdin --<span class="built_in">tty</span> &lt;pod_name&gt; &lt;container_name&gt; -n &lt;namespace&gt; -- /bin./bash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>copy files from local to pods vice versa.</p>
+</li>
 </ul>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copy file from pods to local director</span></span><br><span class="line">kubectl <span class="built_in">cp</span> &lt;namespace&gt;/&lt;pod_name&gt;:/PATH/FILE /LOCAL_PATH/FILE_NAME</span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy file from local to pods</span></span><br><span class="line">kubectl <span class="built_in">cp</span> /LOCAL_PATH/FILE_NAME &lt;namespace&gt;/&lt;pod_name&gt;:/PATH/FILE </span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clj43qxgk00016ike9d3hfnjp" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clji7q6v80004kmke1ssw63cp" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
