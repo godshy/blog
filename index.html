@@ -120,10 +120,15 @@
 
 <h3 id="Limit-range-for-resource-management"><a href="#Limit-range-for-resource-management" class="headerlink" title="Limit range for resource management"></a>Limit range for resource management</h3><p><strong>only affect on creation</strong></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">LimitRange</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> [<span class="string">name</span>]</span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">limits:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">default:</span></span><br><span class="line">      <span class="attr">cpu:</span></span><br><span class="line">    <span class="attr">defaultRequest:</span></span><br><span class="line">      <span class="attr">cpu:</span> </span><br><span class="line">    <span class="attr">max:</span></span><br><span class="line">      <span class="attr">cpu:</span></span><br><span class="line">    <span class="attr">min:</span></span><br><span class="line">      <span class="attr">cpu:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">Container</span>  </span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Allocate-pods-to-deploy-on-modified-scheduler"><a href="#Allocate-pods-to-deploy-on-modified-scheduler" class="headerlink" title="Allocate pods to deploy on modified scheduler"></a>Allocate pods to deploy on modified scheduler</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># on pod definition file</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">schedulerName:</span> <span class="string">&lt;scheduler-name&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Allocate-the-priority-to-be-scheduled-in-the-queue"><a href="#Allocate-the-priority-to-be-scheduled-in-the-queue" class="headerlink" title="Allocate the priority to be scheduled in the queue"></a>Allocate the priority to be scheduled in the queue</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">high-priority</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cljicyp2m0005rbke57r91gwu" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cljquvll20006dcke1hld3ldt" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -178,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cljicyp2j0001rbke5w9f59tj" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cljquvlkw0000dcke9rix3fol" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -363,6 +368,8 @@
 <h2 id="Schedulers"><a href="#Schedulers" class="headerlink" title="Schedulers"></a>Schedulers</h2><ul>
 <li>Filter objects by specifying selectors<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get &lt;sth&gt; --selector &lt;sth.&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
+<p>-Create configmap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create configmap --name &lt;configmap_name&gt; --from-file=&lt;PATH_TO_FILE&gt; -n &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="Taint-Node"><a href="#Taint-Node" class="headerlink" title="Taint - Node"></a>Taint - Node</h2><ul>
 <li><p>add taints to nodes</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes &lt;node_name&gt; &lt;keys=values&gt;:&lt;taint-effect&#123;NoSchedule|PreferNoSchedule|NoExecute&#125;&gt;</span><br></pre></td></tr></table></figure>
@@ -386,6 +393,13 @@
 <h3 id="Resource-requests"><a href="#Resource-requests" class="headerlink" title="Resource requests"></a>Resource requests</h3><ul>
 <li>allocate resources desirable for pods:<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">&quot;4Gi&quot;</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">2</span></span><br><span class="line">    <span class="attr">limits:</span></span><br><span class="line">      <span class="attr">memory:</span></span><br><span class="line">      <span class="attr">cpu:</span></span><br></pre></td></tr></table></figure></li>
 </ul>
+<h2 id="Pod-monitoring"><a href="#Pod-monitoring" class="headerlink" title="Pod monitoring"></a>Pod monitoring</h2><ul>
+<li><p>check memory, cpu</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl top node/pods</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>check logs</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl logs -f &lt;pod_name&gt;</span><br><span class="line">kubectl previous -f &lt;pod_name&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h2 id="Node-execution"><a href="#Node-execution" class="headerlink" title="Node execution"></a>Node execution</h2><ul>
 <li><p>enable shell in kubernetes</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> --stdin --<span class="built_in">tty</span> &lt;pod_name&gt; &lt;container_name&gt; -n &lt;namespace&gt; -- /bin./bash</span><br></pre></td></tr></table></figure>
@@ -397,7 +411,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cljicyp2f0000rbke4nd596ez" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cljquvlkz0001dcke8ori4izd" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -460,6 +474,9 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -la /sys/devices</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>Check folder size<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -xhs /&lt;PATH&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h2 id="Syscall-related-commands"><a href="#Syscall-related-commands" class="headerlink" title="Syscall related commands"></a>Syscall related commands</h2><ul>
 <li>Follow syscall</li>
 </ul>
@@ -478,7 +495,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cljicyp2n0006rbke1li761uf" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cljquvll10004dcke3vut08c8" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -536,7 +553,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cljicyp2l0004rbke79xz7bl7" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cljquvll20005dckeec2b7w48" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
