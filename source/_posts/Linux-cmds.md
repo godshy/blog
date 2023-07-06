@@ -39,6 +39,10 @@ or
     ls -la /sys/devices
 ```
 
+- Check folder size
+``` bash
+    du -xhs /<PATH>
+```
 ## Syscall related commands
 
 - Follow syscall

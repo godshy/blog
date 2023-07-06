@@ -241,6 +241,10 @@ checking active process of apiserver by
     kubectl get <sth> --selector <sth.>
 ```
 
+-Create configmap
+``` bash
+    kubectl create configmap --name <configmap_name> --from-file=<PATH_TO_FILE> -n <namespace>
+```
 ## Taint - Node 
 - add taints to nodes
 ``` bash
@@ -303,7 +307,18 @@ spec:
       cpu:
 ```
 
+## Pod monitoring
 
+- check memory, cpu
+``` bash
+    kubectl top node/pods
+```
+
+- check logs
+``` bash
+    kubectl logs -f <pod_name>
+    kubectl previous -f <pod_name>
+```
 ## Node execution
 
 - enable shell in kubernetes

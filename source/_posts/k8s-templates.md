@@ -193,3 +193,19 @@ spec:
       cpu:
     type: Container  
 ```
+
+
+### Allocate pods to deploy on modified scheduler
+``` yaml
+# on pod definition file
+spec:
+  schedulerName: <scheduler-name>
+
+```
+
+### Allocate the priority to be scheduled in the queue
+``` yaml
+kind: pod
+spec:
+  priorityClassName: high-priority
+```
