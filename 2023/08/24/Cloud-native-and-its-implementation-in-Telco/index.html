@@ -6,16 +6,16 @@
   
   <title>Cloud native and its implementation in Telco | Hongyi&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Cloud native in telecom目前对云原生的概念以及如何应用还不是很清晰明了，因此我想用这篇文章介绍一下cloud native的基础概念以及组成。 目录 云原生是什么？ 云原生设计的基本思想与组件 云原生在5G方向上的应用 一些问题的解答  云原生是什么？&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;am">
+  <meta name="description" content="Cloud native in telecom目前对云原生的概念以及如何应用还不是很清晰明了，因此我想用这篇文章介绍一下cloud native的基础概念以及组成。 目录 云原生是什么？ 云原生设计的基本思想与组件 云原生在5G方向上的应用 一些问题的解答  云原生是什么？云原生(cloud native) 不是具体的某种产品或技术，而是一种思想，是一种行为模式。它表述了企业及开发者为了发挥基于云">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cloud native and its implementation in Telco">
 <meta property="og:url" content="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/index.html">
 <meta property="og:site_name" content="Hongyi&#39;s blog">
-<meta property="og:description" content="Cloud native in telecom目前对云原生的概念以及如何应用还不是很清晰明了，因此我想用这篇文章介绍一下cloud native的基础概念以及组成。 目录 云原生是什么？ 云原生设计的基本思想与组件 云原生在5G方向上的应用 一些问题的解答  云原生是什么？&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;am">
+<meta property="og:description" content="Cloud native in telecom目前对云原生的概念以及如何应用还不是很清晰明了，因此我想用这篇文章介绍一下cloud native的基础概念以及组成。 目录 云原生是什么？ 云原生设计的基本思想与组件 云原生在5G方向上的应用 一些问题的解答  云原生是什么？云原生(cloud native) 不是具体的某种产品或技术，而是一种思想，是一种行为模式。它表述了企业及开发者为了发挥基于云">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/08/24/smOyHMjN7Q96wtl.png">
 <meta property="article:published_time" content="2023-08-24T04:48:22.000Z">
-<meta property="article:modified_time" content="2023-08-24T09:19:54.187Z">
+<meta property="article:modified_time" content="2023-08-24T09:30:20.707Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="Cloud native">
 <meta name="twitter:card" content="summary">
@@ -111,8 +111,8 @@
 <li><a href="%E4%BA%91%E5%8E%9F%E7%94%9F%E5%9C%A85G%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8">云原生在5G方向上的应用</a></li>
 <li><a href="#%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E7%AD%94">一些问题的解答</a></li>
 </ol>
-<h2 id="云原生是什么？"><a href="#云原生是什么？" class="headerlink" title="云原生是什么？"></a>云原生是什么？</h2><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;云原生(cloud native) 不是具体的某种产品或技术，而是一种思想，是一种行为模式。它表述了企业及开发者为了发挥基于云服务业务模型(cloud-oriented business models)的特长而采取的考虑了高可用,高可扩展性以及可靠性的开发，构建和管理流程。 云原生是各种最佳实践的结合。企业与开发者使用基于云原生的技术如CI&#x2F;CD, 容器和微服务等技术的组合，来实现上述的高可用，高可扩展及可靠性以及更快的交付，发布时间。人们常说的XXaaS或者XXaaP就是基于这种模式，为客户提供无缝，安全高度自动化的部署，监控及运行体验。</p>
-<h2 id="云原生设计的基本思想与组件"><a href="#云原生设计的基本思想与组件" class="headerlink" title="云原生设计的基本思想与组件"></a>云原生设计的基本思想与组件</h2><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;云原生的基本思路，也可以说和它对企业带来的优势紧密相关。云原生能带来什么呢？</p>
+<h2 id="云原生是什么？"><a href="#云原生是什么？" class="headerlink" title="云原生是什么？"></a>云原生是什么？</h2><p>云原生(cloud native) 不是具体的某种产品或技术，而是一种思想，是一种行为模式。它表述了企业及开发者为了发挥基于云服务业务模型(cloud-oriented business models)的特长而采取的考虑了高可用,高可扩展性以及可靠性的开发，构建和管理流程。 云原生是各种最佳实践的结合。企业与开发者使用基于云原生的技术如CI&#x2F;CD, 容器和微服务等技术的组合，来实现上述的高可用，高可扩展及可靠性以及更快的交付，发布时间。人们常说的XXaaS或者XXaaP就是基于这种模式，为客户提供无缝，安全高度自动化的部署，监控及运行体验。</p>
+<h2 id="云原生设计的基本思想与组件"><a href="#云原生设计的基本思想与组件" class="headerlink" title="云原生设计的基本思想与组件"></a>云原生设计的基本思想与组件</h2><p>云原生的基本思路，也可以说和它对企业带来的优势紧密相关。云原生能带来什么呢？</p>
 <ul>
 <li>速度: 更短的产品发布时间，包括更快的feature发布以及更新&#x2F;回退速度</li>
 <li>可扩展性: 可以任意根据业务需要扩展&#x2F;减少产品所需的资源，无需关注底层</li>
@@ -133,7 +133,7 @@
 <li>高度自动化(包括CI&#x2F;CD，同时还有自动化监控，数据处理与分析以及异常检测的能力)</li>
 <li>积极拥抱开源以及与CNCF (cloud native computing foundation)开展合作: CNCF是一个开源的CN组织，负责开发与维护与云原生息息相关的重要组件。具体介绍及成员请查阅CNCF的<a target="_blank" rel="noopener" href="https://www.cncf.io/">网站</a>。</li>
 </ul>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在这里总结一下，作为企业需要完全拥抱云原生，并且获得云原生带来的优势需要做到以下几点。</p>
+<p>在这里总结一下，作为企业需要完全拥抱云原生，并且获得云原生带来的优势需要做到以下几点。</p>
 <ol>
 <li>拥有完整的云原生应用的使用环境和基础架构</li>
 <li>拥有自动化重复流程的思想和技术栈</li>
@@ -144,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clloyn30n0000j0kefz083nay" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clloyr1t60003xmke6w2711qn" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
