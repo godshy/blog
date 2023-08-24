@@ -73,6 +73,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Cloud-native-and-its-implementation-in-Telco" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" class="article-date">
+  <time class="dt-published" datetime="2023-08-24T04:48:22.000Z" itemprop="datePublished">2023-08-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/knowledge-sharing/">knowledge sharing</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/">Cloud native and its implementation in Telco</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Cloud-native-in-telecom"><a href="#Cloud-native-in-telecom" class="headerlink" title="Cloud native in telecom"></a>Cloud native in telecom</h1><p><strong>目前对云原生的概念以及如何应用还不是很清晰明了，因此我想用这篇文章介绍一下cloud native的基础概念以及组成。</strong></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F">云原生是什么？</a></li>
+<li><a href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E4%B8%8E%E7%BB%84%E4%BB%B6">云原生设计的基本思想与组件</a></li>
+<li><a href="%E4%BA%91%E5%8E%9F%E7%94%9F%E5%9C%A85G%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8">云原生在5G方向上的应用</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E7%AD%94">一些问题的解答</a></li>
+</ol>
+<h2 id="云原生是什么？"><a href="#云原生是什么？" class="headerlink" title="云原生是什么？"></a>云原生是什么？</h2><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;云原生(cloud native) 不是具体的某种产品或技术，而是一种思想，是一种行为模式。它表述了企业及开发者为了发挥基于云服务业务模型(cloud-oriented business models)的特长而采取的考虑了高可用,高可扩展性以及可靠性的开发，构建和管理流程。 云原生是各种最佳实践的结合。企业与开发者使用基于云原生的技术如CI&#x2F;CD, 容器和微服务等技术的组合，来实现上述的高可用，高可扩展及可靠性以及更快的交付，发布时间。人们常说的XXaaS或者XXaaP就是基于这种模式，为客户提供无缝，安全高度自动化的部署，监控及运行体验。</p>
+<h2 id="云原生设计的基本思想与组件"><a href="#云原生设计的基本思想与组件" class="headerlink" title="云原生设计的基本思想与组件"></a>云原生设计的基本思想与组件</h2><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;云原生的基本思路，也可以说和它对企业带来的优势紧密相关。云原生能带来什么呢？</p>
+<ul>
+<li>速度: 更短的产品发布时间，包括更快的feature发布以及更新&#x2F;回退速度</li>
+<li>可扩展性: 可以任意根据业务需要扩展&#x2F;减少产品所需的资源，无需关注底层</li>
+<li>高度自动化: 自动化执行重复的步骤，如部署，测试，升级等。将应用与底层架构解耦来应对更复杂的场景。</li>
+</ul>
+<p>因此，云原生的基本目标是在不牺牲服务可靠性以及性能的前提上实现更快的TTM和更少的TCO(total cost of ownership)。下面我们来看一下云原生的基本组件有哪些。</p>
+<ul>
+<li>云原生应用 (Cloud Native Applications)</li>
+<li>微服务 (Microservice)</li>
+<li>API</li>
+<li>容器与容器编排</li>
+<li>其它与自动化相关的组件</li>
+<li>兼容云原生的基础设施或开发环境(私有云，公有云，混合云等)</li>
+</ul>
+<p>之前提到过，云原生不光包含技术，还包括思想以及一些行为模式。我们来看下意识形态上的云原生思想有哪些。</p>
+<ul>
+<li>CI&#x2F;CD 持续交付&#x2F;集成的思想</li>
+<li>高度自动化(包括CI&#x2F;CD，同时还有自动化监控，数据处理与分析以及异常检测的能力)</li>
+<li>积极拥抱开源以及与CNCF (cloud native computing foundation)开展合作: CNCF是一个开源的CN组织，负责开发与维护与云原生息息相关的重要组件。具体介绍及成员请查阅CNCF的<a target="_blank" rel="noopener" href="https://www.cncf.io/">网站</a>。</li>
+</ul>
+<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在这里总结一下，作为企业需要完全拥抱云原生，并且获得云原生带来的优势需要做到以下几点。</p>
+<ol>
+<li>拥有完整的云原生应用的使用环境和基础架构</li>
+<li>拥有自动化重复流程的思想和技术栈</li>
+<li>积极拥抱开源与云生态圈，能够贡献自己的代码等</li>
+</ol>
+<p><img src="https://s2.loli.net/2023/08/24/smOyHMjN7Q96wtl.png" alt="1.1.png"><br><em>云原生需要同时将硬件基础与开发模式相结合以此来实现目标。</em></p>
+<h2 id="云原生在5G方向上的应用"><a href="#云原生在5G方向上的应用" class="headerlink" title="云原生在5G方向上的应用"></a>云原生在5G方向上的应用</h2><h2 id="一些问题的解答"><a href="#一些问题的解答" class="headerlink" title="一些问题的解答"></a>一些问题的解答</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clloyn30n0000j0kefz083nay" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Cloud-native/" rel="tag">Cloud native</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-k8s-templates" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/blog/2023/06/05/k8s-templates/" class="article-date">
@@ -128,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clkkvl2rz0006z1ke6mdk15gn" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clloyn30y000aj0ke7w5zaatp" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -183,7 +263,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clkkvl2rt0000z1ke8w3vfaod" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clloyn30t0001j0ke5k45efc9" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -204,7 +284,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/Basic-Commands/">Basic_Commands</a>
+    <a class="article-category-link" href="/blog/categories/commands/">commands</a>
   </div>
 
   </div>
@@ -411,7 +491,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clkkvl2rv0001z1kehpegawxw" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clloyn30w0005j0ke84rg4xsu" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -513,7 +593,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clkkvl2ry0004z1keaxxy1tbx" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clloyn30w0004j0keahf28jnn" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -571,7 +651,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clkkvl2ry0005z1ke2l9701fi" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clloyn30x0006j0keb9wgf151" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -593,7 +673,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Basic-Commands/">Basic_Commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/knowledge-sharing/">knowledge sharing</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
     </div>
   </div>
 
@@ -603,7 +683,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Cloud-native/" rel="tag">Cloud native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
     </div>
   </div>
 
@@ -613,7 +693,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a>
+      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a>
     </div>
   </div>
 
@@ -622,7 +702,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
     </div>
   </div>
 
@@ -633,6 +713,10 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/">Cloud native and its implementation in Telco</a>
+          </li>
         
           <li>
             <a href="/blog/2023/06/05/k8s-templates/">k8s templates</a>
@@ -648,10 +732,6 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
         
           <li>
             <a href="/blog/2023/06/04/Linux-cmds/">Linux cmds</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/06/04/Misc/">Misc</a>
           </li>
         
       </ul>
