@@ -2,7 +2,7 @@
 title: K8s cmds
 date: 2023-06-05 10:57:16
 tags: K8s
-category: Basic_Commands
+category: commands
 ---
 
 # Basic K8s-Commands
