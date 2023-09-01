@@ -99,28 +99,29 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Cloud-native-in-telecom"><a href="#Cloud-native-in-telecom" class="headerlink" title="Cloud native in telecom"></a>Cloud native in telecom</h1><p><strong>目前对云原生的概念以及如何应用还不是很清晰明了，因此我想用这篇文章介绍一下cloud native的基础概念以及组成。</strong></p>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
-<li><a href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F">云原生是什么？</a></li>
-<li><a href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E4%B8%8E%E7%BB%84%E4%BB%B6">云原生设计的基本思想与组件</a></li>
-<li><a href="%E4%BA%91%E5%8E%9F%E7%94%9F%E5%9C%A85G%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8">云原生在5G方向上的应用</a></li>
-<li><a href="#%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E7%AD%94">一些问题的解答</a></li>
+        <h1 id="Cloud-native-in-telecom"><a href="#Cloud-native-in-telecom" class="headerlink" title="Cloud native in telecom"></a>Cloud native in telecom</h1><p><strong>Right now it is unclear what is the concept of Cloud Native and what is its implementations, so this blog is to simply introduce the basic concept and how Cloud Native is conposed.</strong></p>
+<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+<li><a href="#what-is-cloud-native">What is Cloud Native？</a></li>
+<li><a href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E4%B8%8E%E7%BB%84%E4%BB%B6">Basic principles and conponents of Cloud Native</a></li>
+<li><a href="%E4%BA%91%E5%8E%9F%E7%94%9F%E5%9C%A85G%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8">Cloud Native implementations in telco industries</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E7%AD%94">Some Q&amp;As</a></li>
 </ol>
-<h2 id="云原生是什么？"><a href="#云原生是什么？" class="headerlink" title="云原生是什么？"></a>云原生是什么？</h2><p>云原生(cloud native) 不是具体的某种产品或技术，而是一种思想，是一种行为模式。它表述了企业及开发者为了发挥基于云服务业务模型(cloud-oriented business models)的特长而采取的考虑了高可用,高可扩展性以及可靠性的开发，构建和管理流程。 云原生是各种最佳实践的结合。企业与开发者使用基于云原生的技术如CI&#x2F;CD, 容器和微服务等技术的组合，来实现上述的高可用，高可扩展及可靠性以及更快的交付，发布时间。人们常说的XXaaS或者XXaaP就是基于这种模式，为客户提供无缝，安全高度自动化的部署，监控及运行体验。</p>
-<h2 id="云原生设计的基本思想与组件"><a href="#云原生设计的基本思想与组件" class="headerlink" title="云原生设计的基本思想与组件"></a>云原生设计的基本思想与组件</h2><p>云原生的基本思路，也可以说和它对企业带来的优势紧密相关。云原生能带来什么呢？</p>
+<h2 id="What-is-Cloud-Native？"><a href="#What-is-Cloud-Native？" class="headerlink" title="What is Cloud Native？"></a>What is Cloud Native？</h2><p>Cloud native is not a particular product or technology. Instead, it is a principle, a business pattern. Cloud Native is a term that describes the patterns of organizations, architectures and technologies that consistently, reliably and at scale fully take advantage of the possibilities of the cloud to support cloud-oriented business models.It is the combination of severals of best practices.Enterprise and developers use thchnologies based on Cloud Native such as CI&#x2F;CD, container and microservices to achieve high availability, high reliability scalibility and lower Time To Market and delivery.</p>
+<h2 id="Basic-principles-and-conponents-of-Cloud-Native"><a href="#Basic-principles-and-conponents-of-Cloud-Native" class="headerlink" title="Basic principles and conponents of Cloud Native"></a>Basic principles and conponents of Cloud Native</h2><p>What can Cloud Native bring us?</p>
 <ul>
-<li>速度: 更短的产品发布时间，包括更快的feature发布以及更新&#x2F;回退速度</li>
-<li>可扩展性: 可以任意根据业务需要扩展&#x2F;减少产品所需的资源，无需关注底层</li>
-<li>高度自动化: 自动化执行重复的步骤，如部署，测试，升级等。将应用与底层架构解耦来应对更复杂的场景。</li>
+<li>Speed: Fast introduction of new services</li>
+<li>Scale: Easily expand from hundreds of users to millions</li>
+<li>Performance: Optimized capacity throughput and resource utilization</li>
+<li>Efficiency : Low cost for both Speed and Scale. Automation, no-touch operations, legacy and new services, life-cycle independence for both Services and<br>Infrastructure</li>
 </ul>
-<p>因此，云原生的基本目标是在不牺牲服务可靠性以及性能的前提上实现更快的TTM和更少的TCO(total cost of ownership)。下面我们来看一下云原生的基本组件有哪些。</p>
+<p>Therefore, target of Cloud Native is to achieve higher TTM and lower TCO(Total Cost of Ownership) without sacrificing service reliability and performance. Let’s see what are the basic conponents of Cloud Native.</p>
 <ul>
-<li>云原生应用 (Cloud Native Applications)</li>
-<li>微服务 (Microservice)</li>
-<li>API</li>
-<li>容器与容器编排</li>
-<li>其它与自动化相关的组件</li>
-<li>兼容云原生的基础设施或开发环境(私有云，公有云，混合云等)</li>
+<li>Cloud Native Applications</li>
+<li>Microservice</li>
+<li>APIs</li>
+<li>Containers and container orchestration</li>
+<li>Other automating tools</li>
+<li>Cloud native friendly infrastructures(Public clouds，private clouds，mixture clouds)</li>
 </ul>
 <p>之前提到过，云原生不光包含技术，还包括思想以及一些行为模式。我们来看下意识形态上的云原生思想有哪些。</p>
 <ul>
@@ -139,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clloysu2g00009ske44x09pq3" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cllzx2nij0000vzke8t5l0lhf" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -208,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clloysu2n00069ske3ga663zg" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cllzx2nip0006vzkec007fzsf" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -263,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clloysu2j00019skeeppzb5yr" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cllzx2nim0001vzke11wbffxq" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -491,7 +492,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clloysu2l00049ske7dk40d8x" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cllzx2nio0004vzke67ooai0x" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -531,7 +532,12 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Basic-linux-cmds"><a href="#Basic-linux-cmds" class="headerlink" title="Basic linux cmds"></a>Basic linux cmds</h1><h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><h3 id="Resource-check-commands"><a href="#Resource-check-commands" class="headerlink" title="Resource check commands"></a>Resource check commands</h3><ul>
+        <h1 id="Basic-linux-cmds"><a href="#Basic-linux-cmds" class="headerlink" title="Basic linux cmds"></a>Basic linux cmds</h1><h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+<li><a href="#system-check-related-commands">System check realted commands</a></li>
+<li><a href="#inputoutput-related-commands">Input&#x2F;output related commands</a></li>
+<li><a href="#shell-and-bash-scripting-related">Shell and bash scripting</a></li>
+</ol>
+<h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><h3 id="Resource-check-commands"><a href="#Resource-check-commands" class="headerlink" title="Resource check commands"></a>Resource check commands</h3><ul>
 <li>Check CPU info</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure>
@@ -571,7 +577,7 @@
 <h3 id="Process-related-commands"><a href="#Process-related-commands" class="headerlink" title="Process related commands"></a>Process related commands</h3><ul>
 <li>List current process and show in tree form<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Syscall-related-commands"><a href="#Syscall-related-commands" class="headerlink" title="Syscall related commands"></a>Syscall related commands</h2><ul>
+<h3 id="Syscall-related-commands"><a href="#Syscall-related-commands" class="headerlink" title="Syscall related commands"></a>Syscall related commands</h3><ul>
 <li>Follow syscall</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace + syscall_cmd</span><br></pre></td></tr></table></figure>
@@ -586,14 +592,37 @@
 
 
 <h2 id="Input-x2F-output-related-commands"><a href="#Input-x2F-output-related-commands" class="headerlink" title="Input&#x2F;output related commands"></a>Input&#x2F;output related commands</h2><ul>
-<li>Translate with input&#x2F;outs. tr command.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tr</span> [input] [output]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Examples</span></span><br><span class="line"><span class="comment"># Input some texts into tr command then translate to all CAPS</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">tr</span> [a-z] [A-Z] &lt; input.txt &gt;output.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete numbers in the given input</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;My UID is <span class="variable">$UID</span>&quot;</span> | <span class="built_in">tr</span> -<span class="built_in">cd</span> <span class="string">&quot;[:digit:]\n&quot;</span></span><br></pre></td></tr></table></figure>
+<li>Translate with input&#x2F;outs. tr command.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">tr</span> [input] [output]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Examples</span></span><br><span class="line"><span class="comment"># Input some texts into tr command then translate to all CAPS</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">tr</span> [a-z] [A-Z] &lt; input.txt &gt;output.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete numbers in the given input</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;My UID is <span class="variable">$UID</span>&quot;</span> | <span class="built_in">tr</span> -<span class="built_in">cd</span> <span class="string">&quot;[:digit:]\n&quot;</span></span><br></pre></td></tr></table></figure>
 for detailed SETS, need to check with the <code>tr --help</code> command</li>
 </ul>
 <h3 id="Locate-file-x2F-folders"><a href="#Locate-file-x2F-folders" class="headerlink" title="Locate file&#x2F;folders"></a>Locate file&#x2F;folders</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">locate <span class="comment"># Find all files available with keyword </span></span><br><span class="line">whereis <span class="comment"># find binary file, config file and man files</span></span><br><span class="line"><span class="built_in">which</span> <span class="comment"># find the position of the command executed</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Find-command"><a href="#Find-command" class="headerlink" title="Find command"></a>Find command</h3><ul>
+<li>Fo example, to find avaiable modules in Linux.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find /lib/modules/$(umame -r) -<span class="built_in">type</span> f -name <span class="string">&#x27;*.ko*&#x27;</span></span><br><span class="line"><span class="comment"># find &quot;in directory - type file or else -name &#x27;&#x27; with anything related to .ko</span></span><br><span class="line"><span class="comment"># It didn&#x27;t work on my WSL ubuntu</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="To-list-modules-that-loaded-by-kernel"><a href="#To-list-modules-that-loaded-by-kernel" class="headerlink" title="To list modules that loaded by kernel"></a>To list modules that loaded by kernel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod</span><br></pre></td></tr></table></figure>
+
+<h2 id="Shell-and-bash-scripting-related"><a href="#Shell-and-bash-scripting-related" class="headerlink" title="Shell and bash scripting related"></a>Shell and bash scripting related</h2><h3 id="terminal-and-shell"><a href="#terminal-and-shell" class="headerlink" title="terminal and shell"></a>terminal and shell</h3><ul>
+<li>check terminal configuration<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    infocmp</span><br><span class="line"><span class="comment">#       Reconstructed via infocmp from file: /lib/terminfo/x/xterm-256color</span></span><br><span class="line">xterm-256color|xterm with 256 colors,</span><br><span class="line">        am, bce, ccc, km, mc5i, mir, msgr, npc, xenl,</span><br><span class="line">        colors<span class="comment">#0x100, cols#80, it#8, lines#24, pairs#0x10000,</span></span><br><span class="line">        acsc=``aaffggiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz&#123;&#123;||&#125;&#125;~~,</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>In general, shell uses File Descriptors for input and output</p>
+<ul>
+<li>stdin (FD 0)</li>
+<li>stdout (FD 1)</li>
+<li>stderr (FD 2)</li>
+</ul>
+<p>Here is some redirect examples:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl https://sth.com &amp;&gt; /dev/null <span class="comment"># no output generated </span></span><br><span class="line"></span><br><span class="line">curl https://sth.com 1&gt; output 2&gt; curl_status <span class="comment"># generate std output and status of the execution of curl seperatelly.</span></span><br><span class="line"></span><br><span class="line">curl https://sth.com 1&gt;&amp;2 file <span class="comment"># 2 kind of outputs in one file.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p>There are <em>Shell variables</em> and <em>Environmental Variables</em> in Linux.<br>Shell variables only exist in local shell process and are not inherited by subprocesses. Env variables are shell-wide.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">MY_VAR=42 <span class="comment"># Shell variable</span></span><br><span class="line"><span class="built_in">export</span> MY_GLOBAL_VAR=250 <span class="comment"># Global variable</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">set</span> | grep MY</span><br><span class="line">MY_GLOBAL_VAR=250</span><br><span class="line">MY_VAR=42</span><br><span class="line">$ <span class="built_in">env</span> | grep MY</span><br><span class="line">MY_GLOBAL_VAR=250</span><br><span class="line">$ bash</span><br><span class="line">$ <span class="built_in">set</span> | grep MY  <span class="comment"># Shell variable only exists in current shell.</span></span><br><span class="line">MY_GLOBAL_VAR=250</span><br></pre></td></tr></table></figure>
+<p>Full environmental variable list is under <a target="_blank" rel="noopener" href="https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html">GNU bash manual</a>.</p>
+<h3 id="Exit-status"><a href="#Exit-status" class="headerlink" title="Exit status"></a>Exit status</h3><p>The result of the execution of commands are determined by the exit status code from 0-255, in which 0 means normal. To querry the exit status, use <code>echo &amp;?</code> </p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clloysu2m00059skehcqt9ogr" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cllzx2nip0005vzke84cd4pez" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -651,7 +680,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clloysu2o000a9ske2svrcc5m" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cllzx2niq000avzkebl0yehx9" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
