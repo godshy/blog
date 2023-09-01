@@ -6,33 +6,35 @@ category: knowledge sharing
 ---
 # Cloud native in telecom 
 
-**目前对云原生的概念以及如何应用还不是很清晰明了，因此我想用这篇文章介绍一下cloud native的基础概念以及组成。**
-## 目录
-1. [云原生是什么？](#云原生是什么？)
-2. [云原生设计的基本思想与组件](#云原生设计的基本思想与组件)
-3. [云原生在5G方向上的应用](云原生在5G方向上的应用)
-4. [一些问题的解答](#一些问题的解答)
+**Right now it is unclear what is the concept of Cloud Native and what is its implementations, so this blog is to simply introduce the basic concept and how Cloud Native is conposed.**
+## Index
+1. [What is Cloud Native？](#what-is-cloud-native)
+2. [Basic principles and conponents of Cloud Native](#云原生设计的基本思想与组件)
+3. [Cloud Native implementations in telco industries](云原生在5G方向上的应用)
+4. [Some Q&As](#一些问题的解答)
 
 
 
-## 云原生是什么？
-云原生(cloud native) 不是具体的某种产品或技术，而是一种思想，是一种行为模式。它表述了企业及开发者为了发挥基于云服务业务模型(cloud-oriented business models)的特长而采取的考虑了高可用,高可扩展性以及可靠性的开发，构建和管理流程。 云原生是各种最佳实践的结合。企业与开发者使用基于云原生的技术如CI/CD, 容器和微服务等技术的组合，来实现上述的高可用，高可扩展及可靠性以及更快的交付，发布时间。人们常说的XXaaS或者XXaaP就是基于这种模式，为客户提供无缝，安全高度自动化的部署，监控及运行体验。
+## What is Cloud Native？
+Cloud native is not a particular product or technology. Instead, it is a principle, a business pattern. Cloud Native is a term that describes the patterns of organizations, architectures and technologies that consistently, reliably and at scale fully take advantage of the possibilities of the cloud to support cloud-oriented business models.It is the combination of severals of best practices.Enterprise and developers use thchnologies based on Cloud Native such as CI/CD, container and microservices to achieve high availability, high reliability scalibility and lower Time To Market and delivery.
 
 
-## 云原生设计的基本思想与组件
-云原生的基本思路，也可以说和它对企业带来的优势紧密相关。云原生能带来什么呢？
-- 速度: 更短的产品发布时间，包括更快的feature发布以及更新/回退速度
-- 可扩展性: 可以任意根据业务需要扩展/减少产品所需的资源，无需关注底层
-- 高度自动化: 自动化执行重复的步骤，如部署，测试，升级等。将应用与底层架构解耦来应对更复杂的场景。
+## Basic principles and conponents of Cloud Native
+What can Cloud Native bring us?
+- Speed: Fast introduction of new services
+- Scale: Easily expand from hundreds of users to millions
+- Performance: Optimized capacity throughput and resource utilization
+- Efficiency : Low cost for both Speed and Scale. Automation, no-touch operations, legacy and new services, life-cycle independence for both Services and
+Infrastructure
 
-因此，云原生的基本目标是在不牺牲服务可靠性以及性能的前提上实现更快的TTM和更少的TCO(total cost of ownership)。下面我们来看一下云原生的基本组件有哪些。
+Therefore, target of Cloud Native is to achieve higher TTM and lower TCO(Total Cost of Ownership) without sacrificing service reliability and performance. Let's see what are the basic conponents of Cloud Native.
 
-- 云原生应用 (Cloud Native Applications)
-- 微服务 (Microservice)
-- API
-- 容器与容器编排
-- 其它与自动化相关的组件
-- 兼容云原生的基础设施或开发环境(私有云，公有云，混合云等)
+- Cloud Native Applications
+- Microservice
+- APIs
+- Containers and container orchestration
+- Other automating tools
+- Cloud native friendly infrastructures(Public clouds，private clouds，mixture clouds)
 
 之前提到过，云原生不光包含技术，还包括思想以及一些行为模式。我们来看下意识形态上的云原生思想有哪些。
 - CI/CD 持续交付/集成的思想
