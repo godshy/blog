@@ -27,7 +27,7 @@ What can Cloud Native bring us?
 - Efficiency : Low cost for both Speed and Scale. Automation, no-touch operations, legacy and new services, life-cycle independence for both Services and
 Infrastructure
 
-Therefore, target of Cloud Native is to achieve higher TTM and lower TCO(Total Cost of Ownership) without sacrificing service reliability and performance. Let's see what are the basic conponents of Cloud Native.
+Therefore, target of Cloud Native is to achieve higher TTM and lower TCO(Total Cost of Ownership) without sacrificing service reliability and performance. Let's see what are the basic components of Cloud Native.
 
 - Cloud Native Applications
 - Microservice
