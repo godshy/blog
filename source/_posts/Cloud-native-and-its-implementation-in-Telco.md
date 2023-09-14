@@ -6,17 +6,17 @@ category: knowledge sharing
 ---
 # Cloud native in telecom 
 
-**Right now it is unclear what is the concept of Cloud Native and what is its implementations, so this blog is to simply introduce the basic concept and how Cloud Native is conposed.**
+**Right now it is unclear what is the concept of Cloud Native and what is its implementations, so main goal of this blog is to simply introduce the basic concept and how Cloud Native is conposed.**
 ## Index
 1. [What is Cloud Native？](#what-is-cloud-native)
-2. [Basic principles and conponents of Cloud Native](#云原生设计的基本思想与组件)
-3. [Cloud Native implementations in telco industries](云原生在5G方向上的应用)
-4. [Some Q&As](#一些问题的解答)
+2. [Basic principles and components of Cloud Native](#basic-principles-and-conponents-of-cloud-native)
+3. [Cloud Native design principles](#cloud-native-design-priciples)
+4. [Some Q&As](#qas)
 
 
 
 ## What is Cloud Native？
-Cloud native is not a particular product or technology. Instead, it is a principle, a business pattern. Cloud Native is a term that describes the patterns of organizations, architectures and technologies that consistently, reliably and at scale fully take advantage of the possibilities of the cloud to support cloud-oriented business models.It is the combination of severals of best practices.Enterprise and developers use thchnologies based on Cloud Native such as CI/CD, container and microservices to achieve high availability, high reliability scalibility and lower Time To Market and delivery.
+Cloud native is not a particular product or technology. Instead, it's a principle, a business pattern. Cloud Native is a term that describes the patterns of organizations, architectures and technologies that consistently, reliably and at scale fully takes advantage of the possibilities of the cloud to support cloud-oriented business models. It is the combination of severals of best practices.Enterprise and developers use thchnologies based on Cloud Native such as CI/CD, container and microservices to achieve high availability, high reliability scalibility and lower Time To Market and delivery.
 
 
 ## Basic principles and conponents of Cloud Native
@@ -24,10 +24,10 @@ What can Cloud Native bring us?
 - Speed: Fast introduction of new services
 - Scale: Easily expand from hundreds of users to millions
 - Performance: Optimized capacity throughput and resource utilization
-- Efficiency : Low cost for both Speed and Scale. Automation, no-touch operations, legacy and new services, life-cycle independence for both Services and
+- Efficiency : Low cost for both Speed and Scale. Automation, zero-touch operations, legacy and new services, life-cycle independence for both Services and
 Infrastructure
 
-Therefore, target of Cloud Native is to achieve higher TTM and lower TCO(Total Cost of Ownership) without sacrificing service reliability and performance. Let's see what are the basic components of Cloud Native.
+Therefore, target of Cloud Native is to achieve higher TTM(Time to) and lower TCO(Total Cost of Ownership) without sacrificing service reliability and performance. Let's see what are the basic components of Cloud Native.
 
 - Cloud Native Applications
 - Microservice
@@ -36,19 +36,22 @@ Therefore, target of Cloud Native is to achieve higher TTM and lower TCO(Total C
 - Other automating tools
 - Cloud native friendly infrastructures(Public clouds，private clouds，mixture clouds)
 
-之前提到过，云原生不光包含技术，还包括思想以及一些行为模式。我们来看下意识形态上的云原生思想有哪些。
-- CI/CD 持续交付/集成的思想
-- 高度自动化(包括CI/CD，同时还有自动化监控，数据处理与分析以及异常检测的能力)
-- 积极拥抱开源以及与CNCF (cloud native computing foundation)开展合作: CNCF是一个开源的CN组织，负责开发与维护与云原生息息相关的重要组件。具体介绍及成员请查阅CNCF的[网站](https://www.cncf.io/)。
+Like I mentioned earlier, cloud native doesn't only contain technologies, but also idea and behavior patterns. Let's see what needs to be considered in mind about cloud native.
 
-在这里总结一下，作为企业需要完全拥抱云原生，并且获得云原生带来的优势需要做到以下几点。
+- CI/CD (Continous delivery and continous integration)
+- Highly automated (includes CI/CD，along with auto monitoring，data handeling and analysis with ability to anomoly detection)
+- Embrace actively to open source and collaboration with CNCF (cloud native computing foundation): CNCF is an open source Cloud Native organization, it is responsible to develop and matain crutial parts close related to Cloud Native. Ple refer to their [website](https://www.cncf.io/).
 
-1. 拥有完整的云原生应用的使用环境和基础架构
-2. 拥有自动化重复流程的思想和技术栈
-3. 积极拥抱开源与云生态圈，能够贡献自己的代码等
+To sum-up, a company need to achieve the following to compeletely take the advantage of cloud native.
 
-![云原生需要同时将硬件基础与开发模式相结合以此来实现目标。](https://s2.loli.net/2023/08/24/smOyHMjN7Q96wtl.png)
+1. Posess complete infrastructure and environments for cloud native applications
+2. Have the ideal of automation on duplicated process
+3. Contribute to open source society, continous delivery of value to the user
+
+![Cloud native requires both infrastruture and development patterns to reach the target.](https://s2.loli.net/2023/09/14/2uHknclWej18IiB.png)
+
+## Cloud Native design principles
+Let's talk about the design principles of cloud native applications. Since it is one of the most important parts in the whole could native concept and it is rather new in the industry.  Graph below describes the basic principles need to considered before deploying and designing cloud native applications.
 
 
-## 云原生在5G方向上的应用
-## 一些问题的解答
+## Q&As
