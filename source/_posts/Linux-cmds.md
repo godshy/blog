@@ -143,7 +143,11 @@ for detailed SETS, need to check with the `tr --help` command
 ## Shell and bash scripting related
 
 ### terminal and shell
+- solve problem of ```/bin/bash^m bad interpreter no such file or directory```
 
+``` bash
+    sed -i 's/\r//' <filename>
+```
 - check terminal configuration
 ```bash
     infocmp
