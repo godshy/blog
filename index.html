@@ -73,6 +73,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Deploy-free5GC-with-k8s-and-helm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" class="article-date">
+  <time class="dt-published" datetime="2023-10-23T06:32:30.000Z" itemprop="datePublished">2023-10-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/">Deploy free5GC with k8s and helm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clo2itotm0001lekecuzx31ix" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Cloud-native-and-its-implementation-in-Telco" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" class="article-date">
@@ -99,15 +137,19 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Cloud-native-in-telecom"><a href="#Cloud-native-in-telecom" class="headerlink" title="Cloud native in telecom"></a>Cloud native in telecom</h1><p><strong>Right now it is unclear what is the concept of Cloud Native and what is its implementations, so main goal of this blog is to simply introduce the basic concept and how Cloud Native is conposed.</strong></p>
+        <h1 id="Cloud-native-in-telecom"><a href="#Cloud-native-in-telecom" class="headerlink" title="Cloud native in telecom"></a>Cloud native in telecom</h1><p><strong>Right now it is unclear what is the concept of Cloud Native and what is its implementations, so main goal of this blog is to simply introduce the basic concept and how Cloud Native is composed.</strong></p>
 <h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
 <li><a href="#what-is-cloud-native">What is Cloud Native？</a></li>
 <li><a href="#basic-principles-and-conponents-of-cloud-native">Basic principles and components of Cloud Native</a></li>
-<li><a href="#cloud-native-design-priciples">Cloud Native design principles</a></li>
+<li><a href="#cloud-native-design-priciples">Cloud Native design principles</a><ol>
+<li><a href="#agnosticism">Agnosticism</a></li>
+<li><a href="#software-decomposition-and-life-cycle-management">Software decomposition and Life Cycle Management</a></li>
+</ol>
+</li>
 <li><a href="#qas">Some Q&amp;As</a></li>
 </ol>
-<h2 id="What-is-Cloud-Native？"><a href="#What-is-Cloud-Native？" class="headerlink" title="What is Cloud Native？"></a>What is Cloud Native？</h2><p>Cloud native is not a particular product or technology. Instead, it’s a principle, a business pattern. Cloud Native is a term that describes the patterns of organizations, architectures and technologies that consistently, reliably and at scale fully takes advantage of the possibilities of the cloud to support cloud-oriented business models. It is the combination of severals of best practices.Enterprise and developers use thchnologies based on Cloud Native such as CI&#x2F;CD, container and microservices to achieve high availability, high reliability scalibility and lower Time To Market and delivery.</p>
-<h2 id="Basic-principles-and-conponents-of-Cloud-Native"><a href="#Basic-principles-and-conponents-of-Cloud-Native" class="headerlink" title="Basic principles and conponents of Cloud Native"></a>Basic principles and conponents of Cloud Native</h2><p>What can Cloud Native bring us?</p>
+<h2 id="What-is-Cloud-Native？"><a href="#What-is-Cloud-Native？" class="headerlink" title="What is Cloud Native？"></a>What is Cloud Native？</h2><p>Cloud native is not a particular product or technology. Instead, it’s a principle, a business pattern. Cloud Native is a term that describes the patterns of organizations, architectures and technologies that consistently, reliably and at scale fully takes advantage of the possibilities of the cloud to support cloud-oriented business models. It is the combination of different kinds of best practices.Enterprise and developers use technologies based on Cloud Native such as CI&#x2F;CD, container and microservices to achieve high availability, high reliability scalability and lower Time To Market and delivery.</p>
+<h2 id="Basic-principles-and-components-of-Cloud-Native"><a href="#Basic-principles-and-components-of-Cloud-Native" class="headerlink" title="Basic principles and components of Cloud Native"></a>Basic principles and components of Cloud Native</h2><p>What can Cloud Native bring us?</p>
 <ul>
 <li>Speed: Fast introduction of new services</li>
 <li>Scale: Easily expand from hundreds of users to millions</li>
@@ -125,23 +167,27 @@
 </ul>
 <p>Like I mentioned earlier, cloud native doesn’t only contain technologies, but also idea and behavior patterns. Let’s see what needs to be considered in mind about cloud native.</p>
 <ul>
-<li>CI&#x2F;CD (Continous delivery and continous integration)</li>
-<li>Highly automated (includes CI&#x2F;CD，along with auto monitoring，data handeling and analysis with ability to anomoly detection)</li>
-<li>Embrace actively to open source and collaboration with CNCF (cloud native computing foundation): CNCF is an open source Cloud Native organization, it is responsible to develop and matain crutial parts close related to Cloud Native. Ple refer to their <a target="_blank" rel="noopener" href="https://www.cncf.io/">website</a>.</li>
+<li>CI&#x2F;CD (Continuous delivery and continuous integration)</li>
+<li>Highly automated (includes CI&#x2F;CD，along with auto monitoring，data handling and analysis with ability to anomaly detection)</li>
+<li>Embrace actively to open source and collaboration with CNCF (cloud native computing foundation): CNCF is an open source Cloud Native organization, it is responsible to develop and maintain crucial parts close related to Cloud Native. Please refer to their <a target="_blank" rel="noopener" href="https://www.cncf.io/">website</a>.</li>
 </ul>
-<p>To sum-up, a company need to achieve the following to compeletely take the advantage of cloud native.</p>
+<p>To sum-up, a company need to achieve the following to completely take the advantage of cloud native.</p>
 <ol>
-<li>Posess complete infrastructure and environments for cloud native applications</li>
+<li>Posses complete infrastructure and environments for cloud native applications</li>
 <li>Have the ideal of automation on duplicated process</li>
-<li>Contribute to open source society, continous delivery of value to the user</li>
+<li>Contribute to open source society, continuous delivery of value to the user</li>
 </ol>
-<p><img src="https://s2.loli.net/2023/09/14/2uHknclWej18IiB.png" alt="Cloud native requires both infrastruture and development patterns to reach the target."></p>
-<h2 id="Cloud-Native-design-principles"><a href="#Cloud-Native-design-principles" class="headerlink" title="Cloud Native design principles"></a>Cloud Native design principles</h2><p>Let’s talk about the design principles of cloud native applications. Since it is one of the most important parts in the whole could native concept and it is rather new in the industry.  Graph below describes the basic principles need to considered before deploying and designing cloud native applications.</p>
-<h2 id="Q-amp-As"><a href="#Q-amp-As" class="headerlink" title="Q&amp;As"></a>Q&amp;As</h2>
+<p><img src="https://s2.loli.net/2023/09/14/2uHknclWej18IiB.png" alt="Cloud native requires both infrastructure and development patterns to reach the target."></p>
+<h2 id="Cloud-Native-design-principles"><a href="#Cloud-Native-design-principles" class="headerlink" title="Cloud Native design principles"></a>Cloud Native design principles</h2><p>Let’s talk about the design principles of cloud native application. Since it is one of the most important parts in the whole could native concept and it is rather new in the industry.  Graph below describes the basic principles need to considered before deploying and designing cloud native applications.</p>
+<p><img src="https://s2.loli.net/2023/10/18/ErKoVcvehbxfl9i.png" alt="Cloud Native Application Design Principles"></p>
+<h3 id="Agnosticism"><a href="#Agnosticism" class="headerlink" title="Agnosticism"></a>Agnosticism</h3><p>Cloud native applications need to to be agnostic to the underlying cloud infrastructure. Although this does not necessarily apply to the traditional Cloud Native players like Netflix and Uber since they control the full stack that they are deploying their application on.<br>As we evolve the cloud infrastructure towards supporting container infrastructure (CaaS) the agnosticism requirements remain but the challenges are different. A CNA requires a CaaS and must be able to be deployed on whatever CaaS and IaaS combination that an operator has in their cloud environment, see figure below for CNA agnosticism scenario. A CNA must be able to run on any modern kernel without requiring any proprietary additions. Optional use of plug-ins for optimizing performance is allowed.</p>
+<p><img src="https://s2.loli.net/2023/10/18/ctJGAWqylKeRxuz.png" alt="Agnosticism explained"></p>
+<h3 id="Software-decomposition-and-Life-Cycle-Management"><a href="#Software-decomposition-and-Life-Cycle-Management" class="headerlink" title="Software decomposition and Life Cycle Management"></a>Software decomposition and Life Cycle Management</h3><p>Another important principle is for CNA itself, which requires CNA to be decomposed into smaller, more manageable pieces. This is usually done through utilizing a microservice architecture (MSA). MSA is a design pattern that strives to structure an application as a collection of loosely coupled stateless services.<br><img src="https://s2.loli.net/2023/10/23/KhxQlkCBGo7WI9z.png" alt="Microservice architecture"><br>This concept is not new in only for cloud native, dividing code into more manageable pieces and call them “code modules” or “software components” has always been a good practice in software development. However, in cloud native realm, those software components, AKA microservices, now have a well bounded scope and can be individually deploys, scaled and upgrade using CaaS environment. In addition, microservices have their own defines and version-controlled network-based interfaces to communicate with each other, which enables the lifecycle management for each microservice.</p>
+<h4 id="Scaling"><a href="#Scaling" class="headerlink" title="Scaling"></a>Scaling</h4><h4 id="Upgrade"><a href="#Upgrade" class="headerlink" title="Upgrade"></a>Upgrade</h4><h2 id="Q-amp-As"><a href="#Q-amp-As" class="headerlink" title="Q&amp;As"></a>Q&amp;As</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clmiyvvgf0000okke4j9u2rak" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clo2itoth0000lekebl7ug4sd" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -210,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clmiyvvgo000aokke6bbqany3" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clo2itotw000hlekebx0gh4p7" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -265,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clmiyvvgj0001okkedxrn2kim" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clo2itotq0004lekebroa18m6" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -493,7 +539,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clmiyvvgm0004okkeglgtc804" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clo2itotr0005leke8hid4hod" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -604,6 +650,10 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 <h3 id="To-list-modules-that-loaded-by-kernel"><a href="#To-list-modules-that-loaded-by-kernel" class="headerlink" title="To list modules that loaded by kernel"></a>To list modules that loaded by kernel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod</span><br></pre></td></tr></table></figure>
 
 <h2 id="Shell-and-bash-scripting-related"><a href="#Shell-and-bash-scripting-related" class="headerlink" title="Shell and bash scripting related"></a>Shell and bash scripting related</h2><h3 id="terminal-and-shell"><a href="#terminal-and-shell" class="headerlink" title="terminal and shell"></a>terminal and shell</h3><ul>
+<li>solve problem of <code>/bin/bash^m bad interpreter no such file or directory</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/\r//&#x27;</span> &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+<ul>
 <li>check terminal configuration<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    infocmp</span><br><span class="line"><span class="comment">#       Reconstructed via infocmp from file: /lib/terminfo/x/xterm-256color</span></span><br><span class="line">xterm-256color|xterm with 256 colors,</span><br><span class="line">        am, bce, ccc, km, mc5i, mir, msgr, npc, xenl,</span><br><span class="line">        colors<span class="comment">#0x100, cols#80, it#8, lines#24, pairs#0x10000,</span></span><br><span class="line">        acsc=``aaffggiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz&#123;&#123;||&#125;&#125;~~,</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>In general, shell uses File Descriptors for input and output</p>
@@ -623,7 +673,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clmiyvvgm0005okkeerbm30l3" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clo2itotv000glekefa1n0mp7" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -681,7 +731,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clmiyvvgn0006okke0dnv03sx" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clo2itoty000jlekebx4u4od8" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -732,7 +782,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
     </div>
   </div>
 
@@ -743,6 +793,10 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/">Deploy free5GC with k8s and helm</a>
+          </li>
         
           <li>
             <a href="/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/">Cloud native and its implementation in Telco</a>
@@ -758,10 +812,6 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
         
           <li>
             <a href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/06/04/Linux-cmds/">Linux cmds</a>
           </li>
         
       </ul>
