@@ -26,8 +26,7 @@ After ubuntu is up, do the install and update packages first.
 ``` bash
     :~$ sudo apt update -y
     :~$ sudo apt upgrade -y
-    :~$ sudo apt install -y 
-    :~$ curl wget apt-transport-https
+    :~$ sudo apt install -y curl wget apt-transport-https
 ```
 
 Then install and start up minikube, minikube enables user to set up kubernetes cluster on the system.
@@ -77,7 +76,7 @@ Then for the last step of preparation, we need to install helm and multus-CNI pl
     :~$ git clone https://github.com/k8snetworkplumbingwg/multus-cni.git
     :~$ cd multus-cni
     :~$ cat ./deployments/multus-daemonset-thick.yml | kubectl apply -f -
-    kubectl get pods -n kube-system
+    :~$ kubectl get pods -n kube-system
 ```
 
 For me I had multus pods oom killed, so I modified the request and limit resource in the multus-daemonset-thick.yml then pod went up fine.
