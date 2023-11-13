@@ -16,6 +16,20 @@ category: commands
 
 ## System check related commands
 
+
+
+
+### Often used basic commands and their variations
+
+- 'cat' command and its successor 'bat'
+- 'find' command and its better version
+``` bash 
+    # example of using find and rg to find yaml files that contains "sample"
+    find . -type f -name "*.yaml" -exec grep "sample" '{}' \; -print
+    rg -t "yaml" sample
+```
+
+
 ### Resource check commands
 
 - Check CPU info
@@ -83,6 +97,11 @@ or
     udp6       0      0 ip6-localhost:323       [::]:*                              -
 ```
 
+``` bash
+grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,":")-2,2)); for (i=5; i>0; i-=2) x = x"."strtonum("0x"substr($3,i,2))}{print x":"strtonum("0x"substr($3,index($3,":")+1,4))}'
+# If nestat is not there, we can check connection using this instead.
+```
+
 ### Process related commands 
 - List current process and show in tree form
 ``` bash
@@ -96,7 +115,7 @@ or
     strace + syscall_cmd
 ```
 
-> -c summary only
+- use  -c summarize the overview of the command
 
 - Check kernel machine and kernel release
 
@@ -143,12 +162,15 @@ for detailed SETS, need to check with the `tr --help` command
 ## Shell and bash scripting related
 
 ### terminal and shell
+
 - solve problem of ```/bin/bash^m bad interpreter no such file or directory```
 
 ``` bash
     sed -i 's/\r//' <filename>
 ```
+
 - check terminal configuration
+
 ```bash
     infocmp
 #       Reconstructed via infocmp from file: /lib/terminfo/x/xterm-256color
@@ -195,4 +217,22 @@ Full environmental variable list is under [GNU bash manual](https://www.gnu.org/
 
 ### Exit status
 
-The result of the execution of commands are determined by the exit status code from 0-255, in which 0 means normal. To querry the exit status, use `echo &?` 
+The result of the execution of commands are determined by the exit status code from 0-255, in which 0 means normal. To query the exit status, use ` echo &? ` 
+
+### Job control 
+
+We can run commands in background, and then take it back to the foreground. Also use ctrl+z is able to put command into background.
+
+``` bash
+    <some command> & # use & to run commands in backend
+    fg # bring command back to frontend
+    jobs # watch current jobs in the backend
+
+    disown
+    nohup # disown and nohup
+```
+
+Terminal multiplexer, is also able to maintain multiple tasks. 
+
+
+### Json processing command jq
