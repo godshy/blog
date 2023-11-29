@@ -142,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clo6yrm4l0001zcke7y7fhl7i" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clpje909q00015mkefgk02bmn" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -232,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clo6yrm4i0000zcke7l1j4c0i" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clpje909o00005mkeflno2pkc" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -268,7 +268,17 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Config-templates-for-K8s"><a href="#Config-templates-for-K8s" class="headerlink" title="Config templates for K8s"></a>Config templates for K8s</h1><h3 id="YAML-description-file-for-pods"><a href="#YAML-description-file-for-pods" class="headerlink" title="YAML description file for pods"></a>YAML description file for pods</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">sleep</span> <span class="number">100</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Config-templates-for-K8s"><a href="#Config-templates-for-K8s" class="headerlink" title="Config templates for K8s"></a>Config templates for K8s</h1><h3 id="YAML-description-file-for-pods"><a href="#YAML-description-file-for-pods" class="headerlink" title="YAML description file for pods"></a>YAML description file for pods</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">labels:</span> </span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&quot;cmd&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&quot;args&quot;</span></span><br><span class="line">    <span class="comment"># or </span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;somecommand&quot;</span>]</span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="attr">args:</span> [<span class="string">&quot;some_args&quot;</span>]</span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">8080</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>ENV VAR for pods</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">env:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ENV_VAR_NAME</span></span><br><span class="line">      <span class="attr">value:</span> <span class="string">ENV_VAR_VALUE</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Template-for-configmap"><a href="#Template-for-configmap" class="headerlink" title="Template for configmap"></a>Template for configmap</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span> <span class="string">&lt;ConfigMap_Name&gt;</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="string">&lt;key_name&gt;:</span> <span class="string">&lt;value_name&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Inject-configmap-to-pods"><a href="#Inject-configmap-to-pods" class="headerlink" title="Inject configmap to pods"></a>Inject configmap to pods</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span></span><br><span class="line">    <span class="attr">image:</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> </span><br><span class="line">    <span class="attr">envFrom:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">configMapRef:</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">&lt;config_map_name&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">env:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span></span><br><span class="line">  <span class="attr">valueFrom:</span></span><br><span class="line">    <span class="attr">configMapKeyRef:</span></span><br><span class="line">      <span class="attr">name:</span></span><br><span class="line">      <span class="attr">key:</span></span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+
 
 
 
@@ -299,10 +309,12 @@
 <h3 id="Allocate-pods-to-deploy-on-modified-scheduler"><a href="#Allocate-pods-to-deploy-on-modified-scheduler" class="headerlink" title="Allocate pods to deploy on modified scheduler"></a>Allocate pods to deploy on modified scheduler</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># on pod definition file</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">schedulerName:</span> <span class="string">&lt;scheduler-name&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h3 id="Allocate-the-priority-to-be-scheduled-in-the-queue"><a href="#Allocate-the-priority-to-be-scheduled-in-the-queue" class="headerlink" title="Allocate the priority to be scheduled in the queue"></a>Allocate the priority to be scheduled in the queue</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">high-priority</span></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clo6yrm4q000azckednzl1bas" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clpje90a0000b5mked5y12r2h" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -357,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clo6yrm4n0004zcke33rfb3ky" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clpje909u00045mke8yr4frjr" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -397,7 +409,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Basic-K8s-Commands"><a href="#Basic-K8s-Commands" class="headerlink" title="Basic K8s-Commands"></a>Basic K8s-Commands</h1><h2 id="ETCD-related-commands"><a href="#ETCD-related-commands" class="headerlink" title="ETCD related commands"></a>ETCD related commands</h2><ul>
+        <h1 id="Basic-K8s-Commands"><a href="#Basic-K8s-Commands" class="headerlink" title="Basic K8s-Commands"></a>Basic K8s-Commands</h1><h2 id="Cluster-logs"><a href="#Cluster-logs" class="headerlink" title="Cluster logs"></a>Cluster logs</h2><ul>
+<li>Get cluster nodes logs <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl cluster-info dump --output-directory cluster_info_dump_$(<span class="built_in">uname</span> -n)  -A</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="ETCD-related-commands"><a href="#ETCD-related-commands" class="headerlink" title="ETCD related commands"></a>ETCD related commands</h2><ul>
 <li><p>ETCDCTL version 2</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl backup</span><br><span class="line">etcdctl cluster-health</span><br><span class="line">etcdctl mk</span><br><span class="line">etcdctl <span class="built_in">mkdir</span></span><br><span class="line">etcdctl <span class="built_in">set</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -507,6 +522,10 @@
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment &lt;deployment_name&gt; --image=&lt;image_name&gt; --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="Check-deployment-rollout-and-update-pods"><a href="#Check-deployment-rollout-and-update-pods" class="headerlink" title="Check deployment rollout and update pods"></a>Check deployment rollout and update pods</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout status deployment/&lt;deployment_name&gt;</span><br><span class="line"></span><br><span class="line">kubectl rollout <span class="built_in">history</span> deployment/&lt;deployment_name&gt; <span class="comment">#Check rollout history</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># update pods</span></span><br><span class="line">kubectl apply -f deployment-definition.yml <span class="comment"># after edit image spec in definination, apply it</span></span><br><span class="line"></span><br><span class="line">kubectl <span class="built_in">set</span> image deployment &lt;deployment_name&gt; \ &lt;image_name:version&gt;</span><br><span class="line"></span><br><span class="line">kubectl rollout undo deployment &lt;deployment_name&gt;</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="Service-creation"><a href="#Service-creation" class="headerlink" title="Service creation"></a>Service creation</h2><ul>
 <li><p>Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml <span class="comment"># automatically use pods labels as selectors</span></span><br></pre></td></tr></table></figure>
@@ -582,10 +601,12 @@
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copy file from pods to local director</span></span><br><span class="line">kubectl <span class="built_in">cp</span> &lt;namespace&gt;/&lt;pod_name&gt;:/PATH/FILE /LOCAL_PATH/FILE_NAME</span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy file from local to pods</span></span><br><span class="line">kubectl <span class="built_in">cp</span> /LOCAL_PATH/FILE_NAME &lt;namespace&gt;/&lt;pod_name&gt;:/PATH/FILE </span><br></pre></td></tr></table></figure>
+
+<h2 id="ENV-VAR-and-ConfigMap"><a href="#ENV-VAR-and-ConfigMap" class="headerlink" title="ENV VAR and ConfigMap"></a>ENV VAR and ConfigMap</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">kubectl create configmap \</span><br><span class="line">&lt;config-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span><br><span class="line"></span><br><span class="line">kubectl create configmap \</span><br><span class="line">&lt;config-name&gt; --from-file=&lt;configmap_file_name&gt;</span><br><span class="line"></span><br><span class="line">kubectl create -f cfgmap_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># display configmaps</span></span><br><span class="line">kubectl get/describe &lt;configmap_name&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clo6yrm4o0005zcke6sbpb05r" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clpje909w00055mkehehvhyox" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -630,7 +651,11 @@
 <li><a href="#inputoutput-related-commands">Input&#x2F;output related commands</a></li>
 <li><a href="#shell-and-bash-scripting-related">Shell and bash scripting</a></li>
 </ol>
-<h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><h3 id="Resource-check-commands"><a href="#Resource-check-commands" class="headerlink" title="Resource check commands"></a>Resource check commands</h3><ul>
+<h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><h3 id="Often-used-basic-commands-and-their-variations"><a href="#Often-used-basic-commands-and-their-variations" class="headerlink" title="Often used basic commands and their variations"></a>Often used basic commands and their variations</h3><ul>
+<li>‘cat’ command and its successor ‘bat’</li>
+<li>‘find’ command and its better version<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example of using find and rg to find yaml files that contains &quot;sample&quot;</span></span><br><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.yaml&quot;</span> -<span class="built_in">exec</span> grep <span class="string">&quot;sample&quot;</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> \; -<span class="built_in">print</span></span><br><span class="line">rg -t <span class="string">&quot;yaml&quot;</span> sample</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Resource-check-commands"><a href="#Resource-check-commands" class="headerlink" title="Resource check commands"></a>Resource check commands</h3><ul>
 <li>Check CPU info</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure>
@@ -667,6 +692,8 @@
 </ul>
 <h3 id="Network-related-commands"><a href="#Network-related-commands" class="headerlink" title="Network related commands"></a>Network related commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">netstat -t -u -n -p -l <span class="comment"># tcp | udp | numeric(do not resolve hostnames) | programs | listening</span></span><br><span class="line"></span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 localhost:43619         0.0.0.0:*               LISTEN      13331/node</span><br><span class="line">tcp        0      0 127.0.0.53:domain       0.0.0.0:*               LISTEN      1860/systemd-resolv</span><br><span class="line">tcp        0      0 localhost:34781         0.0.0.0:*               LISTEN      248/containerd</span><br><span class="line">tcp        0      0 localhost:32809         0.0.0.0:*               LISTEN      13259/node</span><br><span class="line">udp        0      0 127.0.0.53:domain       0.0.0.0:*                           1860/systemd-resolv</span><br><span class="line">udp        0      0 localhost:323           0.0.0.0:*                           -</span><br><span class="line">udp6       0      0 ip6-localhost:323       [::]:*                              -</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -v <span class="string">&quot;rem_address&quot;</span> /proc/net/tcp  | awk  <span class="string">&#x27;&#123;x=strtonum(&quot;0x&quot;substr($3,index($3,&quot;:&quot;)-2,2)); for (i=5; i&gt;0; i-=2) x = x&quot;.&quot;strtonum(&quot;0x&quot;substr($3,i,2))&#125;&#123;print x&quot;:&quot;strtonum(&quot;0x&quot;substr($3,index($3,&quot;:&quot;)+1,4))&#125;&#x27;</span></span><br><span class="line"><span class="comment"># If nestat is not there, we can check connection using this instead.</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="Process-related-commands"><a href="#Process-related-commands" class="headerlink" title="Process related commands"></a>Process related commands</h3><ul>
 <li>List current process and show in tree form<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -675,11 +702,11 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace + syscall_cmd</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>-c summary only</p>
-</blockquote>
 <ul>
-<li>Check kernel machine and kernel release</li>
+<li><p>use  -c summarize the overview of the command</p>
+</li>
+<li><p>Check kernel machine and kernel release</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -srm</span><br></pre></td></tr></table></figure>
 
@@ -699,9 +726,12 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 <li>solve problem of <code>/bin/bash^m bad interpreter no such file or directory</code></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/\r//&#x27;</span> &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>check terminal configuration<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    infocmp</span><br><span class="line"><span class="comment">#       Reconstructed via infocmp from file: /lib/terminfo/x/xterm-256color</span></span><br><span class="line">xterm-256color|xterm with 256 colors,</span><br><span class="line">        am, bce, ccc, km, mc5i, mir, msgr, npc, xenl,</span><br><span class="line">        colors<span class="comment">#0x100, cols#80, it#8, lines#24, pairs#0x10000,</span></span><br><span class="line">        acsc=``aaffggiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz&#123;&#123;||&#125;&#125;~~,</span><br></pre></td></tr></table></figure></li>
+<li>check terminal configuration</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    infocmp</span><br><span class="line"><span class="comment">#       Reconstructed via infocmp from file: /lib/terminfo/x/xterm-256color</span></span><br><span class="line">xterm-256color|xterm with 256 colors,</span><br><span class="line">        am, bce, ccc, km, mc5i, mir, msgr, npc, xenl,</span><br><span class="line">        colors<span class="comment">#0x100, cols#80, it#8, lines#24, pairs#0x10000,</span></span><br><span class="line">        acsc=``aaffggiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz&#123;&#123;||&#125;&#125;~~,</span><br></pre></td></tr></table></figure>
+
 <p>In general, shell uses File Descriptors for input and output</p>
 <ul>
 <li>stdin (FD 0)</li>
@@ -714,12 +744,16 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 <h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p>There are <em>Shell variables</em> and <em>Environmental Variables</em> in Linux.<br>Shell variables only exist in local shell process and are not inherited by subprocesses. Env variables are shell-wide.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">MY_VAR=42 <span class="comment"># Shell variable</span></span><br><span class="line"><span class="built_in">export</span> MY_GLOBAL_VAR=250 <span class="comment"># Global variable</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">set</span> | grep MY</span><br><span class="line">MY_GLOBAL_VAR=250</span><br><span class="line">MY_VAR=42</span><br><span class="line">$ <span class="built_in">env</span> | grep MY</span><br><span class="line">MY_GLOBAL_VAR=250</span><br><span class="line">$ bash</span><br><span class="line">$ <span class="built_in">set</span> | grep MY  <span class="comment"># Shell variable only exists in current shell.</span></span><br><span class="line">MY_GLOBAL_VAR=250</span><br></pre></td></tr></table></figure>
 <p>Full environmental variable list is under <a target="_blank" rel="noopener" href="https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html">GNU bash manual</a>.</p>
-<h3 id="Exit-status"><a href="#Exit-status" class="headerlink" title="Exit status"></a>Exit status</h3><p>The result of the execution of commands are determined by the exit status code from 0-255, in which 0 means normal. To querry the exit status, use <code>echo &amp;?</code> </p>
+<h3 id="Exit-status"><a href="#Exit-status" class="headerlink" title="Exit status"></a>Exit status</h3><p>The result of the execution of commands are determined by the exit status code from 0-255, in which 0 means normal. To query the exit status, use <code>echo &amp;?</code> </p>
+<h3 id="Job-control"><a href="#Job-control" class="headerlink" title="Job control"></a>Job control</h3><p>We can run commands in background, and then take it back to the foreground. Also use ctrl+z is able to put command into background.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;some <span class="built_in">command</span>&gt; &amp; <span class="comment"># use &amp; to run commands in backend</span></span><br><span class="line"><span class="built_in">fg</span> <span class="comment"># bring command back to frontend</span></span><br><span class="line"><span class="built_in">jobs</span> <span class="comment"># watch current jobs in the backend</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disown</span></span><br><span class="line"><span class="built_in">nohup</span> <span class="comment"># disown and nohup</span></span><br></pre></td></tr></table></figure>
 
+<p>Terminal multiplexer, is also able to maintain multiple tasks. </p>
+<h3 id="Json-processing-command-jq"><a href="#Json-processing-command-jq" class="headerlink" title="Json processing command jq"></a>Json processing command jq</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clo6yrm4q000bzcke23dra4pg" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clpje909x00065mkefyop1318" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -777,7 +811,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clo6yrm4o0006zcke7j4d0lni" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clpje909z000a5mke7rw2aoz8" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
