@@ -21,10 +21,64 @@ spec:
   - name: nginx
     image: nginx
     command:
-    - sleep 100
+    - "cmd"
+    - "args"
+    # or 
+    command: ["somecommand"]
+    #
+    args: ["some_args"]
     ports:
     - containerPort: 8080
+
 ```
+
+ENV VAR for pods
+
+``` yaml
+spec:
+  containers:
+  - env:
+    - name: ENV_VAR_NAME
+      value: ENV_VAR_VALUE
+
+```
+
+### Template for configmap 
+
+``` yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: <ConfigMap_Name>
+data:
+  <key_name>: <value_name>
+
+```
+
+### Inject configmap to pods
+``` yaml
+
+spec:
+  containers:
+  - name:
+    image:
+    ports:
+      - 
+    envFrom:
+      - configMapRef:
+          name: <config_map_name>
+
+```
+or
+``` yaml
+- env: 
+  - name:
+  valueFrom:
+    configMapKeyRef:
+      name:
+      key:
+      
+```
+
 
 
 
@@ -210,3 +264,4 @@ kind: pod
 spec:
   priorityClassName: high-priority
 ```
+

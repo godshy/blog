@@ -7,6 +7,12 @@ category: commands
 
 # Basic K8s-Commands
 
+## Cluster logs
+
+- Get cluster nodes logs 
+``` bash
+    kubectl cluster-info dump --output-directory cluster_info_dump_$(uname -n)  -A
+```
 ## ETCD related commands
 
 - ETCDCTL version 2
@@ -186,6 +192,24 @@ checking active process of apiserver by
 ``` bash
     kubectl create deployment <deployment_name> --image=<image_name> --dry-run=client -o yaml
 ```
+
+### Check deployment rollout and update pods 
+
+``` bash
+    kubectl rollout status deployment/<deployment_name>
+
+    kubectl rollout history deployment/<deployment_name> #Check rollout history
+
+
+    # update pods
+    kubectl apply -f deployment-definition.yml # after edit image spec in definination, apply it
+
+    kubectl set image deployment <deployment_name> \ <image_name:version>
+
+    kubectl rollout undo deployment <deployment_name>
+```
+
+
 ## Service creation
 
 - Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379
@@ -208,6 +232,7 @@ checking active process of apiserver by
 ``` bash
     kubectl run <name> --image=<image_name> --port=<port_name> --expose
 ```
+
 ## Namaespaces
 
 - To create namespace
@@ -334,4 +359,19 @@ kubectl cp <namespace>/<pod_name>:/PATH/FILE /LOCAL_PATH/FILE_NAME
 
 # Copy file from local to pods
 kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE 
+```
+
+## ENV VAR and ConfigMap
+
+``` bash
+    kubectl create configmap \
+    <config-name> --from-literal=<key>=<value>
+
+    kubectl create configmap \
+    <config-name> --from-file=<configmap_file_name>
+
+    kubectl create -f cfgmap_name
+
+    # display configmaps
+    kubectl get/describe <configmap_name>
 ```
