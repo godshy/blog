@@ -43,18 +43,35 @@ spec:
 
 ```
 
+
 ### Template for configmap 
 
 ``` yaml
 apiVersion: v1
 kind: ConfigMap
-metadata: <ConfigMap_Name>
+metadata: 
+  name: <ConfigMap_Name>
 data:
   <key_name>: <value_name>
 
 ```
 
-### Inject configmap to pods
+### Template for secret
+
+``` yaml
+# need to convert k-v data into coded form
+# echo -n '<plain_text>' | base64
+# echo -n '<secret_text>' | base64 --decode
+apiVersion: v1
+kind: Secret
+metadata: 
+  name: <secret_Name>
+data:
+  <key_name>: <value_name>
+  <key_name_1>: <Pwd_1>
+
+```
+### Inject configmap and secrets to pods
 ``` yaml
 
 spec:
@@ -66,6 +83,10 @@ spec:
     envFrom:
       - configMapRef:
           name: <config_map_name>
+        secretRef:
+          name: <secret_name>
+  
+      
 
 ```
 or
@@ -74,8 +95,11 @@ or
   - name:
   valueFrom:
     configMapKeyRef:
-      name:
-      key:
+      name: <config_map_name>
+      key: <some_keys_of_cmap>
+    secretKeyRef:
+      name: <secret_name>
+      key: <some_keys>
       
 ```
 

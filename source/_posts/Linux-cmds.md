@@ -22,12 +22,7 @@ category: commands
 ### Often used basic commands and their variations
 
 - 'cat' command and its successor 'bat'
-- 'find' command and its better version
-``` bash 
-    # example of using find and rg to find yaml files that contains "sample"
-    find . -type f -name "*.yaml" -exec grep "sample" '{}' \; -print
-    rg -t "yaml" sample
-```
+
 
 
 ### Resource check commands
@@ -147,11 +142,18 @@ for detailed SETS, need to check with the `tr --help` command
 ```
 
 ### Find command 
-- Fo example, to find avaiable modules in Linux.
+- For example, to find available modules in Linux.
 ``` bash
     find /lib/modules/$(umame -r) -type f -name '*.ko*'
     # find "in directory - type file or else -name '' with anything related to .ko
     # It didn't work on my WSL ubuntu
+
+#'find' command and its better version
+
+    # example of using find and rg to find yaml files that contains "sample"
+    find . -type f -name "*.yaml" -exec grep "sample" '{}' \; -print
+    rg -t "yaml" sample
+
 ```
 
 ### To list modules that loaded by kernel

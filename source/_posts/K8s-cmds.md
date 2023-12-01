@@ -59,6 +59,7 @@ In total:
 ``` bash
     kubectl get pods -n kube-system
 ```
+
 - view api-server options with kubeadmin
 
 ``` bash
@@ -70,6 +71,7 @@ In total:
 ``` bash
     cat /etc/systemd/system/kube-apiserver.service
 ```
+
 checking active process of apiserver by
 
 ``` bash
@@ -374,4 +376,17 @@ kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE
 
     # display configmaps
     kubectl get/describe <configmap_name>
+```
+
+## Secrets
+
+``` bash
+    # create secret using command
+    kubectl create secret generic <secret-name> \
+    --from-literal=<key>=<value>
+
+    kubectl create secret generic \
+    <secret-name> --from-file=<secret_file_name>
+
+
 ```
