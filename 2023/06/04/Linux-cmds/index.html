@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic linux cmdsIndex System check realted commands Input&#x2F;output related commands Shell and bash scripting  System check related commandsOften used basic commands and their variations ‘cat’ comma">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-04T10:18:25.000Z">
-<meta property="article:modified_time" content="2023-11-13T15:38:23.873Z">
+<meta property="article:modified_time" content="2023-12-01T08:52:07.270Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -109,7 +109,6 @@
 </ol>
 <h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><h3 id="Often-used-basic-commands-and-their-variations"><a href="#Often-used-basic-commands-and-their-variations" class="headerlink" title="Often used basic commands and their variations"></a>Often used basic commands and their variations</h3><ul>
 <li>‘cat’ command and its successor ‘bat’</li>
-<li>‘find’ command and its better version<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example of using find and rg to find yaml files that contains &quot;sample&quot;</span></span><br><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.yaml&quot;</span> -<span class="built_in">exec</span> grep <span class="string">&quot;sample&quot;</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> \; -<span class="built_in">print</span></span><br><span class="line">rg -t <span class="string">&quot;yaml&quot;</span> sample</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="Resource-check-commands"><a href="#Resource-check-commands" class="headerlink" title="Resource check commands"></a>Resource check commands</h3><ul>
 <li>Check CPU info</li>
@@ -174,7 +173,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 <h3 id="Locate-file-x2F-folders"><a href="#Locate-file-x2F-folders" class="headerlink" title="Locate file&#x2F;folders"></a>Locate file&#x2F;folders</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">locate <span class="comment"># Find all files available with keyword </span></span><br><span class="line">whereis <span class="comment"># find binary file, config file and man files</span></span><br><span class="line"><span class="built_in">which</span> <span class="comment"># find the position of the command executed</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="Find-command"><a href="#Find-command" class="headerlink" title="Find command"></a>Find command</h3><ul>
-<li>Fo example, to find avaiable modules in Linux.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find /lib/modules/$(umame -r) -<span class="built_in">type</span> f -name <span class="string">&#x27;*.ko*&#x27;</span></span><br><span class="line"><span class="comment"># find &quot;in directory - type file or else -name &#x27;&#x27; with anything related to .ko</span></span><br><span class="line"><span class="comment"># It didn&#x27;t work on my WSL ubuntu</span></span><br></pre></td></tr></table></figure></li>
+<li>For example, to find available modules in Linux.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    find /lib/modules/$(umame -r) -<span class="built_in">type</span> f -name <span class="string">&#x27;*.ko*&#x27;</span></span><br><span class="line">    <span class="comment"># find &quot;in directory - type file or else -name &#x27;&#x27; with anything related to .ko</span></span><br><span class="line">    <span class="comment"># It didn&#x27;t work on my WSL ubuntu</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#&#x27;find&#x27; command and its better version</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># example of using find and rg to find yaml files that contains &quot;sample&quot;</span></span><br><span class="line">    find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.yaml&quot;</span> -<span class="built_in">exec</span> grep <span class="string">&quot;sample&quot;</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> \; -<span class="built_in">print</span></span><br><span class="line">    rg -t <span class="string">&quot;yaml&quot;</span> sample</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="To-list-modules-that-loaded-by-kernel"><a href="#To-list-modules-that-loaded-by-kernel" class="headerlink" title="To list modules that loaded by kernel"></a>To list modules that loaded by kernel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod</span><br></pre></td></tr></table></figure>
 
@@ -209,7 +208,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clpje909x00065mkefyop1318" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clpmevps3000423kefbztcymv" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
