@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic linux cmdsIndex System check realted commands Input&#x2F;output related commands Shell and bash scripting  System check related commandsOften used basic commands and their variations ‘cat’ comma">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-04T10:18:25.000Z">
-<meta property="article:modified_time" content="2023-12-01T08:52:07.270Z">
+<meta property="article:modified_time" content="2023-12-07T05:11:00.004Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -164,7 +164,7 @@
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -srm</span><br></pre></td></tr></table></figure>
-
+<h3 id="Directory-sync-commands"><a href="#Directory-sync-commands" class="headerlink" title="Directory sync commands"></a>Directory sync commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rsync &lt;source_ip&gt; &lt;target_ip&gt;</span><br><span class="line"><span class="comment">#a -- for archive keep file group, version etc</span></span><br><span class="line"><span class="comment">#z -- for compress</span></span><br><span class="line"><span class="comment">#p -- keep permissions</span></span><br><span class="line"><span class="comment">#q -- quiet mode</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Input-x2F-output-related-commands"><a href="#Input-x2F-output-related-commands" class="headerlink" title="Input&#x2F;output related commands"></a>Input&#x2F;output related commands</h2><ul>
 <li>Translate with input&#x2F;outs. tr command.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">tr</span> [input] [output]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Examples</span></span><br><span class="line"><span class="comment"># Input some texts into tr command then translate to all CAPS</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">tr</span> [a-z] [A-Z] &lt; input.txt &gt;output.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete numbers in the given input</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;My UID is <span class="variable">$UID</span>&quot;</span> | <span class="built_in">tr</span> -<span class="built_in">cd</span> <span class="string">&quot;[:digit:]\n&quot;</span></span><br></pre></td></tr></table></figure>
@@ -208,7 +208,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clpmevps3000423kefbztcymv" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clpuqq1010006gske59072jf4" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
