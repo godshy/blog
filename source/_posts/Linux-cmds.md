@@ -117,7 +117,15 @@ grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,
 ``` bash
     uname -srm
 ```
+### Directory sync commands
 
+``` bash
+    rsync <source_ip> <target_ip>
+    #a -- for archive keep file group, version etc
+    #z -- for compress
+    #p -- keep permissions
+    #q -- quiet mode
+```
 
 ## Input/output related commands
 - Translate with input/outs. tr command.
