@@ -21,7 +21,7 @@ spec:
   - name: nginx
     image: nginx
     command:
-    - "cmd"
+    - cmd
     - "args"
     # or 
     command: ["somecommand"]
@@ -29,7 +29,12 @@ spec:
     args: ["some_args"]
     ports:
     - containerPort: 8080
+  initContainers:
+  - name: sth
+    image: sth
 
+  - name: sidecar  
+    image: sidecar_image
 ```
 
 ENV VAR for pods

@@ -286,7 +286,7 @@ spec:
   - key: "<key>"
     operator: "Equal"
     value: "<value>"
-    effect: "<taint-effec>t"
+    effect: "<taint-effect>"
 ```
 ## Node affinity
 
@@ -388,5 +388,17 @@ kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE
     kubectl create secret generic \
     <secret-name> --from-file=<secret_file_name>
 
+```
+
+
+## Procedure for pods when executing node graceful restart
+
+``` bash
+
+# drain pod on the nodes you want to perform reboot procedure
+    kubectl drain --ignore-daemonsets --delete-emptydir-data
+    kubectl describe nodes <node-name>
+    # perform node reboot
+    kubectl uncordon <node_name>
 
 ```
