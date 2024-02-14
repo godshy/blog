@@ -149,6 +149,22 @@ for detailed SETS, need to check with the `tr --help` command
     which # find the position of the command executed
 ```
 
+### File content management
+
+- Create a file using here document. "EOF"
+``` bash
+    cat << 'EOF' > /some_dir/file_name
+    # ENDLINE with EOF
+```
+
+- Compare to files side by side
+``` bash
+    diff -y file1 file2
+```
+- __To see a constantly growing file__
+``` bash
+    tail -f sth.log
+```
 ### Find command 
 - For example, to find available modules in Linux.
 ``` bash
@@ -246,3 +262,68 @@ Terminal multiplexer, is also able to maintain multiple tasks.
 
 
 ### Json processing command jq
+
+For example, we have a following json file.
+``` json
+{
+  "menu": {
+    "id": "file",
+    "value": "File",
+    "popup": {
+      "menuitem": [
+        {
+          "value": "New",
+          "onclick": "CreateNewDoc()"
+        },
+        {
+          "value": "Open",
+          "onclick": "OpenDoc()"
+        }
+      ]
+    }
+  }
+}
+```
+dot '.' followed by the object is used to access the value of jq.      
+``` bash
+    # this shows the whole file of test.json
+    jq '.' test.json
+    # use multiple dots to show the nested proterty
+    jq '.menu.value, .menu.id' test.json
+```
+```
+"File"
+"file"
+```
+It is able to use '[]' to show lists in json file.
+``` bash
+    jq '.menu.popup.menuitem' test.json | jq '.[]'
+```
+``` json
+{
+  "value": "New",
+  "onclick": "CreateNewDoc()"
+}
+{
+  "value": "Open",
+  "onclick": "OpenDoc()"
+}   
+```
+Also, it is able to use index in the <code>[]</code> operator. 
+
+``` bash
+     jq '.menu.popup.menuitem' test.json | jq '.[0].value'
+```
+```
+"New"  
+```
+
+### Time display
+
+``` bash
+    # show time in linux epoch
+    date +%s
+
+    # linux time to human readable time
+    date -d @1707912602 '+%m/%d/%Y :%H:%M:%S'
+```

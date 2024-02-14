@@ -30,6 +30,7 @@ category: commands
     etcdctl endpoint health
     etcdctl get
     etcdctl put
+    etcdctl member list  # check how many nodes are managed by etcd server
 ```
 
 - Set version of version
@@ -51,6 +52,75 @@ In total:
 ``` bash
     kubectl exec etcd-master -n kube-system -- sh -c "ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key"
 ```
+
+- set ETCD snapshot
+``` bash
+
+# create snapshot for ETCD
+    ETCDCTL_API=3 etcdctl \
+        snapshot save snahpshot.db
+    ls
+
+# check status of ETCD
+    ETCDCTL_API=3 etcdctl \
+        snapshot status snapshot.db
+
+
+```
+- Procedures to restore ETCD from snapshot
+
+``` bash
+# stop api-server
+    service kube-apiserver stop
+# restore ETCD from snapshot, this created a brand new ETCD cluster
+    ETCDCTL_API=3 etcdctl \
+        snapshot restore <snapshot_name> \ 
+        --data-dir /var/lib/etcd-from-backup
+
+# modify etcd.service under defination file to use the assigned data-dir
+--data-dir=/var/lib/etcd-from-back-up
+
+    systemctl daemon-reload
+    service kube-apiserver start
+
+```
+- Restore etcd as external server 
+
+
+``` bash
+
+# Execute restore on etcd server, same
+    
+    ETCDCTL_API=3 etcdctl \
+        snapshot restore <snapshot_name> \ 
+        --data-dir /var/lib/etcd-from-backup
+# Modify data-dir, make sure owner is correct
+
+    chown -R etcd:etcd /var/lib/etcd-from-backup
+
+# Modify configurations
+    vi etc/systemd/system/etcd.service
+
+# Restart
+    systemctl daemon-reload
+    systemctl restart etcd
+    
+```
+
+- Check if ETCD is stacked or external server
+``` bash
+    kubectl get pods -n kube-system
+    # If etcd is shown as pods in kube-system, then it is stacked ETCD.
+    # or 
+    kubectl describe apiserver -n kube-system
+    # URL in it shows hos apiserver communicate with ETCD
+```
+
+- Check status on external server
+``` bash
+    ps -ef | grep -i nels
+```
+
 
 ## Kube-API commands
 
@@ -77,6 +147,22 @@ checking active process of apiserver by
 ``` bash
     ps -aux | grep kube-apiserver
 ```
+
+- add username/password or token and securely access to api-server (most insecure)
+``` yaml
+    # add username/password info in .csv
+    # then specify the related file
+    --basic-auth-file=user_info.csv
+    # kube-apiserver.service
+    # or pod defination file under /etc/kubernetes/manifests
+
+    # use curl command to securely access to api server
+    curl -v -k <url_to_api_server:6443/api/v1/pods --header "Authorization: Bearer <token>"
+
+    # or 
+    curl -v -k <url> -u "user:pass"
+```
+
 
 ## Kube controller manager
 
