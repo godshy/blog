@@ -142,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clqgbfdhw0001a1keca2a9zeo" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clslvpqdv0001i6keakjq9f8f" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -232,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clqgbfdht0000a1ke8572c6gw" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clslvpqdq0000i6keckvwhgoj" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -316,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clqgbfdi0000aa1ke2w1xc027" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clslvpqe4000bi6ke8xrg7ujz" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -371,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clqgbfdhy0004a1keejodag6h" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clslvpqe3000ai6ke3x7h9cpy" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -419,7 +419,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl backup</span><br><span class="line">etcdctl cluster-health</span><br><span class="line">etcdctl mk</span><br><span class="line">etcdctl <span class="built_in">mkdir</span></span><br><span class="line">etcdctl <span class="built_in">set</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>ETCDCTL version 3</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">etcdctl snapshot save </span><br><span class="line">etcdctl endpoint health</span><br><span class="line">etcdctl get</span><br><span class="line">etcdctl put</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl snapshot save </span><br><span class="line">etcdctl endpoint health</span><br><span class="line">etcdctl get</span><br><span class="line">etcdctl put</span><br><span class="line">etcdctl member list  <span class="comment"># check how many nodes are managed by etcd server</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Set version of version</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ETCDCTL_API = 3</span><br></pre></td></tr></table></figure>
@@ -433,6 +433,23 @@
 <p>In total:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> etcd-master -n kube-system -- sh -c <span class="string">&quot;ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key&quot;</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>set ETCD snapshot<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># create snapshot for ETCD</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot save snahpshot.db</span><br><span class="line">    <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check status of ETCD</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot status snapshot.db</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>Procedures to restore ETCD from snapshot</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stop api-server</span></span><br><span class="line">    service kube-apiserver stop</span><br><span class="line"><span class="comment"># restore ETCD from snapshot, this created a brand new ETCD cluster</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot restore &lt;snapshot_name&gt; \ </span><br><span class="line">        --data-dir /var/lib/etcd-from-backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify etcd.service under defination file to use the assigned data-dir</span></span><br><span class="line">--data-dir=/var/lib/etcd-from-back-up</span><br><span class="line"></span><br><span class="line">    systemctl daemon-reload</span><br><span class="line">    service kube-apiserver start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Restore etcd as external server</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># Execute restore on etcd server, same</span></span><br><span class="line">    </span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot restore &lt;snapshot_name&gt; \ </span><br><span class="line">        --data-dir /var/lib/etcd-from-backup</span><br><span class="line"><span class="comment"># Modify data-dir, make sure owner is correct</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">chown</span> -R etcd:etcd /var/lib/etcd-from-backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Modify configurations</span></span><br><span class="line">    vi etc/systemd/system/etcd.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restart</span></span><br><span class="line">    systemctl daemon-reload</span><br><span class="line">    systemctl restart etcd</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Check if ETCD is stacked or external server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n kube-system</span><br><span class="line"><span class="comment"># If etcd is shown as pods in kube-system, then it is stacked ETCD.</span></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">kubectl describe apiserver -n kube-system</span><br><span class="line"><span class="comment"># URL in it shows hos apiserver communicate with ETCD</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Check status on external server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep -i nels</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h2 id="Kube-API-commands"><a href="#Kube-API-commands" class="headerlink" title="Kube-API commands"></a>Kube-API commands</h2><ul>
 <li>View api-server thru kubeadm, kubeadm deploys kube-api as a pod in the kube-system namespace on the master node.</li>
 </ul>
@@ -451,6 +468,9 @@
 <p>checking active process of apiserver by</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-apiserver</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>add username&#x2F;password or token and securely access to api-server (most insecure)<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># add username/password info in .csv</span></span><br><span class="line"><span class="comment"># then specify the related file</span></span><br><span class="line"><span class="string">--basic-auth-file=user_info.csv</span></span><br><span class="line"><span class="comment"># kube-apiserver.service</span></span><br><span class="line"><span class="comment"># or pod defination file under /etc/kubernetes/manifests</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use curl command to securely access to api server</span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url_to_api_server:6443/api/v1/pods</span> <span class="string">--header</span> <span class="string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url&gt;</span> <span class="string">-u</span> <span class="string">&quot;user:pass&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 <h2 id="Kube-controller-manager"><a href="#Kube-controller-manager" class="headerlink" title="Kube controller manager"></a>Kube controller manager</h2><ul>
 <li>check status with the deployment by kubeadmin</li>
 </ul>
@@ -615,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clqgbfdhy0005a1keehldby8n" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clslvpqdz0004i6ke2lhcaigp" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -725,6 +745,15 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 </ul>
 <h3 id="Locate-file-x2F-folders"><a href="#Locate-file-x2F-folders" class="headerlink" title="Locate file&#x2F;folders"></a>Locate file&#x2F;folders</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">locate <span class="comment"># Find all files available with keyword </span></span><br><span class="line">whereis <span class="comment"># find binary file, config file and man files</span></span><br><span class="line"><span class="built_in">which</span> <span class="comment"># find the position of the command executed</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="File-content-management"><a href="#File-content-management" class="headerlink" title="File content management"></a>File content management</h3><ul>
+<li><p>Create a file using here document. “EOF”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">&#x27;EOF&#x27;</span> &gt; /some_dir/file_name</span><br><span class="line"><span class="comment"># ENDLINE with EOF</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Compare to files side by side</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff -y file1 file2</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>To see a constantly growing file</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -f sth.log</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h3 id="Find-command"><a href="#Find-command" class="headerlink" title="Find command"></a>Find command</h3><ul>
 <li>For example, to find available modules in Linux.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    find /lib/modules/$(umame -r) -<span class="built_in">type</span> f -name <span class="string">&#x27;*.ko*&#x27;</span></span><br><span class="line">    <span class="comment"># find &quot;in directory - type file or else -name &#x27;&#x27; with anything related to .ko</span></span><br><span class="line">    <span class="comment"># It didn&#x27;t work on my WSL ubuntu</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#&#x27;find&#x27; command and its better version</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># example of using find and rg to find yaml files that contains &quot;sample&quot;</span></span><br><span class="line">    find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.yaml&quot;</span> -<span class="built_in">exec</span> grep <span class="string">&quot;sample&quot;</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> \; -<span class="built_in">print</span></span><br><span class="line">    rg -t <span class="string">&quot;yaml&quot;</span> sample</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -757,11 +786,23 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;some <span class="built_in">command</span>&gt; &amp; <span class="comment"># use &amp; to run commands in backend</span></span><br><span class="line"><span class="built_in">fg</span> <span class="comment"># bring command back to frontend</span></span><br><span class="line"><span class="built_in">jobs</span> <span class="comment"># watch current jobs in the backend</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disown</span></span><br><span class="line"><span class="built_in">nohup</span> <span class="comment"># disown and nohup</span></span><br></pre></td></tr></table></figure>
 
 <p>Terminal multiplexer, is also able to maintain multiple tasks. </p>
-<h3 id="Json-processing-command-jq"><a href="#Json-processing-command-jq" class="headerlink" title="Json processing command jq"></a>Json processing command jq</h3>
+<h3 id="Json-processing-command-jq"><a href="#Json-processing-command-jq" class="headerlink" title="Json processing command jq"></a>Json processing command jq</h3><p>For example, we have a following json file.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;menu&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;file&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;File&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;popup&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;menuitem&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;New&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CreateNewDoc()&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Open&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;OpenDoc()&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>dot ‘.’ followed by the object is used to access the value of jq.      </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this shows the whole file of test.json</span></span><br><span class="line">jq <span class="string">&#x27;.&#x27;</span> test.json</span><br><span class="line"><span class="comment"># use multiple dots to show the nested proterty</span></span><br><span class="line">jq <span class="string">&#x27;.menu.value, .menu.id&#x27;</span> test.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;File&quot;</span><br><span class="line">&quot;file&quot;</span><br></pre></td></tr></table></figure>
+<p>It is able to use ‘[]’ to show lists in json file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jq <span class="string">&#x27;.menu.popup.menuitem&#x27;</span> test.json | jq <span class="string">&#x27;.[]&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;New&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CreateNewDoc()&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Open&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;OpenDoc()&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span>   </span><br></pre></td></tr></table></figure>
+<p>Also, it is able to use index in the <code>[]</code> operator. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jq <span class="string">&#x27;.menu.popup.menuitem&#x27;</span> test.json | jq <span class="string">&#x27;.[0].value&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;New&quot;  </span><br></pre></td></tr></table></figure>
+
+<h3 id="Time-display"><a href="#Time-display" class="headerlink" title="Time display"></a>Time display</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show time in linux epoch</span></span><br><span class="line"><span class="built_in">date</span> +%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># linux time to human readable time</span></span><br><span class="line"><span class="built_in">date</span> -d @1707912602 <span class="string">&#x27;+%m/%d/%Y :%H:%M:%S&#x27;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clqgbfdhz0006a1kefnpr1qo0" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clslvpqe00005i6ke6fmhekq6" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -819,7 +860,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clqgbfdi1000ba1ke8twd7xck" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clslvpqe10006i6ke4voa7eqs" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -915,7 +956,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2023 Hongyi Shen<br>
+      &copy; 2024 Hongyi Shen<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic K8s-CommandsCluster logs Get cluster nodes logs 1kubectl cluster-info dump --output-directory cluster_info_dump_$(uname -n)  -A  ETCD related commands ETCDCTL version 2 12345etcdctl backupetcdct">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T01:57:16.000Z">
-<meta property="article:modified_time" content="2023-12-07T08:41:20.763Z">
+<meta property="article:modified_time" content="2024-02-08T08:18:38.504Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl backup</span><br><span class="line">etcdctl cluster-health</span><br><span class="line">etcdctl mk</span><br><span class="line">etcdctl <span class="built_in">mkdir</span></span><br><span class="line">etcdctl <span class="built_in">set</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>ETCDCTL version 3</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">etcdctl snapshot save </span><br><span class="line">etcdctl endpoint health</span><br><span class="line">etcdctl get</span><br><span class="line">etcdctl put</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl snapshot save </span><br><span class="line">etcdctl endpoint health</span><br><span class="line">etcdctl get</span><br><span class="line">etcdctl put</span><br><span class="line">etcdctl member list  <span class="comment"># check how many nodes are managed by etcd server</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Set version of version</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ETCDCTL_API = 3</span><br></pre></td></tr></table></figure>
@@ -124,6 +124,23 @@
 <p>In total:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> etcd-master -n kube-system -- sh -c <span class="string">&quot;ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key&quot;</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>set ETCD snapshot<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># create snapshot for ETCD</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot save snahpshot.db</span><br><span class="line">    <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check status of ETCD</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot status snapshot.db</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>Procedures to restore ETCD from snapshot</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stop api-server</span></span><br><span class="line">    service kube-apiserver stop</span><br><span class="line"><span class="comment"># restore ETCD from snapshot, this created a brand new ETCD cluster</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot restore &lt;snapshot_name&gt; \ </span><br><span class="line">        --data-dir /var/lib/etcd-from-backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify etcd.service under defination file to use the assigned data-dir</span></span><br><span class="line">--data-dir=/var/lib/etcd-from-back-up</span><br><span class="line"></span><br><span class="line">    systemctl daemon-reload</span><br><span class="line">    service kube-apiserver start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Restore etcd as external server</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># Execute restore on etcd server, same</span></span><br><span class="line">    </span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot restore &lt;snapshot_name&gt; \ </span><br><span class="line">        --data-dir /var/lib/etcd-from-backup</span><br><span class="line"><span class="comment"># Modify data-dir, make sure owner is correct</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">chown</span> -R etcd:etcd /var/lib/etcd-from-backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Modify configurations</span></span><br><span class="line">    vi etc/systemd/system/etcd.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restart</span></span><br><span class="line">    systemctl daemon-reload</span><br><span class="line">    systemctl restart etcd</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Check if ETCD is stacked or external server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n kube-system</span><br><span class="line"><span class="comment"># If etcd is shown as pods in kube-system, then it is stacked ETCD.</span></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">kubectl describe apiserver -n kube-system</span><br><span class="line"><span class="comment"># URL in it shows hos apiserver communicate with ETCD</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Check status on external server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep -i nels</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h2 id="Kube-API-commands"><a href="#Kube-API-commands" class="headerlink" title="Kube-API commands"></a>Kube-API commands</h2><ul>
 <li>View api-server thru kubeadm, kubeadm deploys kube-api as a pod in the kube-system namespace on the master node.</li>
 </ul>
@@ -142,6 +159,9 @@
 <p>checking active process of apiserver by</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-apiserver</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>add username&#x2F;password or token and securely access to api-server (most insecure)<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># add username/password info in .csv</span></span><br><span class="line"><span class="comment"># then specify the related file</span></span><br><span class="line"><span class="string">--basic-auth-file=user_info.csv</span></span><br><span class="line"><span class="comment"># kube-apiserver.service</span></span><br><span class="line"><span class="comment"># or pod defination file under /etc/kubernetes/manifests</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use curl command to securely access to api server</span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url_to_api_server:6443/api/v1/pods</span> <span class="string">--header</span> <span class="string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url&gt;</span> <span class="string">-u</span> <span class="string">&quot;user:pass&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 <h2 id="Kube-controller-manager"><a href="#Kube-controller-manager" class="headerlink" title="Kube controller manager"></a>Kube controller manager</h2><ul>
 <li>check status with the deployment by kubeadmin</li>
 </ul>
@@ -306,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clqgbfdhy0005a1keehldby8n" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clslvpqdz0004i6ke2lhcaigp" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -421,7 +441,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2023 Hongyi Shen<br>
+      &copy; 2024 Hongyi Shen<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
