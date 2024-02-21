@@ -2,7 +2,7 @@
 title: Cloud native and its implementation in Telco
 date: 2023-08-24 13:48:22
 tags: Cloud native
-category: knowledge sharing
+category: Learning
 ---
 # Cloud native in telecom 
 
@@ -55,7 +55,7 @@ To sum-up, a company need to achieve the following to completely take the advant
 ## Cloud Native design principles
 Let's talk about the design principles of cloud native application. Since it is one of the most important parts in the whole could native concept and it is rather new in the industry.  Graph below describes the basic principles need to considered before deploying and designing cloud native applications.
 
-![Cloud Native Application Design Principles](https://s2.loli.net/2023/10/18/ErKoVcvehbxfl9i.png)
+![Cloud Native Application Design Principles](https://s2.loli.net/2024/02/21/s6AUd5MEwOl9IDV.png)
 
 ### Agnosticism
 

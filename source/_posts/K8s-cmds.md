@@ -248,7 +248,10 @@ checking active process of apiserver by
     
     kubectl replace/apply -f something.yaml # able to recreate node
 ```
-
+## Kubelet
+Configuration file of kubelet is located at 
+``` /var/lib/kubelet/config.yaml ``` or 
+```/etc/kubernetes/kubelet.conf ```
 ## Deployment
 
 - create deployment by commands

@@ -12,7 +12,7 @@ category: commands
 1. [System check realted commands](#system-check-related-commands)
 2. [Input/output related commands](#inputoutput-related-commands)
 3. [Shell and bash scripting](#shell-and-bash-scripting-related)
-
+4. [Security and cert](#security-and-certificate-generation)
 
 ## System check related commands
 
@@ -116,6 +116,12 @@ grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,
 
 ``` bash
     uname -srm
+```
+
+- Check capability (Advanced access control)
+``` bash
+    capsh --print
+    grep Cap /proc/$$/status # capabilities for the current process
 ```
 ### Directory sync commands
 
@@ -295,7 +301,7 @@ dot '.' followed by the object is used to access the value of jq.
 "File"
 "file"
 ```
-It is able to use '[]' to show lists in json file.
+It is able to use <code>[]</code> to show lists in json file.
 ``` bash
     jq '.menu.popup.menuitem' test.json | jq '.[]'
 ```
@@ -326,4 +332,32 @@ Also, it is able to use index in the <code>[]</code> operator.
 
     # linux time to human readable time
     date -d @1707912602 '+%m/%d/%Y :%H:%M:%S'
+```
+
+## Security and certificate generation
+
+Generate keys for CA.
+
+``` bash
+    # generate private key
+    openssl genrsa -out ca.key 2048 
+    # create CSR
+    openssl req -new -key ca.key -subj "/CN=" -out ca.csr
+    # sign the CSR
+    openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
+```
+
+Generate keys cert for client
+``` bash
+    openssl genrsa -out admin.key 2048
+    openssl req -new -key admin.key -subj "/CN=kube-admin/O=system:masters" -out admin.csr
+    # Sign the csr using CA's private key
+    openssl x509 -req -in admin.csr -CA ca.crt -CAkey ca.key -out admin.crt
+    
+
+```
+
+Check certificate details
+``` bash
+    openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 ```

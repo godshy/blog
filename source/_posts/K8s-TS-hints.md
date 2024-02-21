@@ -39,3 +39,15 @@ spec:
 ``` bash
   kubectl run <pods_name> <args> --image=<image_name>
 ```
+
+### Things todo if kubectl command ceased responding
+
+- check logs under ```/var/log/container```
+- use ``` crictl ``` command 
+``` bash
+  crictl ps -a
+  crictl logs container-id
+  # or
+  docker ps 
+  docker logs
+```
