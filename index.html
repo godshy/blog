@@ -73,6 +73,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-linux-FS-and-pkg" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2024/02/21/linux-FS-and-pkg/" class="article-date">
+  <time class="dt-published" datetime="2024-02-21T05:38:04.000Z" itemprop="datePublished">2024-02-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Learning/">Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/blog/2024/02/21/linux-FS-and-pkg/">linux FS and pkg</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-filesystem-and-package-management"><a href="#Linux-filesystem-and-package-management" class="headerlink" title="Linux filesystem and package management"></a>Linux filesystem and package management</h1><h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+<li><a href="#filesystems">Filesystems</a></li>
+</ol>
+<h2 id="Filesystems"><a href="#Filesystems" class="headerlink" title="Filesystems"></a>Filesystems</h2><p>Some concept in filesystems are:</p>
+<ul>
+<li><p>Drive: A physical block device such as HDD or SSD. <strong>In virtual machines, drive can be emulated</strong>. <code>/dev/sda (SCSI device)</code> <code>/dev/sdb (SATA)</code> or <code>/dev/hda (IDE)</code></p>
+</li>
+<li><p>Partition: Divide physical disks into partitions, logical sub-disks</p>
+</li>
+<li><p>Volume: special partition with more flexibility </p>
+</li>
+<li><p>Super block: A special section that contains metadata of the filesystem such as fs type, blocks, state..</p>
+</li>
+<li><p>Inodes: Inodes store metadata about files such as size, owner, location, data and permissions. It does not store file name and actual data</p>
+</li>
+</ul>
+<p>Use <code> lsblk</code> to list the block devices</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    lsblk --exclude 7</span><br><span class="line">NAME  MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span><br><span class="line">sda     8:0    0 389.8M  1 disk</span><br><span class="line">sdb     8:16   0     3G  0 disk [SWAP]</span><br><span class="line">sdc     8:32   0     1T  0 disk /var/lib/docker</span><br><span class="line">                                /var/snap/firefox/common/host-hunspell</span><br><span class="line">                                /snap</span><br><span class="line">                                /mnt/wslg/distro</span><br><span class="line">                                /</span><br></pre></td></tr></table></figure>
+
+<p>Use <code> findmnt</code> to list filesystems</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">findmnt -D -t nosquashfs <span class="comment"># exclude squashfs type files(used for snapshots)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Hard-link-and-symbolic-links"><a href="#Hard-link-and-symbolic-links" class="headerlink" title="Hard link and symbolic links"></a>Hard link and symbolic links</h3><p> A hard link works by creating another filename that refers to the inode data of the original file. In practice, this is similar to creating a copy of the file.</p>
+<ul>
+<li><p>If the original file is deleted, the file data can still be accessed through other hard links.</p>
+</li>
+<li><p>If the original file is moved, hard links still work.</p>
+</li>
+<li><p>A hard link can only refer to a file on the same file system.</p>
+</li>
+<li><p>The inode and file data are permanently deleted when the number of hard links is zero</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> myfile somealias</span><br></pre></td></tr></table></figure>
+<p>A soft link, sometimes called a symbolic link or symlink, points to the location or path of the original file. It works like a hyperlink on the internet.</p>
+<ul>
+<li><p>If the symbolic link file is deleted, the original data remains.</p>
+</li>
+<li><p>If the original file is moved or deleted, the symbolic link won’t work.</p>
+</li>
+<li><p>A soft link can refer to a file on a different file system.</p>
+</li>
+<li><p>Soft links are often used to quickly access a frequently-used file without typing the whole location.</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s myfile somealias</span><br></pre></td></tr></table></figure>
+<p>Differences between hard link and symbolic link</p>
+<ul>
+<li><p>A soft link does not contain the data in the target file.</p>
+</li>
+<li><p>A soft link points to another entry somewhere in the file system.</p>
+</li>
+<li><p>A soft link has the ability to link to directories, or to files on remote computers networked through NFS.</p>
+</li>
+<li><p>Deleting a target file for a symbolic link makes that link useless.</p>
+</li>
+<li><p>A hard link preserves the contents of the file.</p>
+</li>
+<li><p>A hard link cannot be created for directories, and they cannot cross filesystem boundaries or span across partitions.</p>
+</li>
+<li><p>In a hard link, you can use any of the hard link names created to execute a program or script in the same manner as the original name given.</p>
+</li>
+</ul>
+<h3 id="VFS-virtual-file-system"><a href="#VFS-virtual-file-system" class="headerlink" title="VFS (virtual file system)"></a>VFS (virtual file system)</h3><p>Abstraction layer in the kernel that provides clients a common way to access resources.<br>Using VFS user can access to resource like local filesystems, in-memory filesystems(memory), pseudo filesystems or network filesystems and treat them as simple file.<br>[<a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/next/filesystems/vfs.html]">https://www.kernel.org/doc/html/next/filesystems/vfs.html]</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="clsvviwut000fxtke893tarot" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Deploy-free5GC-with-k8s-and-helm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" class="article-date">
@@ -142,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clslvpqdv0001i6keakjq9f8f" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clsvviwuo0001xtkeam940qm8" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -163,7 +271,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/knowledge-sharing/">knowledge sharing</a>
+    <a class="article-category-link" href="/blog/categories/Learning/">Learning</a>
   </div>
 
   </div>
@@ -224,7 +332,7 @@
 </ol>
 <p><img src="https://s2.loli.net/2023/09/14/2uHknclWej18IiB.png" alt="Cloud native requires both infrastructure and development patterns to reach the target."></p>
 <h2 id="Cloud-Native-design-principles"><a href="#Cloud-Native-design-principles" class="headerlink" title="Cloud Native design principles"></a>Cloud Native design principles</h2><p>Let’s talk about the design principles of cloud native application. Since it is one of the most important parts in the whole could native concept and it is rather new in the industry.  Graph below describes the basic principles need to considered before deploying and designing cloud native applications.</p>
-<p><img src="https://s2.loli.net/2023/10/18/ErKoVcvehbxfl9i.png" alt="Cloud Native Application Design Principles"></p>
+<p><img src="https://s2.loli.net/2024/02/21/s6AUd5MEwOl9IDV.png" alt="Cloud Native Application Design Principles"></p>
 <h3 id="Agnosticism"><a href="#Agnosticism" class="headerlink" title="Agnosticism"></a>Agnosticism</h3><p>Cloud native applications need to to be agnostic to the underlying cloud infrastructure. Although this does not necessarily apply to the traditional Cloud Native players like Netflix and Uber since they control the full stack that they are deploying their application on.<br>As we evolve the cloud infrastructure towards supporting container infrastructure (CaaS) the agnosticism requirements remain but the challenges are different. A CNA requires a CaaS and must be able to be deployed on whatever CaaS and IaaS combination that an operator has in their cloud environment, see figure below for CNA agnosticism scenario. A CNA must be able to run on any modern kernel without requiring any proprietary additions. Optional use of plug-ins for optimizing performance is allowed.</p>
 <p><img src="https://s2.loli.net/2023/10/18/ctJGAWqylKeRxuz.png" alt="Agnosticism explained"></p>
 <h3 id="Software-decomposition-and-Life-Cycle-Management"><a href="#Software-decomposition-and-Life-Cycle-Management" class="headerlink" title="Software decomposition and Life Cycle Management"></a>Software decomposition and Life Cycle Management</h3><p>Another important principle is for CNA itself, which requires CNA to be decomposed into smaller, more manageable pieces. This is usually done through utilizing a microservice architecture (MSA). MSA is a design pattern that strives to structure an application as a collection of loosely coupled stateless services.<br><img src="https://s2.loli.net/2023/10/23/KhxQlkCBGo7WI9z.png" alt="Microservice architecture"><br>This concept is not new in only for cloud native, dividing code into more manageable pieces and call them “code modules” or “software components” has always been a good practice in software development. However, in cloud native realm, those software components, AKA microservices, now have a well bounded scope and can be individually deploys, scaled and upgrade using CaaS environment. In addition, microservices have their own defines and version-controlled network-based interfaces to communicate with each other, which enables the lifecycle management for each microservice.</p>
@@ -232,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clslvpqdq0000i6keckvwhgoj" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clsvviwul0000xtkeg9jl74pa" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -316,7 +424,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clslvpqe4000bi6ke8xrg7ujz" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clsvviwus000bxtkechlw6zvd" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -368,10 +476,16 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset -o yaml &gt;&gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure>
 
 <h3 id="Do-not-add-extra-name-after-pods-name-when-creating-pods-imperatively"><a href="#Do-not-add-extra-name-after-pods-name-when-creating-pods-imperatively" class="headerlink" title="Do not add extra name after [pods_name] when creating pods imperatively"></a>Do not add extra name after [pods_name] when creating pods imperatively</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;pods_name&gt; &lt;args&gt; --image=&lt;image_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Things-todo-if-kubectl-command-ceased-responding"><a href="#Things-todo-if-kubectl-command-ceased-responding" class="headerlink" title="Things todo if kubectl command ceased responding"></a>Things todo if kubectl command ceased responding</h3><ul>
+<li>check logs under <code>/var/log/container</code></li>
+<li>use <code>crictl</code> command <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">crictl ps -a</span><br><span class="line">crictl logs container-id</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">docker ps </span><br><span class="line">docker logs</span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clslvpqe3000ai6ke3x7h9cpy" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clsvviwuq0004xtkeeumxf9kr" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -526,10 +640,8 @@
 <ul>
 <li>scale up&#x2F;down by modifying the yaml file first <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset &lt;name_of_replicaset&gt; -o yaml &gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml <span class="comment"># able to recreate node</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><ul>
-<li>create deployment by commands</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment --image=&lt;image_name&gt; &lt;deploy_name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Kubelet"><a href="#Kubelet" class="headerlink" title="Kubelet"></a>Kubelet</h2><p>Configuration file of kubelet is located at </p>
+<figure class="highlight plaintext"><figcaption><span>``` or</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">```/etc/kubernetes/kubelet.conf ```</span><br><span class="line">## Deployment</span><br><span class="line"></span><br><span class="line">- create deployment by commands</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">    kubectl create deployment --image=&lt;image_name&gt; &lt;deploy_name&gt;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>by configuration file</p>
@@ -635,7 +747,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clslvpqdz0004i6ke2lhcaigp" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clsvviwur0005xtkec0b7dt0e" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -679,6 +791,7 @@
 <li><a href="#system-check-related-commands">System check realted commands</a></li>
 <li><a href="#inputoutput-related-commands">Input&#x2F;output related commands</a></li>
 <li><a href="#shell-and-bash-scripting-related">Shell and bash scripting</a></li>
+<li><a href="#security-and-certificate-generation">Security and cert</a></li>
 </ol>
 <h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><h3 id="Often-used-basic-commands-and-their-variations"><a href="#Often-used-basic-commands-and-their-variations" class="headerlink" title="Often used basic commands and their variations"></a>Often used basic commands and their variations</h3><ul>
 <li>‘cat’ command and its successor ‘bat’</li>
@@ -737,6 +850,10 @@
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -srm</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check capability (Advanced access control)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">capsh --<span class="built_in">print</span></span><br><span class="line">grep Cap /proc/$$/status <span class="comment"># capabilities for the current process</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 <h3 id="Directory-sync-commands"><a href="#Directory-sync-commands" class="headerlink" title="Directory sync commands"></a>Directory sync commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rsync &lt;source_ip&gt; &lt;target_ip&gt;</span><br><span class="line"><span class="comment">#a -- for archive keep file group, version etc</span></span><br><span class="line"><span class="comment">#z -- for compress</span></span><br><span class="line"><span class="comment">#p -- keep permissions</span></span><br><span class="line"><span class="comment">#q -- quiet mode</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Input-x2F-output-related-commands"><a href="#Input-x2F-output-related-commands" class="headerlink" title="Input&#x2F;output related commands"></a>Input&#x2F;output related commands</h2><ul>
@@ -791,7 +908,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 <p>dot ‘.’ followed by the object is used to access the value of jq.      </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this shows the whole file of test.json</span></span><br><span class="line">jq <span class="string">&#x27;.&#x27;</span> test.json</span><br><span class="line"><span class="comment"># use multiple dots to show the nested proterty</span></span><br><span class="line">jq <span class="string">&#x27;.menu.value, .menu.id&#x27;</span> test.json</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;File&quot;</span><br><span class="line">&quot;file&quot;</span><br></pre></td></tr></table></figure>
-<p>It is able to use ‘[]’ to show lists in json file.</p>
+<p>It is able to use <code>[]</code> to show lists in json file.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jq <span class="string">&#x27;.menu.popup.menuitem&#x27;</span> test.json | jq <span class="string">&#x27;.[]&#x27;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;New&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CreateNewDoc()&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Open&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;OpenDoc()&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span>   </span><br></pre></td></tr></table></figure>
 <p>Also, it is able to use index in the <code>[]</code> operator. </p>
@@ -799,10 +916,19 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;New&quot;  </span><br></pre></td></tr></table></figure>
 
 <h3 id="Time-display"><a href="#Time-display" class="headerlink" title="Time display"></a>Time display</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show time in linux epoch</span></span><br><span class="line"><span class="built_in">date</span> +%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># linux time to human readable time</span></span><br><span class="line"><span class="built_in">date</span> -d @1707912602 <span class="string">&#x27;+%m/%d/%Y :%H:%M:%S&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Security-and-certificate-generation"><a href="#Security-and-certificate-generation" class="headerlink" title="Security and certificate generation"></a>Security and certificate generation</h2><p>Generate keys for CA.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># generate private key</span></span><br><span class="line">openssl genrsa -out ca.key 2048 </span><br><span class="line"><span class="comment"># create CSR</span></span><br><span class="line">openssl req -new -key ca.key -subj <span class="string">&quot;/CN=&quot;</span> -out ca.csr</span><br><span class="line"><span class="comment"># sign the CSR</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> ca.csr -signkey ca.key -out ca.crt</span><br></pre></td></tr></table></figure>
+
+<p>Generate keys cert for client</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out admin.key 2048</span><br><span class="line">openssl req -new -key admin.key -subj <span class="string">&quot;/CN=kube-admin/O=system:masters&quot;</span> -out admin.csr</span><br><span class="line"><span class="comment"># Sign the csr using CA&#x27;s private key</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> admin.csr -CA ca.crt -CAkey ca.key -out admin.crt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Check certificate details</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/apiserver.crt -text -noout</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clslvpqe00005i6ke6fmhekq6" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clsvviwur0006xtkectsyema2" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -860,7 +986,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clslvpqe10006i6ke4voa7eqs" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clsvviwus000axtke1nrj3wej" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -882,7 +1008,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/knowledge-sharing/">knowledge sharing</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
     </div>
   </div>
 
@@ -902,7 +1028,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
+      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
     </div>
   </div>
 
@@ -911,7 +1037,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
     </div>
   </div>
 
@@ -922,6 +1048,10 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2024/02/21/linux-FS-and-pkg/">linux FS and pkg</a>
+          </li>
         
           <li>
             <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/">Deploy free5GC with k8s and helm</a>
@@ -937,10 +1067,6 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
         
           <li>
             <a href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
           </li>
         
       </ul>

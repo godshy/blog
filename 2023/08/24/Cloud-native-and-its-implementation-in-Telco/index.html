@@ -14,11 +14,11 @@
 <meta property="og:description" content="Cloud native in telecomRight now it is unclear what is the concept of Cloud Native and what is its implementations, so main goal of this blog is to simply introduce the basic concept and how Cloud Nat">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/09/14/2uHknclWej18IiB.png">
-<meta property="og:image" content="https://s2.loli.net/2023/10/18/ErKoVcvehbxfl9i.png">
+<meta property="og:image" content="https://s2.loli.net/2024/02/21/s6AUd5MEwOl9IDV.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/18/ctJGAWqylKeRxuz.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/23/KhxQlkCBGo7WI9z.png">
 <meta property="article:published_time" content="2023-08-24T04:48:22.000Z">
-<meta property="article:modified_time" content="2023-10-23T06:22:35.445Z">
+<meta property="article:modified_time" content="2024-02-21T05:39:15.852Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="Cloud native">
 <meta name="twitter:card" content="summary">
@@ -88,7 +88,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/knowledge-sharing/">knowledge sharing</a>
+    <a class="article-category-link" href="/blog/categories/Learning/">Learning</a>
   </div>
 
   </div>
@@ -149,7 +149,7 @@
 </ol>
 <p><img src="https://s2.loli.net/2023/09/14/2uHknclWej18IiB.png" alt="Cloud native requires both infrastructure and development patterns to reach the target."></p>
 <h2 id="Cloud-Native-design-principles"><a href="#Cloud-Native-design-principles" class="headerlink" title="Cloud Native design principles"></a>Cloud Native design principles</h2><p>Let’s talk about the design principles of cloud native application. Since it is one of the most important parts in the whole could native concept and it is rather new in the industry.  Graph below describes the basic principles need to considered before deploying and designing cloud native applications.</p>
-<p><img src="https://s2.loli.net/2023/10/18/ErKoVcvehbxfl9i.png" alt="Cloud Native Application Design Principles"></p>
+<p><img src="https://s2.loli.net/2024/02/21/s6AUd5MEwOl9IDV.png" alt="Cloud Native Application Design Principles"></p>
 <h3 id="Agnosticism"><a href="#Agnosticism" class="headerlink" title="Agnosticism"></a>Agnosticism</h3><p>Cloud native applications need to to be agnostic to the underlying cloud infrastructure. Although this does not necessarily apply to the traditional Cloud Native players like Netflix and Uber since they control the full stack that they are deploying their application on.<br>As we evolve the cloud infrastructure towards supporting container infrastructure (CaaS) the agnosticism requirements remain but the challenges are different. A CNA requires a CaaS and must be able to be deployed on whatever CaaS and IaaS combination that an operator has in their cloud environment, see figure below for CNA agnosticism scenario. A CNA must be able to run on any modern kernel without requiring any proprietary additions. Optional use of plug-ins for optimizing performance is allowed.</p>
 <p><img src="https://s2.loli.net/2023/10/18/ctJGAWqylKeRxuz.png" alt="Agnosticism explained"></p>
 <h3 id="Software-decomposition-and-Life-Cycle-Management"><a href="#Software-decomposition-and-Life-Cycle-Management" class="headerlink" title="Software decomposition and Life Cycle Management"></a>Software decomposition and Life Cycle Management</h3><p>Another important principle is for CNA itself, which requires CNA to be decomposed into smaller, more manageable pieces. This is usually done through utilizing a microservice architecture (MSA). MSA is a design pattern that strives to structure an application as a collection of loosely coupled stateless services.<br><img src="https://s2.loli.net/2023/10/23/KhxQlkCBGo7WI9z.png" alt="Microservice architecture"><br>This concept is not new in only for cloud native, dividing code into more manageable pieces and call them “code modules” or “software components” has always been a good practice in software development. However, in cloud native realm, those software components, AKA microservices, now have a well bounded scope and can be individually deploys, scaled and upgrade using CaaS environment. In addition, microservices have their own defines and version-controlled network-based interfaces to communicate with each other, which enables the lifecycle management for each microservice.</p>
@@ -157,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clslvpqdq0000i6keckvwhgoj" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clsvviwul0000xtkeg9jl74pa" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -198,7 +198,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/knowledge-sharing/">knowledge sharing</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
     </div>
   </div>
 
@@ -218,7 +218,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
+      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
     </div>
   </div>
 
@@ -227,7 +227,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
     </div>
   </div>
 
@@ -238,6 +238,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2024/02/21/linux-FS-and-pkg/">linux FS and pkg</a>
+          </li>
         
           <li>
             <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/">Deploy free5GC with k8s and helm</a>
@@ -253,10 +257,6 @@
         
           <li>
             <a href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
           </li>
         
       </ul>

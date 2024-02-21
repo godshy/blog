@@ -14,7 +14,7 @@
 <meta property="og:description" content="Provide some basic point of view for troubleshooting K8sImagePullBackoff This usually indicates something wrong with the pod description yaml file. Check name under image: 12345spec:  containers:  - n">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T07:00:30.000Z">
-<meta property="article:modified_time" content="2023-06-08T07:56:15.601Z">
+<meta property="article:modified_time" content="2024-02-21T14:03:54.208Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -114,10 +114,16 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset name_of_replicaset -o yaml &gt;&gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml</span><br></pre></td></tr></table></figure>
 
 <h3 id="Do-not-add-extra-name-after-pods-name-when-creating-pods-imperatively"><a href="#Do-not-add-extra-name-after-pods-name-when-creating-pods-imperatively" class="headerlink" title="Do not add extra name after [pods_name] when creating pods imperatively"></a>Do not add extra name after [pods_name] when creating pods imperatively</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;pods_name&gt; &lt;args&gt; --image=&lt;image_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Things-todo-if-kubectl-command-ceased-responding"><a href="#Things-todo-if-kubectl-command-ceased-responding" class="headerlink" title="Things todo if kubectl command ceased responding"></a>Things todo if kubectl command ceased responding</h3><ul>
+<li>check logs under <code>/var/log/container</code></li>
+<li>use <code>crictl</code> command <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">crictl ps -a</span><br><span class="line">crictl logs container-id</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">docker ps </span><br><span class="line">docker logs</span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clslvpqe3000ai6ke3x7h9cpy" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clsvviwuq0004xtkeeumxf9kr" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -158,7 +164,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/knowledge-sharing/">knowledge sharing</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
     </div>
   </div>
 
@@ -178,7 +184,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
+      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
     </div>
   </div>
 
@@ -187,7 +193,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
     </div>
   </div>
 
@@ -198,6 +204,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2024/02/21/linux-FS-and-pkg/">linux FS and pkg</a>
+          </li>
         
           <li>
             <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/">Deploy free5GC with k8s and helm</a>
@@ -213,10 +223,6 @@
         
           <li>
             <a href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
           </li>
         
       </ul>

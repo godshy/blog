@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic K8s-CommandsCluster logs Get cluster nodes logs 1kubectl cluster-info dump --output-directory cluster_info_dump_$(uname -n)  -A  ETCD related commands ETCDCTL version 2 12345etcdctl backupetcdct">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T01:57:16.000Z">
-<meta property="article:modified_time" content="2024-02-08T08:18:38.504Z">
+<meta property="article:modified_time" content="2024-02-21T13:28:35.309Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -217,10 +217,8 @@
 <ul>
 <li>scale up&#x2F;down by modifying the yaml file first <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset &lt;name_of_replicaset&gt; -o yaml &gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml <span class="comment"># able to recreate node</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><ul>
-<li>create deployment by commands</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment --image=&lt;image_name&gt; &lt;deploy_name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Kubelet"><a href="#Kubelet" class="headerlink" title="Kubelet"></a>Kubelet</h2><p>Configuration file of kubelet is located at </p>
+<figure class="highlight plaintext"><figcaption><span>``` or</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">```/etc/kubernetes/kubelet.conf ```</span><br><span class="line">## Deployment</span><br><span class="line"></span><br><span class="line">- create deployment by commands</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">    kubectl create deployment --image=&lt;image_name&gt; &lt;deploy_name&gt;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>by configuration file</p>
@@ -326,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clslvpqdz0004i6ke2lhcaigp" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clsvviwur0005xtkec0b7dt0e" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -367,7 +365,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/knowledge-sharing/">knowledge sharing</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
     </div>
   </div>
 
@@ -387,7 +385,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
+      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
     </div>
   </div>
 
@@ -396,7 +394,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
     </div>
   </div>
 
@@ -407,6 +405,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2024/02/21/linux-FS-and-pkg/">linux FS and pkg</a>
+          </li>
         
           <li>
             <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/">Deploy free5GC with k8s and helm</a>
@@ -422,10 +424,6 @@
         
           <li>
             <a href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
           </li>
         
       </ul>
