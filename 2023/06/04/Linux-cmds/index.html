@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic linux cmdsIndex System check realted commands Input&#x2F;output related commands Shell and bash scripting Security and cert  System check related commandsOften used basic commands and their vari">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-04T10:18:25.000Z">
-<meta property="article:modified_time" content="2024-02-21T13:32:26.228Z">
+<meta property="article:modified_time" content="2024-03-05T08:14:40.832Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -la /sys/devices</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>Check folder size<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -xhs /&lt;PATH&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>Check folder size</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -xhs /&lt;PATH&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>check logical volume, physical volume and volume group </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo lvscan <span class="comment"># list logical volumes</span></span><br><span class="line">sudo vgs <span class="comment"># list volume group</span></span><br><span class="line">sudo pvdisplay <span class="comment"># list physical volume</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="Network-related-commands"><a href="#Network-related-commands" class="headerlink" title="Network related commands"></a>Network related commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">netstat -t -u -n -p -l <span class="comment"># tcp | udp | numeric(do not resolve hostnames) | programs | listening</span></span><br><span class="line"></span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 localhost:43619         0.0.0.0:*               LISTEN      13331/node</span><br><span class="line">tcp        0      0 127.0.0.53:domain       0.0.0.0:*               LISTEN      1860/systemd-resolv</span><br><span class="line">tcp        0      0 localhost:34781         0.0.0.0:*               LISTEN      248/containerd</span><br><span class="line">tcp        0      0 localhost:32809         0.0.0.0:*               LISTEN      13259/node</span><br><span class="line">udp        0      0 127.0.0.53:domain       0.0.0.0:*                           1860/systemd-resolv</span><br><span class="line">udp        0      0 localhost:323           0.0.0.0:*                           -</span><br><span class="line">udp6       0      0 ip6-localhost:323       [::]:*                              -</span><br></pre></td></tr></table></figure>
 
@@ -243,7 +247,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clsvviwur0006xtkectsyema2" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cltgu7x42000512ke11p629xd" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

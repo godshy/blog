@@ -163,11 +163,28 @@
 </li>
 </ul>
 <h3 id="VFS-virtual-file-system"><a href="#VFS-virtual-file-system" class="headerlink" title="VFS (virtual file system)"></a>VFS (virtual file system)</h3><p>Abstraction layer in the kernel that provides clients a common way to access resources.<br>Using VFS user can access to resource like local filesystems, in-memory filesystems(memory), pseudo filesystems or network filesystems and treat them as simple file.<br>[<a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/next/filesystems/vfs.html]">https://www.kernel.org/doc/html/next/filesystems/vfs.html]</a></p>
+<h3 id="Creating-filesystems"><a href="#Creating-filesystems" class="headerlink" title="Creating filesystems"></a>Creating filesystems</h3><p>To creating filesystems, first step is to create filesystem (similar to partition)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/some_vg/some_lv <span class="comment"># some volume group and logical volume</span></span><br></pre></td></tr></table></figure>
+<p>Then, you need to mount it to the root filesystem tree</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t ext4, tmpfs <span class="comment"># check mount status for ext4 tmpfs file system types</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Mounts is avaliable as long as the system is running, to mount permanentlly you need to use the fstab file.</code></p>
+<h3 id="procfs-sysfs-and-devfs"><a href="#procfs-sysfs-and-devfs" class="headerlink" title="procfs sysfs and devfs"></a>procfs sysfs and devfs</h3><ul>
+<li><p>proc filesystem contains process-related infor from the kernel.<br>users can view at <code>/proc/PID/</code></p>
+</li>
+<li><p>sysfs is located in <code>/sys</code> contains kernal information to exposed select information.</p>
+</li>
+<li><p>devfs contains device files, random data generator is also included.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tr</span> -dc A-Za-z0-9 &lt; /dev/urandowm | <span class="built_in">head</span> -c 42</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>common filesystem is format for filesystems. Check link below for more details. <a target="_blank" rel="noopener" href="https://hyperskill.org/learn/step/34977">https://hyperskill.org/learn/step/34977</a></p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="clsvviwut000fxtke893tarot" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cltgu7x46000o12ke1fs24kvb" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -250,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clsvviwuo0001xtkeam940qm8" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cltgu7x3z000112keai6eemb5" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -340,7 +357,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clsvviwul0000xtkeg9jl74pa" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cltgu7x3w000012ke3bkmd45j" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -420,11 +437,11 @@
 
 <h3 id="Allocate-the-priority-to-be-scheduled-in-the-queue"><a href="#Allocate-the-priority-to-be-scheduled-in-the-queue" class="headerlink" title="Allocate the priority to be scheduled in the queue"></a>Allocate the priority to be scheduled in the queue</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">high-priority</span></span><br></pre></td></tr></table></figure>
 
-
+<h3 id="description-file-for-CSR"><a href="#description-file-for-CSR" class="headerlink" title="description file for CSR"></a>description file for CSR</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">certificates.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">CertificateSigningRequest</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">somename</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">expirationSeconds:</span> <span class="number">600</span></span><br><span class="line">  <span class="attr">usages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">digital</span> <span class="string">signature</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">key</span> <span class="string">encipherment</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">server</span> <span class="string">auth</span></span><br><span class="line">  <span class="attr">request:</span> <span class="string">&lt;BASE64_encoded</span> <span class="string">CSR_info&gt;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clsvviwus000bxtkechlw6zvd" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cltgu7x46000l12keec1pauiz" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -485,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clsvviwuq0004xtkeeumxf9kr" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cltgu7x41000412ke4aq4g8vk" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -601,7 +618,10 @@
 <li>check process of kube controller manager</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-controller-manager</span><br></pre></td></tr></table></figure>
-
+<ul>
+<li>CSR related command</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get csr</span><br><span class="line">kubectl certificate approve</span><br><span class="line">kubectl get csr &lt;name&gt; -o yaml</span><br></pre></td></tr></table></figure>
 <h2 id="Kube-scheduler"><a href="#Kube-scheduler" class="headerlink" title="Kube-scheduler"></a>Kube-scheduler</h2><ul>
 <li>View kube scheduler thru kubeadm</li>
 </ul>
@@ -747,7 +767,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clsvviwur0005xtkec0b7dt0e" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cltgu7x46000m12kehhlt27ku" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -829,7 +849,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -la /sys/devices</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>Check folder size<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -xhs /&lt;PATH&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>Check folder size</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -xhs /&lt;PATH&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>check logical volume, physical volume and volume group </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo lvscan <span class="comment"># list logical volumes</span></span><br><span class="line">sudo vgs <span class="comment"># list volume group</span></span><br><span class="line">sudo pvdisplay <span class="comment"># list physical volume</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="Network-related-commands"><a href="#Network-related-commands" class="headerlink" title="Network related commands"></a>Network related commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">netstat -t -u -n -p -l <span class="comment"># tcp | udp | numeric(do not resolve hostnames) | programs | listening</span></span><br><span class="line"></span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 localhost:43619         0.0.0.0:*               LISTEN      13331/node</span><br><span class="line">tcp        0      0 127.0.0.53:domain       0.0.0.0:*               LISTEN      1860/systemd-resolv</span><br><span class="line">tcp        0      0 localhost:34781         0.0.0.0:*               LISTEN      248/containerd</span><br><span class="line">tcp        0      0 localhost:32809         0.0.0.0:*               LISTEN      13259/node</span><br><span class="line">udp        0      0 127.0.0.53:domain       0.0.0.0:*                           1860/systemd-resolv</span><br><span class="line">udp        0      0 localhost:323           0.0.0.0:*                           -</span><br><span class="line">udp6       0      0 ip6-localhost:323       [::]:*                              -</span><br></pre></td></tr></table></figure>
 
@@ -928,7 +952,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clsvviwur0006xtkectsyema2" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cltgu7x42000512ke11p629xd" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -986,7 +1010,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clsvviwus000axtke1nrj3wej" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cltgu7x45000k12ke6m1p3lps" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

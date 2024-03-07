@@ -14,7 +14,7 @@
 <meta property="og:description" content="Config templates for K8sYAML description file for pods12345678910111213141516171819202122232425apiVersion: v1kind: Podmetadata:  name: nginx  labels:     app: nginxspec:  containers:  - name: nginx">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T09:07:29.000Z">
-<meta property="article:modified_time" content="2023-12-07T08:29:55.733Z">
+<meta property="article:modified_time" content="2024-03-01T02:32:47.451Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -142,11 +142,11 @@
 
 <h3 id="Allocate-the-priority-to-be-scheduled-in-the-queue"><a href="#Allocate-the-priority-to-be-scheduled-in-the-queue" class="headerlink" title="Allocate the priority to be scheduled in the queue"></a>Allocate the priority to be scheduled in the queue</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">high-priority</span></span><br></pre></td></tr></table></figure>
 
-
+<h3 id="description-file-for-CSR"><a href="#description-file-for-CSR" class="headerlink" title="description file for CSR"></a>description file for CSR</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">certificates.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">CertificateSigningRequest</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">somename</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">expirationSeconds:</span> <span class="number">600</span></span><br><span class="line">  <span class="attr">usages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">digital</span> <span class="string">signature</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">key</span> <span class="string">encipherment</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">server</span> <span class="string">auth</span></span><br><span class="line">  <span class="attr">request:</span> <span class="string">&lt;BASE64_encoded</span> <span class="string">CSR_info&gt;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clsvviwus000bxtkechlw6zvd" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cltgu7x46000l12keec1pauiz" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
