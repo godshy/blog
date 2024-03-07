@@ -77,6 +77,13 @@ or
 ``` bash
     du -xhs /<PATH>
 ```
+
+- check logical volume, physical volume and volume group 
+``` bash
+    sudo lvscan # list logical volumes
+    sudo vgs # list volume group
+    sudo pvdisplay # list physical volume
+```
 ### Network related commands
 ``` bash
     netstat -t -u -n -p -l # tcp | udp | numeric(do not resolve hostnames) | programs | listening

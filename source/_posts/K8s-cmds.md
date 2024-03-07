@@ -186,7 +186,13 @@ checking active process of apiserver by
 ``` bash
     ps -aux | grep kube-controller-manager
 ```
+- CSR related command
 
+``` bash
+    kubectl get csr
+    kubectl certificate approve
+    kubectl get csr <name> -o yaml
+```
 ## Kube-scheduler 
 
 - View kube scheduler thru kubeadm

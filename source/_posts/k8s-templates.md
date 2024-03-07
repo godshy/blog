@@ -294,3 +294,17 @@ spec:
   priorityClassName: high-priority
 ```
 
+### description file for CSR
+``` yaml
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: somename
+spec:
+  expirationSeconds: 600
+  usages:
+  - digital signature
+  - key encipherment
+  - server auth
+  request: <BASE64_encoded CSR_info>
+```

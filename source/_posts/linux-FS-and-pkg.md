@@ -91,3 +91,33 @@ Differences between hard link and symbolic link
 Abstraction layer in the kernel that provides clients a common way to access resources.
 Using VFS user can access to resource like local filesystems, in-memory filesystems(memory), pseudo filesystems or network filesystems and treat them as simple file.
 [https://www.kernel.org/doc/html/next/filesystems/vfs.html]
+
+
+### Creating filesystems
+
+To creating filesystems, first step is to create filesystem (similar to partition)
+``` bash
+mkfs -t ext4 /dev/some_vg/some_lv # some volume group and logical volume
+```
+Then, you need to mount it to the root filesystem tree
+
+``` bash
+    mount -t ext4, tmpfs # check mount status for ext4 tmpfs file system types
+```
+
+```Mounts is avaliable as long as the system is running, to mount permanentlly you need to use the fstab file.```
+
+
+### procfs sysfs and devfs
+- proc filesystem contains process-related infor from the kernel.
+users can view at ```/proc/PID/```
+
+- sysfs is located in ```/sys``` contains kernal information to exposed select information.
+
+- devfs contains device files, random data generator is also included.
+``` bash
+    tr -dc A-Za-z0-9 < /dev/urandowm | head -c 42
+```
+
+- common filesystem is format for filesystems. Check link below for more details. https://hyperskill.org/learn/step/34977
+
