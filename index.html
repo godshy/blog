@@ -184,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cltgu7x46000o12ke1fs24kvb" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cltsdm6gf000fzeked3l9fb48" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -267,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cltgu7x3z000112keai6eemb5" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cltsdm6g40001zekeb5cp6kew" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -357,7 +357,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cltgu7x3w000012ke3bkmd45j" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cltsdm6g00000zeke2b081h7p" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -438,10 +438,12 @@
 <h3 id="Allocate-the-priority-to-be-scheduled-in-the-queue"><a href="#Allocate-the-priority-to-be-scheduled-in-the-queue" class="headerlink" title="Allocate the priority to be scheduled in the queue"></a>Allocate the priority to be scheduled in the queue</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">high-priority</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="description-file-for-CSR"><a href="#description-file-for-CSR" class="headerlink" title="description file for CSR"></a>description file for CSR</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">certificates.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">CertificateSigningRequest</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">somename</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">expirationSeconds:</span> <span class="number">600</span></span><br><span class="line">  <span class="attr">usages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">digital</span> <span class="string">signature</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">key</span> <span class="string">encipherment</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">server</span> <span class="string">auth</span></span><br><span class="line">  <span class="attr">request:</span> <span class="string">&lt;BASE64_encoded</span> <span class="string">CSR_info&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Definition-file-for-kubeconfig"><a href="#Definition-file-for-kubeconfig" class="headerlink" title="Definition file for kubeconfig"></a>Definition file for kubeconfig</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">clusters:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">cluster:</span></span><br><span class="line">    <span class="attr">certificate-authority:</span> <span class="string">/path_to_ca_crt</span></span><br><span class="line">    <span class="comment"># or</span></span><br><span class="line">    <span class="attr">certificate-authority-data:</span> <span class="string">&lt;base64&gt;</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">https://controlplane:6443</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kubernetes</span></span><br><span class="line"></span><br><span class="line"><span class="attr">contexts:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">context:</span></span><br><span class="line">    <span class="attr">cluster:</span> <span class="string">kubernetes</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">kubernetes-admin</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kubernetes-admin@kubernetes</span></span><br><span class="line"><span class="attr">current-context:</span> <span class="string">kubernetes-admin@kubernetes</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Config</span></span><br><span class="line"><span class="attr">preferences:</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="attr">users:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">kubernetes-admin</span></span><br><span class="line">  <span class="attr">user:</span></span><br><span class="line">    <span class="attr">client-certificate-data:</span> <span class="string">&lt;base64&gt;</span></span><br><span class="line">    <span class="attr">client-key-data:</span> <span class="string">&lt;base64&gt;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cltgu7x46000l12keec1pauiz" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cltsdm6gd000bzekecca73f23" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -502,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cltgu7x41000412ke4aq4g8vk" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cltsdm6g90004zekee0mndfwy" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -544,6 +546,10 @@
       
         <h1 id="Basic-K8s-Commands"><a href="#Basic-K8s-Commands" class="headerlink" title="Basic K8s-Commands"></a>Basic K8s-Commands</h1><h2 id="Cluster-logs"><a href="#Cluster-logs" class="headerlink" title="Cluster logs"></a>Cluster logs</h2><ul>
 <li>Get cluster nodes logs <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl cluster-info dump --output-directory cluster_info_dump_$(<span class="built_in">uname</span> -n)  -A</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="View-and-modify-kubectl-configs"><a href="#View-and-modify-kubectl-configs" class="headerlink" title="View and modify kubectl configs"></a>View and modify kubectl configs</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl config view</span><br><span class="line"><span class="comment"># file is located in ~/.kube/config</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>change to use other context to access the cluster<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config use-context &lt;name&gt;@&lt;cluster&gt; --kubeconfig /path_to_config_file</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="ETCD-related-commands"><a href="#ETCD-related-commands" class="headerlink" title="ETCD related commands"></a>ETCD related commands</h2><ul>
 <li><p>ETCDCTL version 2</p>
@@ -764,10 +770,13 @@
 
 
 <h2 id="Procedure-for-pods-when-executing-node-graceful-restart"><a href="#Procedure-for-pods-when-executing-node-graceful-restart" class="headerlink" title="Procedure for pods when executing node graceful restart"></a>Procedure for pods when executing node graceful restart</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># drain pod on the nodes you want to perform reboot procedure</span></span><br><span class="line">    kubectl drain --ignore-daemonsets --delete-emptydir-data</span><br><span class="line">    kubectl describe nodes &lt;node-name&gt;</span><br><span class="line">    <span class="comment"># perform node reboot</span></span><br><span class="line">    kubectl uncordon &lt;node_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cltgu7x46000m12kehhlt27ku" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cltsdm6ga0005zekeger33yug" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -812,6 +821,7 @@
 <li><a href="#inputoutput-related-commands">Input&#x2F;output related commands</a></li>
 <li><a href="#shell-and-bash-scripting-related">Shell and bash scripting</a></li>
 <li><a href="#security-and-certificate-generation">Security and cert</a></li>
+<li><a href="#kvm-related">VM management</a></li>
 </ol>
 <h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><h3 id="Often-used-basic-commands-and-their-variations"><a href="#Often-used-basic-commands-and-their-variations" class="headerlink" title="Often used basic commands and their variations"></a>Often used basic commands and their variations</h3><ul>
 <li>‘cat’ command and its successor ‘bat’</li>
@@ -949,10 +959,17 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 
 <p>Check certificate details</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/apiserver.crt -text -noout</span><br></pre></td></tr></table></figure>
+
+<h2 id="KVM-related"><a href="#KVM-related" class="headerlink" title="KVM related"></a>KVM related</h2><ul>
+<li>check vm list<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all</span><br></pre></td></tr></table></figure></li>
+<li>login into a vm<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh console &lt;vm-name&gt;</span><br></pre></td></tr></table></figure></li>
+<li>to logout from vm, use <code>ctrl+5</code></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cltgu7x42000512ke11p629xd" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cltsdm6gb0006zeke3vzmdcbl" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1010,7 +1027,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cltgu7x45000k12ke6m1p3lps" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cltsdm6gc000azeke5npjfwkw" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
