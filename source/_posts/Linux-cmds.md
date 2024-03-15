@@ -13,6 +13,7 @@ category: commands
 2. [Input/output related commands](#inputoutput-related-commands)
 3. [Shell and bash scripting](#shell-and-bash-scripting-related)
 4. [Security and cert](#security-and-certificate-generation)
+5. [VM management](#kvm-related)
 
 ## System check related commands
 
@@ -368,3 +369,15 @@ Check certificate details
 ``` bash
     openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 ```
+
+## KVM related
+
+- check vm list
+``` bash
+    virsh list --all
+```
+- login into a vm
+``` bash
+    virsh console <vm-name>
+```
+- to logout from vm, use ```ctrl+5```

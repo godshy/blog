@@ -308,3 +308,30 @@ spec:
   - server auth
   request: <BASE64_encoded CSR_info>
 ```
+
+### Definition file for kubeconfig
+``` yaml
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: /path_to_ca_crt
+    # or
+    certificate-authority-data: <base64>
+    server: https://controlplane:6443
+  name: kubernetes
+
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: <base64>
+    client-key-data: <base64>
+```

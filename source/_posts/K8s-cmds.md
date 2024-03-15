@@ -13,6 +13,16 @@ category: commands
 ``` bash
     kubectl cluster-info dump --output-directory cluster_info_dump_$(uname -n)  -A
 ```
+## View and modify kubectl configs
+
+``` bash
+    kubectl config view
+    # file is located in ~/.kube/config
+```
+- change to use other context to access the cluster
+``` bash
+    kubectl config use-context <name>@<cluster> --kubeconfig /path_to_config_file
+```
 ## ETCD related commands
 
 - ETCDCTL version 2
@@ -497,3 +507,5 @@ kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE
     kubectl uncordon <node_name>
 
 ```
+
+
