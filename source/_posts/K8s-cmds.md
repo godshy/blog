@@ -173,7 +173,14 @@ checking active process of apiserver by
     curl -v -k <url> -u "user:pass"
 ```
 
+- RBAC related commands
+``` bash
+    kubectl get roles
+    kubectl get rolebindings
+    kubectl describe role developer
+    kubectl auth can-i <command > --as <usergroup> # for example create deployments
 
+```
 ## Kube controller manager
 
 - check status with the deployment by kubeadmin

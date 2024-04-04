@@ -24,7 +24,14 @@ category: commands
 
 - 'cat' command and its successor 'bat'
 
+### Log check commands 
 
+- use journalctl to check service logs
+
+``` bash
+    journalctl -f -u <someservice.service>
+
+```
 
 ### Resource check commands
 
@@ -85,6 +92,35 @@ or
     sudo vgs # list volume group
     sudo pvdisplay # list physical volume
 ```
+
+- check I/O status
+``` bash
+    iostat -z -- human
+```
+
+- use lsof command to follow process
+
+``` bash
+    # check port usage 
+    sudo lsof -i TCP:1-1024 # check private port usage
+    sudo lsof -p <pid> -i UDP # check process's udp usage
+    # check process
+    sudo lsof -p <pid> # follow process's activity
+
+```
+
+- check uptime
+``` bash
+    uptime
+```
+
+- chec khow long an operation takes
+``` bash
+    time (the command)
+    # for example
+    time (ls -lf)
+```
+
 ### Network related commands
 ``` bash
     netstat -t -u -n -p -l # tcp | udp | numeric(do not resolve hostnames) | programs | listening
@@ -105,6 +141,20 @@ grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,
 # If nestat is not there, we can check connection using this instead.
 ```
 
+
+- check ip link conditions arps
+``` bash
+    ip link show
+    ip addr show
+
+    # check arp
+    arp
+    # check ip neighbors/ arp neighbors
+    ip neigh
+
+    # check net adaptor related 
+    iw dev <nic_name> info
+```
 ### Process related commands 
 - List current process and show in tree form
 ``` bash
@@ -131,14 +181,22 @@ grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,
     capsh --print
     grep Cap /proc/$$/status # capabilities for the current process
 ```
+
+### cgroup and namespace related commands
+
+``` bash
+    sudo lsns # check namespace
+    systemctl status # check cgroup
+```
 ### Directory sync commands
 
 ``` bash
-    rsync <source_ip> <target_ip>
+    rsync <source_ip> <user_name>@<target_ip>:/dir
     #a -- for archive keep file group, version etc
     #z -- for compress
     #p -- keep permissions
     #q -- quiet mode
+    #v -- verbose
 ```
 
 ## Input/output related commands
@@ -381,3 +439,13 @@ Check certificate details
     virsh console <vm-name>
 ```
 - to logout from vm, use ```ctrl+5```
+
+- Check VM IP nad net stack
+
+``` bash
+    virsh net-list # show network name
+    virsh net-info <net_name> # default named default
+    virsh net-dhcp-leases <net_name>
+
+```
+

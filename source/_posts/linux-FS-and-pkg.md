@@ -9,6 +9,7 @@ category: Learning
 
 ## Index
 1. [Filesystems](#filesystems)
+2. [Package and apps](#packages-and-applications)
 
 
 ## Filesystems
@@ -121,3 +122,26 @@ users can view at ```/proc/PID/```
 
 - common filesystem is format for filesystems. Check link below for more details. https://hyperskill.org/learn/step/34977
 
+## Packages and applications
+### Terminology explanations
+- Program: binary file or executable. Code to run something.
+- Process: A running entity based on a program loaded into main memory and either using CPU or I/O when not sleeping
+- Daemon: or called service, a background process that provides function to other processes. For example: daemons for web service, logging time ...
+- Application: program including its dependencies. A combination of multiple programs. 
+- Package: A file that contains programs and configs, used to distribute software applications
+- Package manager: A program that takes a package as an input, and based on its content and user instruction to install it upgrades it or removes it
+
+
+#### Boot process
+PWR on ---> UEFI or BIOS ---> Boot loader ---> Kernel ---> Init ---> Other user interface
+
+1. UEFI or BIOS init hardware and boot basic configuration, then handle over to boot loader
+2. Boot loader starts kernel
+3. kernel are loaded from /boot to main memory
+4. Init system is responsible for launching daemons
+
+### Systemd initializer
+
+If we want to set an application as service, we can define .service file and put them into `/run/systemd/system/`
+
+- User `journalctl` command, you can see systemctl-managed service logs. 
