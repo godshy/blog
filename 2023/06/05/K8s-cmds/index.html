@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic K8s-CommandsCluster logs Get cluster nodes logs 1kubectl cluster-info dump --output-directory cluster_info_dump_$(uname -n)  -A  View and modify kubectl configs12kubectl config view# file is loc">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T01:57:16.000Z">
-<meta property="article:modified_time" content="2024-03-15T08:07:04.170Z">
+<meta property="article:modified_time" content="2024-04-04T07:22:04.295Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -164,7 +164,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-apiserver</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>add username&#x2F;password or token and securely access to api-server (most insecure)<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># add username/password info in .csv</span></span><br><span class="line"><span class="comment"># then specify the related file</span></span><br><span class="line"><span class="string">--basic-auth-file=user_info.csv</span></span><br><span class="line"><span class="comment"># kube-apiserver.service</span></span><br><span class="line"><span class="comment"># or pod defination file under /etc/kubernetes/manifests</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use curl command to securely access to api server</span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url_to_api_server:6443/api/v1/pods</span> <span class="string">--header</span> <span class="string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url&gt;</span> <span class="string">-u</span> <span class="string">&quot;user:pass&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>add username&#x2F;password or token and securely access to api-server (most insecure)</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># add username/password info in .csv</span></span><br><span class="line"><span class="comment"># then specify the related file</span></span><br><span class="line"><span class="string">--basic-auth-file=user_info.csv</span></span><br><span class="line"><span class="comment"># kube-apiserver.service</span></span><br><span class="line"><span class="comment"># or pod defination file under /etc/kubernetes/manifests</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use curl command to securely access to api server</span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url_to_api_server:6443/api/v1/pods</span> <span class="string">--header</span> <span class="string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url&gt;</span> <span class="string">-u</span> <span class="string">&quot;user:pass&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>RBAC related commands</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl get roles</span><br><span class="line">kubectl get rolebindings</span><br><span class="line">kubectl describe role developer</span><br><span class="line">kubectl auth can-i &lt;<span class="built_in">command</span> &gt; --as &lt;usergroup&gt; <span class="comment"># for example create deployments</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="Kube-controller-manager"><a href="#Kube-controller-manager" class="headerlink" title="Kube controller manager"></a>Kube controller manager</h2><ul>
 <li>check status with the deployment by kubeadmin</li>
@@ -334,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cltsdm6ga0005zekeger33yug" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clukzslfc0005ynkeb2s23e6r" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
