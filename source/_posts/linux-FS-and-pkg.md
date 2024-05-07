@@ -98,7 +98,7 @@ Using VFS user can access to resource like local filesystems, in-memory filesyst
 
 To creating filesystems, first step is to create filesystem (similar to partition)
 ``` bash
-mkfs -t ext4 /dev/some_vg/some_lv # some volume group and logical volume
+    mkfs -t ext4 /dev/some_vg/some_lv # some volume group and logical volume
 ```
 Then, you need to mount it to the root filesystem tree
 

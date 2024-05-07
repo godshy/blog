@@ -148,15 +148,21 @@ metadata:
 
 spec:
   template:
-    metadata:
+    metadata:[]
       name: myapp-pod
 	    labels: 
 	      app: myapp
 		    type: front-end
 	  spec:
+      securityContext: # also can be put under "containers" to choose appling context in pod or container scope
+        runAsUser: 1000 # define what user to run in the pod
+        capabilities:
+          add: ["MAC_ADMIN"]
 	    containers:
-	    - name: nginx-containers
+	    - name: dockerhub_url/nginx-containers
 		    image: nginx
+      imagePullSecrets: # image security, docker hub username/pwd secret object
+      - name: <docker-registry-secret-name>
   replicas: 3
   selector:
     matchLabels:
@@ -392,4 +398,154 @@ users:
     name: cluster-administrator
     apiGroup: rbac.authorization.k8s.io
 
+```
+
+### network policy definition
+``` yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: test-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 172.17.0.0/16
+        except:
+        - 172.17.1.0/24
+    - namespaceSelector:
+        matchLabels:
+          project: myproject
+    - podSelector:  # or
+        matchLabels:
+          role: frontend
+    ports:  # and 
+    - protocol: TCP
+      port: 6379
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/24
+    ports:
+    - protocol: TCP
+      port: 5978
+
+```
+
+
+### Storage definition files
+``` yaml
+  spec:
+    containers:
+      volumeMounts:
+      - mountPath: <dir_in_container> # directory in container which you need to store file
+        name: <volume_name>
+    volumes:
+    - name: <volume_name>
+      hostPath:
+        path: <dir_mounted_path> # path outside container which you need to store data on 
+        type: Directory
+      # or
+      persistentVolumeClaim:
+        claimName: <pvclaim_name>
+# this will cause directory created on every node in multi-node env
+```
+
+- persistent volume
+``` yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv0003
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle/Retain/Delete
+  storageClassName: slow
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /tmp
+    server: 172.17.0.2
+
+    # or
+spec:
+  hostPath:
+    path: <dir_local_storage_path>
+```
+
+- persistent volume claim: bind to persistent volume
+``` yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem 
+  volumeName: <name_of_volume> # match what pv you want to bind
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: slow
+  selector:
+    matchLabels:
+      release: "stable"
+    matchExpressions:
+      - {key: environment, operator: In, values: [dev]}
+
+```
+__If a pvc is deleted before the deletion of pod, it will stuck in terminating state.__
+- attach pvc to pod
+``` yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: myfrontend
+      image: nginx
+      volumeMounts:
+      - mountPath: "/var/www/html"
+        name: mypd # name should match with name under volumes
+  volumes:
+    - name: mypd  # should be same with name under volumeMounts
+      persistentVolumeClaim:
+        claimName: myclaim
+```
+
+- storage class: allowed for automatically provision volume
+``` yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: standard
+provisioner: kubernetes.io/example
+parameters:
+  type: pd-standard
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+- matchLabelExpressions:
+  - key: topology.kubernetes.io/zone
+    values:
+    - us-central-1a
+    - us-central-1b
+```
+then update pvc-definition file with:
+``` yaml
+spec:
+  storageClassName: <SC_NAME>
 ```

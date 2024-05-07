@@ -155,6 +155,11 @@ grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,
     # check net adaptor related 
     iw dev <nic_name> info
 ```
+
+- check if ip forwarding is enabled
+``` bash
+    cat /proc/sys/net/ipv4/ip_forward # 1 for enable
+```
 ### Process related commands 
 - List current process and show in tree form
 ``` bash

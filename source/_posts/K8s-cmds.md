@@ -275,6 +275,7 @@ checking active process of apiserver by
 Configuration file of kubelet is located at 
 ``` /var/lib/kubelet/config.yaml ``` or 
 ```/etc/kubernetes/kubelet.conf ```
+
 ## Deployment
 
 - create deployment by commands
@@ -469,10 +470,10 @@ spec:
 
 ``` bash
 # Copy file from pods to local director
-kubectl cp <namespace>/<pod_name>:/PATH/FILE /LOCAL_PATH/FILE_NAME
+    kubectl cp <namespace>/<pod_name>:/PATH/FILE /LOCAL_PATH/FILE_NAME
 
 # Copy file from local to pods
-kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE 
+    kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE 
 ```
 
 ## ENV VAR and ConfigMap
@@ -500,13 +501,23 @@ kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE
     kubectl create secret generic \
     <secret-name> --from-file=<secret_file_name>
 
+    # docker registry secret
+    kubectl create secret docker-registry <secret-name> \
+    --docker-server= \
+    --docker-username= \
+    --docker-password= \
+    --docker-email=
 ```
 
-
+## Service account
+- A service account is an account for services like jenkins and Prometheus to perform tasks on clusters
+``` bash
+    # create service account
+    kubectl create serviceaccount <account_name>
+```
 ## Procedure for pods when executing node graceful restart
 
 ``` bash
-
 # drain pod on the nodes you want to perform reboot procedure
     kubectl drain --ignore-daemonsets --delete-emptydir-data
     kubectl describe nodes <node-name>
@@ -516,3 +527,16 @@ kubectl cp /LOCAL_PATH/FILE_NAME <namespace>/<pod_name>:/PATH/FILE
 ```
 
 
+## Kube storage
+- default directory for docker:
+```/var/lib/docker ```
+
+- To preserve data for container, always create persistent volume for it
+``` bash
+    docker volume create <name>
+    docker run -v <volume_name>:<dir_in_container> <container_name> #volume mounted on /var/lib/docker/volumes or binding mounting on any directories
+    docker run -v <mounted_path>:<dir_in_container> <container_name>
+```
+### Storage drivers and FS
+
+### Volume driver
