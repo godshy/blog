@@ -204,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="clvvtv28q000fazkea2ui9zy5" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="clxd0wp4f000f4ake99gz8kdl" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -287,7 +287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clvvtv28h0000azke32rcbtbw" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="clxd0wp4600014aked0bde96z" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -377,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clvvtv28k0001azke1xwjgyza" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="clxd0wp4300004ake0vd249k4" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -429,7 +429,7 @@
 
 
 
-<h3 id="YAML-description-file-for-replication-sets"><a href="#YAML-description-file-for-replication-sets" class="headerlink" title="YAML description file for replication-sets"></a>YAML description file for replication-sets</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span>  <span class="comment"># error: unable to recognize &quot;filename.yml&quot;: no matches for /, kind=ReplicaSet appears if apiVersion was set to v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicaSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">myrs</span></span><br><span class="line">  <span class="attr">namespace:</span> [<span class="string">ns</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">myapp-pod</span></span><br><span class="line">	    <span class="attr">labels:</span> </span><br><span class="line">	      <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">		    <span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line">	  <span class="attr">spec:</span></span><br><span class="line">	    <span class="attr">containers:</span></span><br><span class="line">	    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-containers</span></span><br><span class="line">		    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span> </span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">front-end</span></span><br></pre></td></tr></table></figure>
+<h3 id="YAML-description-file-for-replication-sets"><a href="#YAML-description-file-for-replication-sets" class="headerlink" title="YAML description file for replication-sets"></a>YAML description file for replication-sets</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span>  <span class="comment"># error: unable to recognize &quot;filename.yml&quot;: no matches for /, kind=ReplicaSet appears if apiVersion was set to v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicaSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">myrs</span></span><br><span class="line">  <span class="attr">namespace:</span> [<span class="string">ns</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">myapp-pod</span></span><br><span class="line">	    <span class="attr">labels:</span> </span><br><span class="line">	      <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">		    <span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line">	  <span class="attr">spec:</span></span><br><span class="line">	    <span class="attr">containers:</span></span><br><span class="line">	    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-containers</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">      </span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span> </span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">front-end</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="YAML-description-file-for-deployments"><a href="#YAML-description-file-for-deployments" class="headerlink" title="YAML description file for deployments"></a>YAML description file for deployments</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">my_deploy</span></span><br><span class="line">  <span class="attr">namespace:</span> [<span class="string">ns</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="string">metadata:[]</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">myapp-pod</span></span><br><span class="line">	    <span class="attr">labels:</span> </span><br><span class="line">	      <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">		    <span class="attr">type:</span> <span class="string">front-end</span></span><br><span class="line">	  <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">securityContext:</span> <span class="comment"># also can be put under &quot;containers&quot; to choose appling context in pod or container scope</span></span><br><span class="line">        <span class="attr">runAsUser:</span> <span class="number">1000</span> <span class="comment"># define what user to run in the pod</span></span><br><span class="line">        <span class="attr">capabilities:</span></span><br><span class="line">          <span class="attr">add:</span> [<span class="string">&quot;MAC_ADMIN&quot;</span>]</span><br><span class="line">	    <span class="attr">containers:</span></span><br><span class="line">	    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">dockerhub_url/nginx-containers</span></span><br><span class="line">		    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">      <span class="attr">imagePullSecrets:</span> <span class="comment"># image security, docker hub username/pwd secret object</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&lt;docker-registry-secret-name&gt;</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">myapp</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">front-end</span></span><br></pre></td></tr></table></figure>
 
@@ -496,7 +496,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clvvtv28p000bazkegpag4xss" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="clxd0wp4e000b4ake2top6uzc" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -557,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clvvtv28m0004azke5ty4h9s6" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="clxd0wp4800044ake7v2p35y1" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -842,7 +842,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clvvtv28n0005azke4gotb83z" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clxd0wp4900054ake6xsaalkh" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -960,6 +960,16 @@
 <li><p>check ip link conditions arps</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> show</span><br><span class="line">ip addr show</span><br><span class="line"></span><br><span class="line"><span class="comment"># check arp</span></span><br><span class="line">arp</span><br><span class="line"><span class="comment"># check ip neighbors/ arp neighbors</span></span><br><span class="line">ip neigh</span><br><span class="line"></span><br><span class="line"><span class="comment"># check net adaptor related </span></span><br><span class="line">iw dev &lt;nic_name&gt; info</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>check ip link on other network namespaces</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip -n &lt;ns_name&gt; ip <span class="built_in">link</span></span><br><span class="line"><span class="comment"># network namespace has its own arp tables</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>create virtual link between two ns</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> add &lt;name&gt; <span class="built_in">type</span> veth peer name &lt;peer-veth_name&gt;</span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> &lt;name&gt; netns &lt;ns_name&gt;</span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> &lt;peer-veth_name&gt; netns &lt;ns_name&gt;</span><br><span class="line">ip -n &lt;ns_name&gt; <span class="built_in">link</span> <span class="built_in">set</span> &lt;name&gt; up</span><br><span class="line">ip -n &lt;peer_ns_name&gt; <span class="built_in">link</span> <span class="built_in">set</span> &lt;peer_veth_name&gt; up</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>configure vswitch for namespaces</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> add &lt;name&gt; <span class="built_in">type</span> bridge</span><br><span class="line">ip <span class="built_in">link</span></span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> dev &lt;name&gt; up</span><br><span class="line">ip <span class="built_in">link</span> add &lt;name&gt; <span class="built_in">type</span> veth peer name &lt;peer-vswitch-name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>check if ip forwarding is enabled</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/sys/net/ipv4/ip_forward <span class="comment"># 1 for enable</span></span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -1071,7 +1081,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clvvtv28o0006azke7uss0ahi" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="clxd0wp4a00064akegndu2x69" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1129,7 +1139,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clvvtv28p000aazke8xzxgb8y" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="clxd0wp4e000a4akegn4vfgrd" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
