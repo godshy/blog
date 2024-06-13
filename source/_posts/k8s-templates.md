@@ -130,7 +130,8 @@ spec:
 	  spec:
 	    containers:
 	    - name: nginx-containers
-		    image: nginx
+        image: nginx
+      
   replicas: 3
   selector: 
     matchLabels:

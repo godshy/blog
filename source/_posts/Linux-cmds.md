@@ -156,10 +156,34 @@ grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,
     iw dev <nic_name> info
 ```
 
+- check ip link on other network namespaces
+
+``` bash
+    ip -n <ns_name> ip link
+    # network namespace has its own arp tables
+```
+- create virtual link between two ns
+``` bash
+    ip link add <name> type veth peer name <peer-veth_name>
+    ip link set <name> netns <ns_name>
+    ip link set <peer-veth_name> netns <ns_name>
+    ip -n <ns_name> link set <name> up
+    ip -n <peer_ns_name> link set <peer_veth_name> up
+```
+
+- configure vswitch for namespaces
+``` bash
+    ip link add <name> type bridge
+    ip link
+    ip link set dev <name> up
+    ip link add <name> type veth peer name <peer-vswitch-name>
+
+```
 - check if ip forwarding is enabled
 ``` bash
     cat /proc/sys/net/ipv4/ip_forward # 1 for enable
 ```
+
 ### Process related commands 
 - List current process and show in tree form
 ``` bash
