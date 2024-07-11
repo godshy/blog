@@ -537,6 +537,21 @@ spec:
     docker run -v <volume_name>:<dir_in_container> <container_name> #volume mounted on /var/lib/docker/volumes or binding mounting on any directories
     docker run -v <mounted_path>:<dir_in_container> <container_name>
 ```
-### Storage drivers and FS
+## Network
+- view kubelet option about CNI
+``` bash
+    ps -aux | grep kubelet
+    ls /opt/cni/bin
+    ls /etc/cni/net.d
+```
 
-### Volume driver
+## JsonPath
+1. what information you need?
+   ``` kubectl get ?```
+2. output as json
+3. check the info and check JSON PATH
+``` bash
+kubectl get pods -o=json='{JSON_PATH}'
+
+kubectl get pods -o=jsonpath='{ .items[*].metadata.name}
+```

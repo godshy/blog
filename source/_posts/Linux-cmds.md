@@ -280,7 +280,10 @@ for detailed SETS, need to check with the `tr --help` command
     rg -t "yaml" sample
 
 ```
-
+- Copy/move multiple files using wildcard with advanced find command
+``` bash
+find . -type f -name "file_name*.*" -exec mv '{}' /target_dir/ \;
+```
 ### To list modules that loaded by kernel
 ``` bash
     lsmod
