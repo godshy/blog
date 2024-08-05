@@ -38,4 +38,6 @@ Deploy it
 ``` bash
 $ npx hexo deploy
 ```
+
+If facing error in hexo deploy, delete .deploy_git folder
 ### 
