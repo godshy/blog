@@ -124,6 +124,8 @@ or
 ### Network related commands
 ``` bash
     netstat -t -u -n -p -l # tcp | udp | numeric(do not resolve hostnames) | programs | listening
+    #or 
+    ss -tlpun
 
     Active Internet connections (only servers)
     Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
@@ -134,6 +136,10 @@ or
     udp        0      0 127.0.0.53:domain       0.0.0.0:*                           1860/systemd-resolv
     udp        0      0 localhost:323           0.0.0.0:*                           -
     udp6       0      0 ip6-localhost:323       [::]:*                              -
+```
+
+``` bash
+    sudo lsof -i -P -n | grep LISTEN # -i: listing ports | -P: Inhibits the conversion of port numbers to port names for network files. Inhibiting the conversion may make lsof run a little faster. It is also useful when port name lookup is not working properly. | -n: no dns
 ```
 
 ``` bash
