@@ -555,3 +555,17 @@ kubectl get pods -o=json='{JSON_PATH}'
 
 kubectl get pods -o=jsonpath='{ .items[*].metadata.name}
 ```
+
+## Prometheus related command
+
+- View prometheus rules 
+
+``` bash
+     kubectl get prometheusrules -A 
+```
+
+- View service monitor 
+
+``` bash
+    kubectl get servicemonitor -A # Service monitor is attached to service to enable prometheus retrieve metrics for core kubernetes components 
+```
