@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic K8s-CommandsCluster logs Get cluster nodes logs 1kubectl cluster-info dump --output-directory cluster_info_dump_$(uname -n)  -A  View and modify kubectl configs12kubectl config view# file is loc">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T01:57:16.000Z">
-<meta property="article:modified_time" content="2024-08-05T11:01:30.267Z">
+<meta property="article:modified_time" content="2025-02-13T02:31:17.116Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -351,11 +351,19 @@
 <li>output as json</li>
 <li>check the info and check JSON PATH<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o=json=<span class="string">&#x27;&#123;JSON_PATH&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">kubectl get pods -o=jsonpath=<span class="string">&#x27;&#123; .items[*].metadata.name&#125;</span></span><br></pre></td></tr></table></figure></li>
 </ol>
+<h2 id="Prometheus-related-command"><a href="#Prometheus-related-command" class="headerlink" title="Prometheus related command"></a>Prometheus related command</h2><ul>
+<li>View prometheus rules</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get prometheusrules -A </span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>View service monitor</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get servicemonitor -A <span class="comment"># Service monitor is attached to service to enable prometheus retrieve metrics for core kubernetes components </span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="clzgw7cxp0005wtkh8pnledfe" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cm72q4pkf0005v2kh67cvan9p" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -470,7 +478,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2024 Hongyi Shen<br>
+      &copy; 2025 Hongyi Shen<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
