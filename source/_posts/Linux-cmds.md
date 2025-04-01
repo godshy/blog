@@ -295,6 +295,15 @@ find . -type f -name "file_name*.*" -exec mv '{}' /target_dir/ \;
     lsmod
 ```
 
+### scp command
+
+``` bash
+# Upload: 
+    scp -i <Path_to_key>  /dir/file username@remote:/dir  
+#Download: 
+    scp -i <Path_to_key> username@remote/dir/file /local/dir
+
+```
 ## Shell and bash scripting related
 
 ### terminal and shell

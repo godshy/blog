@@ -569,3 +569,12 @@ kubectl get pods -o=jsonpath='{ .items[*].metadata.name}
 ``` bash
     kubectl get servicemonitor -A # Service monitor is attached to service to enable prometheus retrieve metrics for core kubernetes components 
 ```
+
+## Helm related command
+
+``` bash
+    helm list
+    helm history <release_name>
+    helm upgrade <release_name>
+    helm rollback <release_name> <version_no> # helm rollback nginx-release 1 # create a new version with same config as version 1
+```
