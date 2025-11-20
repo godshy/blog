@@ -190,11 +190,35 @@ grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,
     cat /proc/sys/net/ipv4/ip_forward # 1 for enable
 ```
 
+- check traffic status on inteface
+
+There are several commands to check traffic.
+
+1. One is ``` sar``` command.
+``` bash
+sar -n DEV 1 # 1 means monitor real-time every 1 second
+# if want to check past status
+cd /var/log/sysstat # check for sa files
+sar -n DEV -f /var/log/sysstat/sa10 -s 12:00:00 -e 13:00:00 # check from time to time
+sar -n DEV -f /var/log/sysstat/sa10 # check all traffic. default is every 10 min.
+```
+
+2. 
+``` bash
+ethtool -S <interface_name>
+```
+
+3. 
+``` bash
+ip -s link show <interface_name>
+```
 ### Process related commands 
 - List current process and show in tree form
 ``` bash
     pstree
 ```
+
+
 ### Syscall related commands
 
 - Follow syscall
