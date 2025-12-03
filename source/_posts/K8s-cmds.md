@@ -578,3 +578,17 @@ kubectl get pods -o=jsonpath='{ .items[*].metadata.name}
     helm upgrade <release_name>
     helm rollback <release_name> <version_no> # helm rollback nginx-release 1 # create a new version with same config as version 1
 ```
+
+## List all resources and explain
+``` bash
+    kubectl api-resources
+    kubectl explain <res>
+    kubectl explain <res.subfield>
+    kubectl explain <res> --recursive
+    # e.g. kubectl explain pod.spec
+```
+
+### Some fancy custom listing examples:
+``` bash
+    kubectl get pods -o custom-columns="NAME:.metadata.name,PRIORITY:.spec.priorityClassName"
+```

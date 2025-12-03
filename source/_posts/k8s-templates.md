@@ -550,3 +550,21 @@ then update pvc-definition file with:
 spec:
   storageClassName: <SC_NAME>
 ```
+
+- priority class: for pod and resource that want to gain higher priority. Default value is 0. Higher value means higher priority.
+
+``` yaml
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: high-priority
+value: 1000000000
+description: "Mission critical pods"
+preemptionPolicy: PreemptLowerPriority(default)/never # Whether to premmpt lower priority pod or not
+```
+After created add to pod's spec
+``` yaml
+kind: Pod
+spec:
+  priorityClassName: high-priority
+```
