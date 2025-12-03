@@ -136,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmipdnd62000hzzkh48rd8352" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmipdsnh2000bokkh3oo1hedh" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -281,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmipdnd5z000bzzkhg5kg706i" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmipdsnh3000fokkhaq14fipk" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -364,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmipdnd5q0001zzkh9jnda2y5" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmipdsngy0001okkhgl5tb64y" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -454,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmipdnd5m0000zzkhd9h16fhy" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmipdsngv0000okkhefmt7er9" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -573,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmipdnd61000fzzkham6q9kpj" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmipdsnh3000hokkh57qy43ix" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -634,7 +634,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmipdnd5t0004zzkh51d0eqvh" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmipdsnh00004okkh5hy17e4q" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -937,7 +937,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmipdnd5v0005zzkh5vrresh5" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmipdsnh2000aokkhf4hfcmoy" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1052,6 +1052,10 @@
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -v <span class="string">&quot;rem_address&quot;</span> /proc/net/tcp  | awk  <span class="string">&#x27;&#123;x=strtonum(&quot;0x&quot;substr($3,index($3,&quot;:&quot;)-2,2)); for (i=5; i&gt;0; i-=2) x = x&quot;.&quot;strtonum(&quot;0x&quot;substr($3,i,2))&#125;&#123;print x&quot;:&quot;strtonum(&quot;0x&quot;substr($3,index($3,&quot;:&quot;)+1,4))&#125;&#x27;</span></span><br><span class="line"><span class="comment"># If nestat is not there, we can check connection using this instead.</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>Check interface bond</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/net/bonding/&lt;bondname&gt;</span><br><span class="line"><span class="comment"># remove interface from bond</span></span><br><span class="line">/sbin/ifenslave -d bond0 eth0</span><br><span class="line"><span class="comment"># add interface to bond</span></span><br><span class="line">/sbin/ifenslave bond0 eth0</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>check ip link conditions arps</p>
@@ -1192,7 +1196,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmipdnd5w0006zzkh3ztz78i1" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmipdsnh00005okkh8506g3pj" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1252,7 +1256,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cmipdnd5y000azzkh5lu36c9s" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cmipdsnh10006okkh27u83ygs" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
