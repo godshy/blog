@@ -147,6 +147,15 @@ grep -v "rem_address" /proc/net/tcp  | awk  '{x=strtonum("0x"substr($3,index($3,
 # If nestat is not there, we can check connection using this instead.
 ```
 
+- Check interface bond
+
+``` bash
+    cat /proc/net/bonding/<bondname>
+    # remove interface from bond
+    /sbin/ifenslave -d bond0 eth0
+    # add interface to bond
+    /sbin/ifenslave bond0 eth0
+```
 
 - check ip link conditions arps
 ``` bash
