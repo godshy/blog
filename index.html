@@ -136,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmipdww5z000bd3khdd434lnm" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmipe8jml000fhkkh81j34t9o" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -281,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmipdww60000fd3khawpfgxsu" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmipe8jmm000hhkkhfdrk7bjt" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -364,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmipdww5t0001d3khciul5eau" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmipe8jme0001hkkh424h06fs" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -454,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmipdww5q0000d3kh7n473h27" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmipe8jmb0000hkkh93l0dr0h" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -573,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmipdww60000hd3khh8xb1yje" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmipe8jmk000bhkkhh4r1hmzb" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -634,7 +634,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmipdww5w0004d3khdfhecngs" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmipe8jmg0004hkkh9ksl0r69" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -937,7 +937,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmipdww5x0005d3khfml96bhz" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmipe8jmh0005hkkh8zeu504v" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1078,14 +1078,7 @@
 </li>
 </ul>
 <p>There are several commands to check traffic.</p>
-<ol>
-<li><p>One is <code> sar</code> command.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sar -n DEV 1 <span class="comment"># 1 means monitor real-time every 1 second</span></span><br><span class="line"><span class="comment"># if want to check past status</span></span><br><span class="line"><span class="built_in">cd</span> /var/log/sysstat <span class="comment"># check for sa files</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 -s 12:00:00 -e 13:00:00 <span class="comment"># check from time to time</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 <span class="comment"># check all traffic. default is every 10 min.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -S &lt;interface_name&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip -s <span class="built_in">link</span> show &lt;interface_name&gt;</span><br></pre></td></tr></table></figure></li>
-</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.  sar command.</span></span><br><span class="line"></span><br><span class="line">sar -n DEV 1 <span class="comment"># 1 means monitor real-time every 1 second</span></span><br><span class="line"><span class="comment"># if want to check past status</span></span><br><span class="line"><span class="built_in">cd</span> /var/log/sysstat <span class="comment"># check for sa files</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 -s 12:00:00 -e 13:00:00 <span class="comment"># check from time to time</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 <span class="comment"># check all traffic. default is every 10 min.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. ethtool </span></span><br><span class="line">ethtool -S &lt;interface_name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. ip link show </span></span><br><span class="line">ip -s <span class="built_in">link</span> show &lt;interface_name&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="Process-related-commands"><a href="#Process-related-commands" class="headerlink" title="Process related commands"></a>Process related commands</h3><ul>
 <li>List current process and show in tree form<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -1196,7 +1189,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmipdww5x0006d3khgturgbmq" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmipe8jmi0006hkkhgmrve22x" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1256,7 +1249,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cmipdww5y000ad3khff9aahb5" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cmipe8jmj000ahkkh9sae9lm3" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

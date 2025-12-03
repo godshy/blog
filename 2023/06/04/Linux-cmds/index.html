@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic linux cmdsIndex System check realted commands Input&#x2F;output related commands Shell and bash scripting Security and cert VM management  System check related commandsOften used basic commands">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-04T10:18:25.000Z">
-<meta property="article:modified_time" content="2025-12-03T02:24:05.943Z">
+<meta property="article:modified_time" content="2025-12-03T02:34:09.146Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -203,14 +203,7 @@
 </li>
 </ul>
 <p>There are several commands to check traffic.</p>
-<ol>
-<li><p>One is <code> sar</code> command.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sar -n DEV 1 <span class="comment"># 1 means monitor real-time every 1 second</span></span><br><span class="line"><span class="comment"># if want to check past status</span></span><br><span class="line"><span class="built_in">cd</span> /var/log/sysstat <span class="comment"># check for sa files</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 -s 12:00:00 -e 13:00:00 <span class="comment"># check from time to time</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 <span class="comment"># check all traffic. default is every 10 min.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -S &lt;interface_name&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip -s <span class="built_in">link</span> show &lt;interface_name&gt;</span><br></pre></td></tr></table></figure></li>
-</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.  sar command.</span></span><br><span class="line"></span><br><span class="line">sar -n DEV 1 <span class="comment"># 1 means monitor real-time every 1 second</span></span><br><span class="line"><span class="comment"># if want to check past status</span></span><br><span class="line"><span class="built_in">cd</span> /var/log/sysstat <span class="comment"># check for sa files</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 -s 12:00:00 -e 13:00:00 <span class="comment"># check from time to time</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 <span class="comment"># check all traffic. default is every 10 min.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. ethtool </span></span><br><span class="line">ethtool -S &lt;interface_name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. ip link show </span></span><br><span class="line">ip -s <span class="built_in">link</span> show &lt;interface_name&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="Process-related-commands"><a href="#Process-related-commands" class="headerlink" title="Process related commands"></a>Process related commands</h3><ul>
 <li>List current process and show in tree form<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -321,7 +314,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmipdww5x0006d3khgturgbmq" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmipe8jmi0006hkkhgmrve22x" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
