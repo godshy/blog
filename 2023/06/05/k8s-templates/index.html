@@ -14,7 +14,7 @@
 <meta property="og:description" content="Config templates for K8sYAML description file for pods12345678910111213141516171819202122232425apiVersion: v1kind: Podmetadata:  name: nginx  labels:     app: nginxspec:  containers:  - name: nginx">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T09:07:29.000Z">
-<meta property="article:modified_time" content="2024-08-05T11:01:30.267Z">
+<meta property="article:modified_time" content="2025-12-03T08:25:06.780Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -175,13 +175,18 @@
 <li><p>storage class: allowed for automatically provision volume</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">storage.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StorageClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">standard</span></span><br><span class="line"><span class="attr">provisioner:</span> <span class="string">kubernetes.io/example</span></span><br><span class="line"><span class="attr">parameters:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">pd-standard</span></span><br><span class="line"><span class="attr">volumeBindingMode:</span> <span class="string">WaitForFirstConsumer</span></span><br><span class="line"><span class="attr">allowedTopologies:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">matchLabelExpressions:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">topology.kubernetes.io/zone</span></span><br><span class="line">    <span class="attr">values:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">us-central-1a</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">us-central-1b</span></span><br></pre></td></tr></table></figure>
 <p>then update pvc-definition file with:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">&lt;SC_NAME&gt;</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">&lt;SC_NAME&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>priority class: for pod and resource that want to gain higher priority. Default value is 0. Higher value means higher priority.</p>
+</li>
 </ul>
-
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">scheduling.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PriorityClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">high-priority</span></span><br><span class="line"><span class="attr">value:</span> <span class="number">1000000000</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&quot;Mission critical pods&quot;</span></span><br><span class="line"><span class="attr">preemptionPolicy:</span> <span class="string">PreemptLowerPriority(default)/never</span> <span class="comment"># Whether to premmpt lower priority pod or not</span></span><br></pre></td></tr></table></figure>
+<p>After created add to pod’s spec</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">high-priority</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmipe8jmk000bhkkhh4r1hmzb" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmipsizsq000bp9kh6i07hg5i" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

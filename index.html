@@ -136,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmipe8jml000fhkkh81j34t9o" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmipsizta000wp9kh10vv59k0" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -281,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmipe8jmm000hhkkhfdrk7bjt" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmipsizsu000fp9kh35cceul5" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -364,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmipe8jme0001hkkh424h06fs" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmipsizsp000ap9kh3soo6wg6" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -454,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmipe8jmb0000hkkh93l0dr0h" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmipsizs60000p9kh5jzl1s6x" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -567,13 +567,18 @@
 <li><p>storage class: allowed for automatically provision volume</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">storage.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StorageClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">standard</span></span><br><span class="line"><span class="attr">provisioner:</span> <span class="string">kubernetes.io/example</span></span><br><span class="line"><span class="attr">parameters:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">pd-standard</span></span><br><span class="line"><span class="attr">volumeBindingMode:</span> <span class="string">WaitForFirstConsumer</span></span><br><span class="line"><span class="attr">allowedTopologies:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">matchLabelExpressions:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">topology.kubernetes.io/zone</span></span><br><span class="line">    <span class="attr">values:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">us-central-1a</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">us-central-1b</span></span><br></pre></td></tr></table></figure>
 <p>then update pvc-definition file with:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">&lt;SC_NAME&gt;</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">&lt;SC_NAME&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>priority class: for pod and resource that want to gain higher priority. Default value is 0. Higher value means higher priority.</p>
+</li>
 </ul>
-
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">scheduling.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PriorityClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">high-priority</span></span><br><span class="line"><span class="attr">value:</span> <span class="number">1000000000</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&quot;Mission critical pods&quot;</span></span><br><span class="line"><span class="attr">preemptionPolicy:</span> <span class="string">PreemptLowerPriority(default)/never</span> <span class="comment"># Whether to premmpt lower priority pod or not</span></span><br></pre></td></tr></table></figure>
+<p>After created add to pod’s spec</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">high-priority</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmipe8jmk000bhkkhh4r1hmzb" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmipsizsq000bp9kh6i07hg5i" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -634,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmipe8jmg0004hkkh9ksl0r69" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmipsizsd0001p9khd88tc3fu" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -934,10 +939,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get servicemonitor -A <span class="comment"># Service monitor is attached to service to enable prometheus retrieve metrics for core kubernetes components </span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Helm-related-command"><a href="#Helm-related-command" class="headerlink" title="Helm related command"></a>Helm related command</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">helm list</span><br><span class="line">helm <span class="built_in">history</span> &lt;release_name&gt;</span><br><span class="line">helm upgrade &lt;release_name&gt;</span><br><span class="line">helm rollback &lt;release_name&gt; &lt;version_no&gt; <span class="comment"># helm rollback nginx-release 1 # create a new version with same config as version 1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="List-all-resources-and-explain"><a href="#List-all-resources-and-explain" class="headerlink" title="List all resources and explain"></a>List all resources and explain</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl api-resources</span><br><span class="line">kubectl explain &lt;res&gt;</span><br><span class="line">kubectl explain &lt;res.subfield&gt;</span><br><span class="line">kubectl explain &lt;res&gt; --recursive</span><br><span class="line"><span class="comment"># e.g. kubectl explain pod.spec</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Some-fancy-custom-listing-examples"><a href="#Some-fancy-custom-listing-examples" class="headerlink" title="Some fancy custom listing examples:"></a>Some fancy custom listing examples:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o custom-columns=<span class="string">&quot;NAME:.metadata.name,PRIORITY:.spec.priorityClassName&quot;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmipe8jmh0005hkkh8zeu504v" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmipsizsi0004p9kh887q6e75" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1185,11 +1194,12 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">virsh net-list <span class="comment"># show network name</span></span><br><span class="line">virsh net-info &lt;net_name&gt; <span class="comment"># default named default</span></span><br><span class="line">virsh net-dhcp-leases &lt;net_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
+<h3 id="Docker-or-container-related-command"><a href="#Docker-or-container-related-command" class="headerlink" title="Docker or container related command"></a>Docker or container related command</h3><h2 id="Open-Container-Initiative-imagespec-runtimespec"><a href="#Open-Container-Initiative-imagespec-runtimespec" class="headerlink" title="Open Container Initiative- imagespec- runtimespec"></a>Open Container Initiative<br>- imagespec<br>- runtimespec</h2><p>Support for docker on kubernetes is terminated, containerd is used instead</p>
+<figure class="highlight plaintext"><figcaption><span>is similar to docker, you can use all command just replace ```docker``` to ```nerdctl``` or</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">``` bash</span><br><span class="line">    crictl pods</span><br><span class="line">    crictl logs </span><br><span class="line">    crictl exec -it &lt;id&gt; ls</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmipe8jmi0006hkkhgmrve22x" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmipsizsm0006p9khh9rw8amq" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1249,7 +1259,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cmipe8jmj000ahkkh9sae9lm3" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cmipsizsk0005p9khhzc3hya7" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
