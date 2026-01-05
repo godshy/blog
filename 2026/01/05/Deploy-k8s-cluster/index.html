@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Deploy kubernetes cluster on virtual machine | Hongyi&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Set up VMs [!NOTE]One Network Adapter for internet, the other is for  connection between Nodes   After VMs are on and running, make sure two VM can ping each other,  edit etc&#x2F;hosts to let them re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deploy kubernetes cluster on virtual machine">
+<meta property="og:url" content="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/index.html">
+<meta property="og:site_name" content="Hongyi&#39;s blog">
+<meta property="og:description" content="Set up VMs [!NOTE]One Network Adapter for internet, the other is for  connection between Nodes   After VMs are on and running, make sure two VM can ping each other,  edit etc&#x2F;hosts to let them re">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2026/01/05/ZuVatjDWwBnSUbT.png">
+<meta property="og:image" content="https://s2.loli.net/2026/01/05/2JkmfQElny6X5z1.png">
+<meta property="article:published_time" content="2026-01-05T12:44:58.000Z">
+<meta property="article:modified_time" content="2026-01-05T12:54:47.425Z">
+<meta property="article:author" content="Hongyi Shen">
+<meta property="article:tag" content="K8s">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2026/01/05/ZuVatjDWwBnSUbT.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Hongyi's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Hongyi&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/blog/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://godshy.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Deploy-k8s-cluster" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2026/01/05/Deploy-k8s-cluster/" class="article-date">
+  <time class="dt-published" datetime="2026-01-05T12:44:58.000Z" itemprop="datePublished">2026-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Deploy kubernetes cluster on virtual machine
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Set-up-VMs"><a href="#Set-up-VMs" class="headerlink" title="Set up VMs"></a>Set up VMs</h2><blockquote>
+<p>[!NOTE]<br>One Network Adapter for internet, the other is for  connection between Nodes</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2026/01/05/ZuVatjDWwBnSUbT.png" alt="VM spec"></p>
+<p>After VMs are on and running, make sure two VM can ping each other,  edit etc&#x2F;hosts to let them resolve each other’s hostname:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># On master</span></span><br><span class="line">vim /etc/hosts</span><br><span class="line">192.168.168.129 worker</span><br><span class="line"></span><br><span class="line"><span class="comment"># On worker </span></span><br><span class="line">vim /etc/hosts</span><br><span class="line">192.168.168.128 master</span><br><span class="line"></span><br><span class="line"><span class="comment"># then ping using hostname:</span></span><br><span class="line">master:$ ping worker <span class="comment"># should be ok</span></span><br><span class="line">worker:$ ping master <span class="comment"># should be ok</span></span><br></pre></td></tr></table></figure>
+
+<p>then execute following commands:</p>
+<p>On Master and Worker:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade -y</span><br><span class="line"><span class="comment"># check your hostname:</span></span><br><span class="line"><span class="built_in">uname</span> -n</span><br><span class="line"></span><br><span class="line"><span class="comment"># disable swapoff for better performance and best practice:</span></span><br><span class="line">sudo swapoff -a</span><br><span class="line">sudo sed -i <span class="string">&#x27;/ swap / s/^\(.*\)$/#\1/g&#x27;</span> /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add settings to containerd.conf  </span></span><br><span class="line"><span class="comment"># overlay (for using overlayfs),  </span></span><br><span class="line"><span class="comment"># br_netfilter (for ipvlan, macvlan, external SNAT of service IPs)  </span></span><br><span class="line">sudo <span class="built_in">tee</span> /etc/modules-load.d/containerd.conf &lt;&lt;<span class="string">EOF  </span></span><br><span class="line"><span class="string">overlay  </span></span><br><span class="line"><span class="string">br_netfilter  </span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># Add settings to kubernetes.conf  </span></span><br><span class="line"><span class="comment"># Allow IPv4, IPv6 and IP forwarding  </span></span><br><span class="line">sudo <span class="built_in">tee</span> /etc/sysctl.d/kubernetes.conf &lt;&lt;<span class="string">EOF  </span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1  </span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1  </span></span><br><span class="line"><span class="string">net.ipv4.ip_forward = 1  </span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	<span class="comment"># Reload updated config  </span></span><br><span class="line">	sudo sysctl --system  </span><br><span class="line">	  </span><br><span class="line">	<span class="comment"># Install required tools and CA certificates  </span></span><br><span class="line">	sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates  </span><br><span class="line">	  </span><br><span class="line">	<span class="comment"># Add Docker repository  </span></span><br><span class="line">	sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg  </span><br><span class="line">	sudo add-apt-repository <span class="string">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu <span class="subst">$(lsb_release -cs)</span> stable&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment"># Then, install containerd  </span></span><br><span class="line">	sudo apt update  </span><br><span class="line">	sudo apt install -y containerd.io  </span><br><span class="line">	containerd config default | sudo <span class="built_in">tee</span> /etc/containerd/config.toml &gt;/dev/null 2&gt;&amp;1  </span><br><span class="line">	sudo sed -i <span class="string">&#x27;s/SystemdCgroup \= false/SystemdCgroup \= true/g&#x27;</span> /etc/containerd/config.toml  </span><br><span class="line">	sudo systemctl restart containerd  </span><br><span class="line">	sudo systemctl <span class="built_in">enable</span> containerd</span><br><span class="line"></span><br><span class="line">	<span class="comment"># Add k8s repository</span></span><br><span class="line">	<span class="comment"># Please modify v1.32 to latest from https://kubernetes.io/releases/</span></span><br><span class="line">	sudo <span class="built_in">mkdir</span> -p /etc/apt/keyrings</span><br><span class="line">	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/kubernetes.list</span><br><span class="line"></span><br><span class="line"><span class="comment"># Then, install Kubernetes components  </span></span><br><span class="line">	sudo apt update  </span><br><span class="line">	sudo apt install -y kubelet kubeadm kubectl</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add port granted for etcd:</span></span><br><span class="line">	sudo iptables -A INPUT -p tcp --dport 6443 -j ACCEPT</span><br><span class="line"><span class="comment"># k8s cluster nodes  </span></span><br><span class="line">	sudo apt-get install docker-ce</span><br><span class="line"></span><br><span class="line">	sudo reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="Set-up-master-and-worker-and-CNI-plugin"><a href="#Set-up-master-and-worker-and-CNI-plugin" class="headerlink" title="Set up master and worker and CNI plugin"></a>Set up master and worker and CNI plugin</h3><h4 id="On-Master"><a href="#On-Master" class="headerlink" title="On Master"></a>On Master</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">	sudo kubeadm config images pull</span><br><span class="line">	sudo kubeadm init --pod-network-cidr=192.168.0.0/16</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">I0602 21:23:23.755053    2030 version.go:261] remote version is much newer: v1.33.1; falling back to: stable-1.32</span><br><span class="line">[config/images] Pulled registry.k8s.io/kube-apiserver:v1.32.5</span><br><span class="line">[config/images] Pulled registry.k8s.io/kube-controller-manager:v1.32.5</span><br><span class="line">[config/images] Pulled registry.k8s.io/kube-scheduler:v1.32.5</span><br><span class="line">[config/images] Pulled registry.k8s.io/kube-proxy:v1.32.5</span><br><span class="line">[config/images] Pulled registry.k8s.io/coredns/coredns:v1.11.3</span><br><span class="line">[config/images] Pulled registry.k8s.io/pause:3.10</span><br><span class="line">[config/images] Pulled registry.k8s.io/etcd:3.5.16-0</span><br><span class="line">shy@shymaster:~$ sudo kubeadm init</span><br><span class="line">I0602 21:24:42.138404    2276 version.go:261] remote version is much newer: v1.33.1; falling back to: stable-1.32</span><br><span class="line">[init] Using Kubernetes version: v1.32.5</span><br><span class="line">[preflight] Running pre-flight checks</span><br><span class="line">[preflight] Pulling images required <span class="keyword">for</span> setting up a Kubernetes cluster</span><br><span class="line">[preflight] This might take a minute or two, depending on the speed of your internet connection</span><br><span class="line">[preflight] You can also perform this action beforehand using <span class="string">&#x27;kubeadm config images pull&#x27;</span></span><br><span class="line">W0602 21:24:42.808265    2276 checks.go:846] detected that the sandbox image <span class="string">&quot;registry.k8s.io/pause:3.8&quot;</span> of the container runtime is inconsistent with that used by kubeadm.It is recommended to use <span class="string">&quot;registry.k8s.io/pause:3.10&quot;</span> as the CRI sandbox image.</span><br><span class="line">[certs] Using certificateDir folder <span class="string">&quot;/etc/kubernetes/pki&quot;</span></span><br><span class="line">[certs] Generating <span class="string">&quot;ca&quot;</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">&quot;apiserver&quot;</span> certificate and key</span><br><span class="line">[certs] apiserver serving cert is signed <span class="keyword">for</span> DNS names [kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local shymaster] and IPs [10.96.0.1 11.0.1.130]</span><br><span class="line">[certs] Generating <span class="string">&quot;apiserver-kubelet-client&quot;</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">&quot;front-proxy-ca&quot;</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">&quot;front-proxy-client&quot;</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">&quot;etcd/ca&quot;</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">&quot;etcd/server&quot;</span> certificate and key</span><br><span class="line">[certs] etcd/server serving cert is signed <span class="keyword">for</span> DNS names [localhost shymaster] and IPs [11.0.1.130 127.0.0.1 ::1]</span><br><span class="line">[certs] Generating <span class="string">&quot;etcd/peer&quot;</span> certificate and key</span><br><span class="line">[certs] etcd/peer serving cert is signed <span class="keyword">for</span> DNS names [localhost shymaster] and IPs [11.0.1.130 127.0.0.1 ::1]</span><br><span class="line">[certs] Generating <span class="string">&quot;etcd/healthcheck-client&quot;</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">&quot;apiserver-etcd-client&quot;</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">&quot;sa&quot;</span> key and public key</span><br><span class="line">[kubeconfig] Using kubeconfig folder <span class="string">&quot;/etc/kubernetes&quot;</span></span><br><span class="line">[kubeconfig] Writing <span class="string">&quot;admin.conf&quot;</span> kubeconfig file</span><br><span class="line">[kubeconfig] Writing <span class="string">&quot;super-admin.conf&quot;</span> kubeconfig file</span><br><span class="line">[kubeconfig] Writing <span class="string">&quot;kubelet.conf&quot;</span> kubeconfig file</span><br><span class="line">[kubeconfig] Writing <span class="string">&quot;controller-manager.conf&quot;</span> kubeconfig file</span><br><span class="line">[kubeconfig] Writing <span class="string">&quot;scheduler.conf&quot;</span> kubeconfig file</span><br><span class="line">[etcd] Creating static Pod manifest <span class="keyword">for</span> <span class="built_in">local</span> etcd <span class="keyword">in</span> <span class="string">&quot;/etc/kubernetes/manifests&quot;</span></span><br><span class="line">[control-plane] Using manifest folder <span class="string">&quot;/etc/kubernetes/manifests&quot;</span></span><br><span class="line">[control-plane] Creating static Pod manifest <span class="keyword">for</span> <span class="string">&quot;kube-apiserver&quot;</span></span><br><span class="line">[control-plane] Creating static Pod manifest <span class="keyword">for</span> <span class="string">&quot;kube-controller-manager&quot;</span></span><br><span class="line">[control-plane] Creating static Pod manifest <span class="keyword">for</span> <span class="string">&quot;kube-scheduler&quot;</span></span><br><span class="line">[kubelet-start] Writing kubelet environment file with flags to file <span class="string">&quot;/var/lib/kubelet/kubeadm-flags.env&quot;</span></span><br><span class="line">[kubelet-start] Writing kubelet configuration to file <span class="string">&quot;/var/lib/kubelet/config.yaml&quot;</span></span><br><span class="line">[kubelet-start] Starting the kubelet</span><br><span class="line">[wait-control-plane] Waiting <span class="keyword">for</span> the kubelet to boot up the control plane as static Pods from directory <span class="string">&quot;/etc/kubernetes/manifests&quot;</span></span><br><span class="line">[kubelet-check] Waiting <span class="keyword">for</span> a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s</span><br><span class="line">[kubelet-check] The kubelet is healthy after 502.872747ms</span><br><span class="line">[api-check] Waiting <span class="keyword">for</span> a healthy API server. This can take up to 4m0s</span><br><span class="line">[api-check] The API server is healthy after 7.00102198s</span><br><span class="line">[upload-config] Storing the configuration used <span class="keyword">in</span> ConfigMap <span class="string">&quot;kubeadm-config&quot;</span> <span class="keyword">in</span> the <span class="string">&quot;kube-system&quot;</span> Namespace</span><br><span class="line">[kubelet] Creating a ConfigMap <span class="string">&quot;kubelet-config&quot;</span> <span class="keyword">in</span> namespace kube-system with the configuration <span class="keyword">for</span> the kubelets <span class="keyword">in</span> the cluster</span><br><span class="line">[upload-certs] Skipping phase. Please see --upload-certs</span><br><span class="line">[mark-control-plane] Marking the node shymaster as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]</span><br><span class="line">[mark-control-plane] Marking the node shymaster as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]</span><br><span class="line">[bootstrap-token] Using token: qbqna4.vcib69rginbjmgi3</span><br><span class="line">[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles</span><br><span class="line">[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes</span><br><span class="line">[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs <span class="keyword">in</span> order <span class="keyword">for</span> nodes to get long term certificate credentials</span><br><span class="line">[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token</span><br><span class="line">[bootstrap-token] Configured RBAC rules to allow certificate rotation <span class="keyword">for</span> all node client certificates <span class="keyword">in</span> the cluster</span><br><span class="line">[bootstrap-token] Creating the <span class="string">&quot;cluster-info&quot;</span> ConfigMap <span class="keyword">in</span> the <span class="string">&quot;kube-public&quot;</span> namespace</span><br><span class="line">[kubelet-finalize] Updating <span class="string">&quot;/etc/kubernetes/kubelet.conf&quot;</span> to point to a rotatable kubelet client certificate and key</span><br><span class="line">[addons] Applied essential addon: CoreDNS</span><br><span class="line">[addons] Applied essential addon: kube-proxy</span><br><span class="line"></span><br><span class="line">Your Kubernetes control-plane has initialized successfully!</span><br><span class="line"></span><br><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">mkdir</span> -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">  sudo <span class="built_in">cp</span> -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">  sudo <span class="built_in">chown</span> $(<span class="built_in">id</span> -u):$(<span class="built_in">id</span> -g) <span class="variable">$HOME</span>/.kube/config</span><br><span class="line"></span><br><span class="line">Alternatively, <span class="keyword">if</span> you are the root user, you can run:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">export</span> KUBECONFIG=/etc/kubernetes/admin.conf</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run <span class="string">&quot;kubectl apply -f [podnetwork].yaml&quot;</span> with one of the options listed at:</span><br><span class="line">  https://kubernetes.io/docs/concepts/cluster-administration/addons/</span><br><span class="line"></span><br><span class="line">Then you can <span class="built_in">join</span> any number of worker nodes by running the following on each as root:</span><br><span class="line"></span><br><span class="line">kubeadm <span class="built_in">join</span> ....</span><br><span class="line"></span><br><span class="line"><span class="comment"># Follow the instructions:</span></span><br><span class="line">  <span class="built_in">mkdir</span> -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">  sudo <span class="built_in">cp</span> -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">  sudo <span class="built_in">chown</span> $(<span class="built_in">id</span> -u):$(<span class="built_in">id</span> -g) <span class="variable">$HOME</span>/.kube/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install cni </span></span><br><span class="line"><span class="comment"># Find latest version on https://github.com/projectcalico/calico/releases</span></span><br><span class="line">	kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.1/manifests/calico.yaml</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="On-worker"><a href="#On-worker" class="headerlink" title="On worker"></a>On worker</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># just copy and paste kubeadm join .... command from kube init output on master node, it will automatically join the master node</span></span><br><span class="line">	kubeadm <span class="built_in">join</span> ....</span><br></pre></td></tr></table></figure>
+
+<h3 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting:"></a>Troubleshooting:</h3><ul>
+<li>Your node will not be ready unless you successfully installed CNI plugin, because your pod cannot communicate outside node. To check issue, run following command:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">journalctl -u kubelet</span><br><span class="line">journalctl -u containerd</span><br></pre></td></tr></table></figure>
+
+<p>Example of the finish state:<br><img src="https://s2.loli.net/2026/01/05/2JkmfQElny6X5z1.png" alt="Final result"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/" data-id="cmk15xsxa0004qhural7bestm" data-title="Deploy kubernetes cluster on virtual machine" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PKI and encryption explained step by step</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/commands/">commands</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/security/">security</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/troubleshooting/">troubleshooting</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Cloud-native/" rel="tag">Cloud native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PKI-encryption-TLS/" rel="tag">PKI, encryption, TLS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s-helm/" rel="tag">k8s, helm</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/blog/tags/PKI-encryption-TLS/" style="font-size: 10px;">PKI, encryption, TLS</a> <a href="/blog/tags/k8s-helm/" style="font-size: 10px;">k8s, helm</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2026/01/">January 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/07/">July 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/06/">June 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2026/01/05/Deploy-k8s-cluster/">Deploy kubernetes cluster on virtual machine</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/">PKI and encryption explained step by step</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2024/02/21/linux-FS-and-pkg/">linux FS and pkg</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/">Deploy free5GC with k8s and helm</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/">Cloud native and its implementation in Telco</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 Hongyi Shen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/blog/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
