@@ -14,7 +14,7 @@
 <meta property="og:description" content="Install 5GC on kubernetes clusterBackground2 years ago, I tried to deploy 5gc on a minikube vm, and installed free5gc. However, free5gc is no longer supported and there are problems related to calico">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-05T13:23:51.000Z">
-<meta property="article:modified_time" content="2026-01-05T15:15:20.406Z">
+<meta property="article:modified_time" content="2026-01-06T14:43:14.632Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="k8s, helm">
 <meta name="twitter:card" content="summary">
@@ -104,7 +104,7 @@
       
         <h1 id="Install-5GC-on-kubernetes-cluster"><a href="#Install-5GC-on-kubernetes-cluster" class="headerlink" title="Install 5GC on kubernetes cluster"></a>Install 5GC on kubernetes cluster</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>2 years ago, I tried to deploy 5gc on a minikube vm, and installed free5gc. However, free5gc is no longer supported and there are problems related to calico cannot be resolved. This time I select another repository and installed on a real kubernetes cluster.</p>
 <h2 id="Cluster-installation-and-preparation"><a href="#Cluster-installation-and-preparation" class="headerlink" title="Cluster installation and preparation"></a>Cluster installation and preparation</h2><p>For kubernetes cluster installation, check my other post <strong>Deploy kubernetes cluster on virtual machine</strong>. </p>
-<h3 id="CNI-plugin"><a href="#CNI-plugin" class="headerlink" title="CNI plugin"></a>CNI plugin</h3><p>When installing network plugin, a calico plugin is installed, it enables pod-pod network, node-node connectivety. However, when deploying 5gs, multiple ports on pod are needed. For example, when adding UPF, an interface for user-plane and an interface for control-plane are both required. Here I installed multus-CNI.</p>
+<h3 id="CNI-plugin"><a href="#CNI-plugin" class="headerlink" title="CNI plugin"></a>CNI plugin</h3><p>When installing network plugin, a calico plugin is installed, it enables pod-pod network, node-node connectivety. However, when deploying 5gs, multiple ports on pod are needed. For example, when adding UPF, an interface for user-plane and an interface for control-plane are both required. Here I installed multus-CNI to accomplish such requirement.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml</span><br></pre></td></tr></table></figure>
 <p>Check multus daemonset is installed on each node:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    kubectl get daemonset -n kube-system</span><br><span class="line">NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE</span><br><span class="line">kube-multus-ds   2         2         2       2            2           &lt;none&gt;                   18d</span><br></pre></td></tr></table></figure>
@@ -138,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/05/deploy-5gc-on-kubernetes/" data-id="cmk1aym6m000hzxur6lzh9gdf" data-title="Deploy-5gc-on-kubernetes" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/05/deploy-5gc-on-kubernetes/" data-id="cmk2pgzzq000h69urem7f95u1" data-title="Deploy-5gc-on-kubernetes" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

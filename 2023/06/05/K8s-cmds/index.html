@@ -14,7 +14,7 @@
 <meta property="og:description" content="Basic K8s-CommandsCluster logs Get cluster nodes logs 1kubectl cluster-info dump --output-directory cluster_info_dump_$(uname -n)  -A  View and modify kubectl configs12kubectl config view# file is loc">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-05T01:57:16.000Z">
-<meta property="article:modified_time" content="2026-01-05T12:41:19.489Z">
+<meta property="article:modified_time" content="2026-01-06T14:43:14.632Z">
 <meta property="article:author" content="Hongyi Shen">
 <meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
@@ -236,7 +236,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f deploy_des_file.yml</span><br><span class="line">kubectl get deployments</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>edit deployment</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit deployement &lt;name&gt;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit deployement &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>Note that only the following is editable when pod is running.</strong></p>
+<p>  spec.containers[*].image</p>
+<p>  spec.initContainers[*].image</p>
+<p>  spec.activeDeadlineSeconds</p>
+<p>  spec.tolerations</p>
+<p>  spec.terminationGracePeriodSeconds</p>
+</li>
 </ul>
 <h3 id="Generate-deployment-yaml-file-without-creating-it"><a href="#Generate-deployment-yaml-file-without-creating-it" class="headerlink" title="Generate deployment yaml file without creating it"></a>Generate deployment yaml file without creating it</h3><ul>
 <li><p>POD manifest</p>
@@ -369,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmk1aym6j0006zxur0xw25lah" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmk2pgzzn000669ur7dt53aj6" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

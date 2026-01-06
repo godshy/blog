@@ -101,7 +101,7 @@
       
         <h1 id="Install-5GC-on-kubernetes-cluster"><a href="#Install-5GC-on-kubernetes-cluster" class="headerlink" title="Install 5GC on kubernetes cluster"></a>Install 5GC on kubernetes cluster</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>2 years ago, I tried to deploy 5gc on a minikube vm, and installed free5gc. However, free5gc is no longer supported and there are problems related to calico cannot be resolved. This time I select another repository and installed on a real kubernetes cluster.</p>
 <h2 id="Cluster-installation-and-preparation"><a href="#Cluster-installation-and-preparation" class="headerlink" title="Cluster installation and preparation"></a>Cluster installation and preparation</h2><p>For kubernetes cluster installation, check my other post <strong>Deploy kubernetes cluster on virtual machine</strong>. </p>
-<h3 id="CNI-plugin"><a href="#CNI-plugin" class="headerlink" title="CNI plugin"></a>CNI plugin</h3><p>When installing network plugin, a calico plugin is installed, it enables pod-pod network, node-node connectivety. However, when deploying 5gs, multiple ports on pod are needed. For example, when adding UPF, an interface for user-plane and an interface for control-plane are both required. Here I installed multus-CNI.</p>
+<h3 id="CNI-plugin"><a href="#CNI-plugin" class="headerlink" title="CNI plugin"></a>CNI plugin</h3><p>When installing network plugin, a calico plugin is installed, it enables pod-pod network, node-node connectivety. However, when deploying 5gs, multiple ports on pod are needed. For example, when adding UPF, an interface for user-plane and an interface for control-plane are both required. Here I installed multus-CNI to accomplish such requirement.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml</span><br></pre></td></tr></table></figure>
 <p>Check multus daemonset is installed on each node:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    kubectl get daemonset -n kube-system</span><br><span class="line">NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE</span><br><span class="line">kube-multus-ds   2         2         2       2            2           &lt;none&gt;                   18d</span><br></pre></td></tr></table></figure>
@@ -135,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/05/deploy-5gc-on-kubernetes/" data-id="cmk1aym6m000hzxur6lzh9gdf" data-title="Deploy-5gc-on-kubernetes" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/05/deploy-5gc-on-kubernetes/" data-id="cmk2pgzzq000h69urem7f95u1" data-title="Deploy-5gc-on-kubernetes" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -201,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/" data-id="cmk1aym6h0004zxurffgh267d" data-title="Deploy kubernetes cluster on virtual machine" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/" data-id="cmk2pgzzl000469ur9fczgvft" data-title="Deploy kubernetes cluster on virtual machine" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -278,7 +278,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmk1aym6l000fzxurhi320htx" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmk2pgzzp000f69urdqbn7ptc" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -423,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmk1aym6q0013zxur6xwe7slo" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmk2pgzzx001369urdu0l1ss9" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -506,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmk1aym6f0001zxurbzcx5ox7" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmk2pgzzj000169ur07fgh36o" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -596,7 +596,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmk1aym6c0000zxur1iuo63dh" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmk2pgzzf000069ur38w26ret" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -717,10 +717,18 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">scheduling.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PriorityClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">high-priority</span></span><br><span class="line"><span class="attr">value:</span> <span class="number">1000000000</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&quot;Mission critical pods&quot;</span></span><br><span class="line"><span class="attr">preemptionPolicy:</span> <span class="string">PreemptLowerPriority(default)/never</span> <span class="comment"># Whether to premmpt lower priority pod or not</span></span><br></pre></td></tr></table></figure>
 <p>After created add to pod’s spec</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">high-priority</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Cronjob-definition-files"><a href="#Cronjob-definition-files" class="headerlink" title="Cronjob definition files:"></a>Cronjob definition files:</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">batch/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">CronJob</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">ppi</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">schedule:</span> <span class="string">&quot;*/5 * * * *&quot;</span></span><br><span class="line">  <span class="attr">successfulJobsHistoryLimit:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">failedJobsHistoryLimit:</span> <span class="number">4</span></span><br><span class="line">  <span class="attr">jobTemplate:</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">	  <span class="attr">activeDeadlineSeconds:</span> <span class="number">8</span></span><br><span class="line">      <span class="attr">template:</span></span><br><span class="line">        <span class="attr">spec:</span></span><br><span class="line">          <span class="attr">containers:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">pi</span></span><br><span class="line">            <span class="attr">image:</span> <span class="string">perl:5</span></span><br><span class="line">            <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">            <span class="attr">command:</span> [<span class="string">&quot;perl&quot;</span>, <span class="string">&quot;-Mbignum=bpi&quot;</span>, <span class="string">&quot;-wle&quot;</span>, <span class="string">&quot;print bpi(2000)&quot;</span>]</span><br><span class="line">          <span class="attr">restartPolicy:</span> <span class="string">Never</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>spec.successfulJobsHistoryLimit</code> and  <code>spec.failedJobsHistoryLimit</code>: defines how many job history remains after failure&#x2F;success. Default successful&#x2F;failed is 3&#x2F;1. </li>
+<li><code>jobTemplate.spec.activeDeadlineSeconds</code>: this means after how long will the job get terminated no matter  <code>jobTemplate.spec.backoffLimit</code> is reached or not</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmk1aym6n000lzxur3pis36tv" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmk2pgzzr000l69ur7t3s0enq" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -781,7 +789,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmk1aym6i0005zxurf67hap19" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmk2pgzzm000569ur169bdte7" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -955,7 +963,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f deploy_des_file.yml</span><br><span class="line">kubectl get deployments</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>edit deployment</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit deployement &lt;name&gt;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit deployement &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>Note that only the following is editable when pod is running.</strong></p>
+<p>  spec.containers[*].image</p>
+<p>  spec.initContainers[*].image</p>
+<p>  spec.activeDeadlineSeconds</p>
+<p>  spec.tolerations</p>
+<p>  spec.terminationGracePeriodSeconds</p>
+</li>
 </ul>
 <h3 id="Generate-deployment-yaml-file-without-creating-it"><a href="#Generate-deployment-yaml-file-without-creating-it" class="headerlink" title="Generate deployment yaml file without creating it"></a>Generate deployment yaml file without creating it</h3><ul>
 <li><p>POD manifest</p>
@@ -1088,7 +1103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmk1aym6j0006zxur0xw25lah" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmk2pgzzn000669ur7dt53aj6" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1341,7 +1356,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmk1aym6k000azxurckx1emjr" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmk2pgzzo000a69urdwveequ0" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
