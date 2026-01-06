@@ -14,7 +14,7 @@ category: DIY and lab
 For kubernetes cluster installation, check my other post __Deploy kubernetes cluster on virtual machine__. 
 
 ### CNI plugin
-When installing network plugin, a calico plugin is installed, it enables pod-pod network, node-node connectivety. However, when deploying 5gs, multiple ports on pod are needed. For example, when adding UPF, an interface for user-plane and an interface for control-plane are both required. Here I installed multus-CNI.
+When installing network plugin, a calico plugin is installed, it enables pod-pod network, node-node connectivety. However, when deploying 5gs, multiple ports on pod are needed. For example, when adding UPF, an interface for user-plane and an interface for control-plane are both required. Here I installed multus-CNI to accomplish such requirement.
 
 ``` bash
     kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml

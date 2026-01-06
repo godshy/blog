@@ -294,6 +294,17 @@ Configuration file of kubelet is located at
 ``` bash
     kubectl edit deployement <name>
 ```
+__Note that only the following is editable when pod is running.__
+    
+    spec.containers[*].image
+
+    spec.initContainers[*].image
+
+    spec.activeDeadlineSeconds
+
+    spec.tolerations
+
+    spec.terminationGracePeriodSeconds 
 
 ### Generate deployment yaml file without creating it
 
