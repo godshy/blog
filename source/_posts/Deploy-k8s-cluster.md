@@ -5,13 +5,14 @@ tags: K8s
 ---
 ## Set up VMs
 
-> [!NOTE]
-> One Network Adapter for internet, the other is for  connection between Nodes
+```One Network Adapter for internet, the other is for  connection between Nodes```
 
 
 ![VM spec](https://s2.loli.net/2026/01/05/ZuVatjDWwBnSUbT.png)
 
-After VMs are on and running, make sure two VM can ping each other,  edit etc/hosts to let them resolve each other's hostname:
+I installed Ubuntu 22.04.5 LTS on my local PC, two VMs, one is for master the other is for worker. 
+
+After VMs are installed and running, make sure two VM can ping each other, then edit etc/hosts to let them resolve each other's hostname:
 
 
 ``` bash
@@ -197,8 +198,9 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 Then you can join any number of worker nodes by running the following on each as root:
 
 kubeadm join ....
+#-------------------#
 
-# Follow the instructions:
+# Follow the instructions from above:
   mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -220,8 +222,8 @@ kubeadm join ....
 - Your node will not be ready unless you successfully installed CNI plugin, because your pod cannot communicate outside node. To check issue, run following command:
 
 ``` bash
-	journalctl -u kubelet
-	journalctl -u containerd
+    journalctl -u kubelet
+    journalctl -u containerd
 ```
 
 Example of the finish state:

@@ -568,3 +568,33 @@ kind: Pod
 spec:
   priorityClassName: high-priority
 ```
+
+
+### Cronjob definition files:
+
+``` yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ppi
+spec:
+  schedule: "*/5 * * * *"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 4
+  jobTemplate:
+    spec:
+	  activeDeadlineSeconds: 8
+      template:
+        spec:
+          containers:
+          - name: pi
+            image: perl:5
+            imagePullPolicy: IfNotPresent
+            command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+          restartPolicy: Never
+
+
+
+```
+- ```spec.successfulJobsHistoryLimit``` and  ```spec.failedJobsHistoryLimit```: defines how many job history remains after failure/success. Default successful/failed is 3/1. 
+- ```jobTemplate.spec.activeDeadlineSeconds```: this means after how long will the job get terminated no matter  ```jobTemplate.spec.backoffLimit``` is reached or not
