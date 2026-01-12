@@ -98,13 +98,13 @@ or
 ``` yaml
 - env: 
   - name:
-  valueFrom:
-    configMapKeyRef:
-      name: <config_map_name>
-      key: <some_keys_of_cmap>
-    secretKeyRef:
-      name: <secret_name>
-      key: <some_keys>
+    valueFrom:
+      configMapKeyRef:
+        name: <config_map_name>
+        key: <some_keys_of_cmap>
+      secretKeyRef:
+        name: <secret_name>
+        key: <some_keys>
       
 ```
 
