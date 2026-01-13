@@ -528,8 +528,10 @@ Check certificate details
 ### Docker or container related command
 
 Open Container Initiative
+
 - imagespec
 - runtimespec
+
 ---
 Support for docker on kubernetes is terminated, containerd is used instead
 
