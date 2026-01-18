@@ -535,7 +535,8 @@ Open Container Initiative
 ---
 Support for docker on kubernetes is terminated, containerd is used instead
 
-```nerdctl``` is similar to docker, you can use all command just replace ```docker``` to ```nerdctl``` or
+Command ```nerdctl``` is similar to docker, you can use all command just replace ```docker``` to ```nerdctl``` or
+
 ``` bash
     crictl pods
     crictl logs 
