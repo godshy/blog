@@ -537,9 +537,11 @@ Support for docker on kubernetes is terminated, containerd is used instead
 
 Command ```nerdctl``` is similar to docker, you can use all command just replace ```docker``` to ```nerdctl``` or
 
+
 ``` bash
     crictl pods
     crictl logs 
     crictl exec -it <id> ls
     
 ```
+
