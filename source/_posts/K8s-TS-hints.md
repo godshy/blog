@@ -52,3 +52,39 @@ spec:
   docker logs
   # 
 ```
+
+### Understand mountpath and host path
+```hostPath```: path in the actual node
+```mountPath```: path shown in the container
+
+Here is the example:
+
+``` yaml
+volumes:
+- name: audit-log
+  hostPath:
+    path: /var/log/k8s-audit
+
+volumeMounts:
+- name: audit-log
+  mountPath: /audit
+
+```
+Container only see ```/audit```. On the actual server, the path is ```/var/log/k8s-audit```
+
+__One special case is single file mapping:__
+
+Warning: mounting path to a file or vice versa will crash the pod
+``` yaml
+volumes:
+- name: audit
+  hostPath:
+    path: /etc/kubernetes/logpolicy/sample-policy.yaml
+    type: File 
+
+volumeMounts:
+- name: audit
+  mountPath: /etc/kubernetes/logpolicy/sample-policy.yaml
+  readOnly: true
+```
+
