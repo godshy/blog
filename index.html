@@ -135,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/05/deploy-5gc-on-kubernetes/" data-id="cmkjfu8y4000hecur8ryid8wu" data-title="Deploy-5gc-on-kubernetes" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/05/deploy-5gc-on-kubernetes/" data-id="cmko28aia000hgbur6vrv210b" data-title="Deploy-5gc-on-kubernetes" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -201,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/" data-id="cmkjfu8xz0004ecurbxhtb93b" data-title="Deploy kubernetes cluster on virtual machine" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/" data-id="cmko28ai50004gburcwffan78" data-title="Deploy kubernetes cluster on virtual machine" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -278,7 +278,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmkjfu8y3000fecurfj50citd" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmko28aia000fgburh9es2qcp" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -423,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmkjfu8y5000lecure0jfe4w1" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmko28aic000ngbur0baf2g0n" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -506,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmkjfu8xw0001ecurgtzb27zv" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmko28ai30001gburajq7ds40" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -596,7 +596,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmkjfu8xt0000ecur132whdv9" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmko28ai00000gbur0den9wt6" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -728,7 +728,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmkjfu8yd0015ecurg2y67map" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmko28aic000lgbur25rd1mvv" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -785,11 +785,17 @@
 <li>check logs under <code>/var/log/container</code></li>
 <li>use <code>crictl</code> command <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crictl ps -a</span><br><span class="line">crictl logs container-id</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">docker ps </span><br><span class="line">docker logs</span><br><span class="line"><span class="comment"># </span></span><br></pre></td></tr></table></figure></li>
 </ul>
+<h3 id="Understand-mountpath-and-host-path"><a href="#Understand-mountpath-and-host-path" class="headerlink" title="Understand mountpath and host path"></a>Understand mountpath and host path</h3><figure class="highlight plaintext"><figcaption><span>path in the actual node</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">```mountPath```: path shown in the container</span><br><span class="line"></span><br><span class="line">Here is the example:</span><br><span class="line"></span><br><span class="line">``` yaml</span><br><span class="line">volumes:</span><br><span class="line">- name: audit-log</span><br><span class="line">  hostPath:</span><br><span class="line">    path: /var/log/k8s-audit</span><br><span class="line"></span><br><span class="line">volumeMounts:</span><br><span class="line">- name: audit-log</span><br><span class="line">  mountPath: /audit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Container only see <code>/audit</code>. On the actual server, the path is <code>/var/log/k8s-audit</code></p>
+<p><strong>One special case is single file mapping:</strong></p>
+<p>Warning: mounting path to a file or vice versa will crash the pod</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">audit</span></span><br><span class="line">  <span class="attr">hostPath:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/etc/kubernetes/logpolicy/sample-policy.yaml</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">File</span> </span><br><span class="line"></span><br><span class="line"><span class="attr">volumeMounts:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">audit</span></span><br><span class="line">  <span class="attr">mountPath:</span> <span class="string">/etc/kubernetes/logpolicy/sample-policy.yaml</span></span><br><span class="line">  <span class="attr">readOnly:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmkjfu8y00005ecurhtbs2lrh" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmko28ai60005gbur13rob6f1" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1103,7 +1109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmkjfu8y00006ecur4fdzfmxm" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmko28ai70006gbur0hbx61l2" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1365,7 +1371,7 @@ for detailed SETS, need to check with the <code>tr --help</code> command</li>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmkjfu8y1000aecur57si0ykx" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmko28ai8000agburfw5u7tcx" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
