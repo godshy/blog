@@ -4,14 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Category: troubleshooting | Hongyi&#39;s blog</title>
+  <title>kubernetes security | Hongyi&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hongyi&#39;s blog">
-<meta property="og:url" content="https://godshy.github.io/blog/categories/troubleshooting/index.html">
+  <meta name="description" content="Pod Security Admission (PSA)Enforce a pod to follow a certain security context, otherwise it cannot be scheduled: 1234567891011apiVersion: v1kind: Namespacemetadata:  labels:    kubernetes.io&#x2F;metadata">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kubernetes security">
+<meta property="og:url" content="https://godshy.github.io/blog/2026/01/22/kubernetes-security/index.html">
 <meta property="og:site_name" content="Hongyi&#39;s blog">
+<meta property="og:description" content="Pod Security Admission (PSA)Enforce a pod to follow a certain security context, otherwise it cannot be scheduled: 1234567891011apiVersion: v1kind: Namespacemetadata:  labels:    kubernetes.io&#x2F;metadata">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-21T15:16:26.000Z">
+<meta property="article:modified_time" content="2026-01-21T15:23:28.200Z">
 <meta property="article:author" content="Hongyi Shen">
+<meta property="article:tag" content="K8s">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hongyi's blog" type="application/atom+xml">
@@ -71,39 +76,62 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2023/06/05/K8s-TS-hints/" class="archive-article-date">
-  <time class="dt-published" datetime="2023-06-05T07:00:30.000Z" itemprop="datePublished">Jun 5</time>
+        <section id="main"><article id="post-kubernetes-security" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2026/01/22/kubernetes-security/" class="article-date">
+  <time class="dt-published" datetime="2026-01-21T15:16:26.000Z" itemprop="datePublished">2026-01-22</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/security/">security</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2023/06/05/K8s-TS-hints/">K8s TS hints</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      kubernetes security
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Pod-Security-Admission-PSA"><a href="#Pod-Security-Admission-PSA" class="headerlink" title="Pod Security Admission (PSA)"></a>Pod Security Admission (PSA)</h3><p>Enforce a pod to follow a certain security context, otherwise it cannot be scheduled:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Namespace</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">kubernetes.io/metadata.name:</span> <span class="string">security_enforced</span></span><br><span class="line">    <span class="attr">pod-security.kubernetes.io/enforce:</span> <span class="string">restricted</span></span><br><span class="line">    <span class="attr">pod-security.kubernetes.io/enforce-version:</span> <span class="string">latest</span></span><br><span class="line">    <span class="attr">pod-security.kubernetes.io/warn:</span> <span class="string">restricted</span></span><br><span class="line">    <span class="attr">pod-security.kubernetes.io/warn-version:</span> <span class="string">latest</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">security_enforced</span></span><br></pre></td></tr></table></figure>
+
+<p>If you have pod violate the security policy, when restarting it will have following error:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">     kubectl rollout restart -f nginx.yaml </span><br><span class="line">Warning: would violate PodSecurity <span class="string">&quot;restricted:latest&quot;</span>: allowPrivilegeEscalation != <span class="literal">false</span> (container <span class="string">&quot;nginx&quot;</span> must <span class="built_in">set</span> securityContext.allowPrivilegeEscalation=<span class="literal">false</span>), unrestricted capabilities (container <span class="string">&quot;nginx&quot;</span> must <span class="built_in">set</span> securityContext.capabilities.drop=[<span class="string">&quot;ALL&quot;</span>]), runAsNonRoot != <span class="literal">true</span> (pod or container <span class="string">&quot;nginx&quot;</span> must <span class="built_in">set</span> securityContext.runAsNonRoot=<span class="literal">true</span>), seccompProfile (pod or container <span class="string">&quot;nginx&quot;</span> must <span class="built_in">set</span> securityContext.seccompProfile.<span class="built_in">type</span> to <span class="string">&quot;RuntimeDefault&quot;</span> or <span class="string">&quot;Localhost&quot;</span>)</span><br><span class="line">deployment.apps/nginx restarted</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2026/01/22/kubernetes-security/" data-id="cmko6f1s0000ndeur2i1f2txn" data-title="kubernetes security" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2026/01/05/deploy-5gc-on-kubernetes/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Deploy-5gc-on-kubernetes</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>

@@ -73,6 +73,268 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux-cmds" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2023/06/04/Linux-cmds/" class="article-date">
+  <time class="dt-published" datetime="2023-06-04T10:18:25.000Z" itemprop="datePublished">2023-06-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/commands/">commands</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/blog/2023/06/04/Linux-cmds/">Linux cmds</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Basic-linux-cmds"><a href="#Basic-linux-cmds" class="headerlink" title="Basic linux cmds"></a>Basic linux cmds</h1><h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+<li><a href="#system-check-related-commands">System check realted commands</a></li>
+<li><a href="#inputoutput-related-commands">Input&#x2F;output related commands</a></li>
+<li><a href="#shell-and-bash-scripting-related">Shell and bash scripting</a></li>
+<li><a href="#security-and-certificate-generation">Security and cert</a></li>
+<li><a href="#kvm-related">VM management</a></li>
+</ol>
+<h2 id="System-check-related-commands"><a href="#System-check-related-commands" class="headerlink" title="System check related commands"></a>System check related commands</h2><h3 id="Often-used-basic-commands-and-their-variations"><a href="#Often-used-basic-commands-and-their-variations" class="headerlink" title="Often used basic commands and their variations"></a>Often used basic commands and their variations</h3><ul>
+<li>‘cat’ command and its successor ‘bat’</li>
+</ul>
+<h3 id="Log-check-commands"><a href="#Log-check-commands" class="headerlink" title="Log check commands"></a>Log check commands</h3><ul>
+<li>use journalctl to check service logs</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">journalctl -f -u &lt;someservice.service&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Resource-check-commands"><a href="#Resource-check-commands" class="headerlink" title="Resource check commands"></a>Resource check commands</h3><ul>
+<li>Check CPU info</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure>
+
+<p>or </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> cpu</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check memory</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep MemTotal /proc/meminfo</span><br></pre></td></tr></table></figure>
+
+<p>or </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">free -m <span class="comment"># show in mbyte</span></span><br><span class="line">free -h <span class="comment"># human-readable forms</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check Virtual memory</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep VmallocTotal /procm/meminfo </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>check block device<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure></li>
+<li>display disk partition status</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check devices</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -la /sys/devices</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Check folder size</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -xhs /&lt;PATH&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>check logical volume, physical volume and volume group </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo lvscan <span class="comment"># list logical volumes</span></span><br><span class="line">sudo vgs <span class="comment"># list volume group</span></span><br><span class="line">sudo pvdisplay <span class="comment"># list physical volume</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>check I&#x2F;O status</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iostat -z -- human</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>use lsof command to follow process</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check port usage </span></span><br><span class="line">sudo lsof -i TCP:1-1024 <span class="comment"># check private port usage</span></span><br><span class="line">sudo lsof -p &lt;pid&gt; -i UDP <span class="comment"># check process&#x27;s udp usage</span></span><br><span class="line"><span class="comment"># check process</span></span><br><span class="line">sudo lsof -p &lt;pid&gt; <span class="comment"># follow process&#x27;s activity</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>check uptime</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uptime</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>chec khow long an operation takes</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">time (the <span class="built_in">command</span>)</span><br><span class="line"><span class="comment"># for example</span></span><br><span class="line">time (<span class="built_in">ls</span> -lf)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Network-related-commands"><a href="#Network-related-commands" class="headerlink" title="Network related commands"></a>Network related commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">netstat -t -u -n -p -l <span class="comment"># tcp | udp | numeric(do not resolve hostnames) | programs | listening</span></span><br><span class="line"><span class="comment">#or </span></span><br><span class="line">ss -tlpun</span><br><span class="line"></span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 localhost:43619         0.0.0.0:*               LISTEN      13331/node</span><br><span class="line">tcp        0      0 127.0.0.53:domain       0.0.0.0:*               LISTEN      1860/systemd-resolv</span><br><span class="line">tcp        0      0 localhost:34781         0.0.0.0:*               LISTEN      248/containerd</span><br><span class="line">tcp        0      0 localhost:32809         0.0.0.0:*               LISTEN      13259/node</span><br><span class="line">udp        0      0 127.0.0.53:domain       0.0.0.0:*                           1860/systemd-resolv</span><br><span class="line">udp        0      0 localhost:323           0.0.0.0:*                           -</span><br><span class="line">udp6       0      0 ip6-localhost:323       [::]:*                              -</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo lsof -i -P -n | grep LISTEN <span class="comment"># -i: listing ports | -P: Inhibits the conversion of port numbers to port names for network files. Inhibiting the conversion may make lsof run a little faster. It is also useful when port name lookup is not working properly. | -n: no dns</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -v <span class="string">&quot;rem_address&quot;</span> /proc/net/tcp  | awk  <span class="string">&#x27;&#123;x=strtonum(&quot;0x&quot;substr($3,index($3,&quot;:&quot;)-2,2)); for (i=5; i&gt;0; i-=2) x = x&quot;.&quot;strtonum(&quot;0x&quot;substr($3,i,2))&#125;&#123;print x&quot;:&quot;strtonum(&quot;0x&quot;substr($3,index($3,&quot;:&quot;)+1,4))&#125;&#x27;</span></span><br><span class="line"><span class="comment"># If nestat is not there, we can check connection using this instead.</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check interface bond</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/net/bonding/&lt;bondname&gt;</span><br><span class="line"><span class="comment"># remove interface from bond</span></span><br><span class="line">/sbin/ifenslave -d bond0 eth0</span><br><span class="line"><span class="comment"># add interface to bond</span></span><br><span class="line">/sbin/ifenslave bond0 eth0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>check ip link conditions arps</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> show</span><br><span class="line">ip addr show</span><br><span class="line"></span><br><span class="line"><span class="comment"># check arp</span></span><br><span class="line">arp</span><br><span class="line"><span class="comment"># check ip neighbors/ arp neighbors</span></span><br><span class="line">ip neigh</span><br><span class="line"></span><br><span class="line"><span class="comment"># check net adaptor related </span></span><br><span class="line">iw dev &lt;nic_name&gt; info</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>check ip link on other network namespaces</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip -n &lt;ns_name&gt; ip <span class="built_in">link</span></span><br><span class="line"><span class="comment"># network namespace has its own arp tables</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>create virtual link between two ns</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> add &lt;name&gt; <span class="built_in">type</span> veth peer name &lt;peer-veth_name&gt;</span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> &lt;name&gt; netns &lt;ns_name&gt;</span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> &lt;peer-veth_name&gt; netns &lt;ns_name&gt;</span><br><span class="line">ip -n &lt;ns_name&gt; <span class="built_in">link</span> <span class="built_in">set</span> &lt;name&gt; up</span><br><span class="line">ip -n &lt;peer_ns_name&gt; <span class="built_in">link</span> <span class="built_in">set</span> &lt;peer_veth_name&gt; up</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>configure vswitch for namespaces</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> add &lt;name&gt; <span class="built_in">type</span> bridge</span><br><span class="line">ip <span class="built_in">link</span></span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> dev &lt;name&gt; up</span><br><span class="line">ip <span class="built_in">link</span> add &lt;name&gt; <span class="built_in">type</span> veth peer name &lt;peer-vswitch-name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>check if ip forwarding is enabled</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/sys/net/ipv4/ip_forward <span class="comment"># 1 for enable</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>check traffic status on inteface</p>
+</li>
+</ul>
+<p>There are several commands to check traffic.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.  sar command.</span></span><br><span class="line"></span><br><span class="line">sar -n DEV 1 <span class="comment"># 1 means monitor real-time every 1 second</span></span><br><span class="line"><span class="comment"># if want to check past status</span></span><br><span class="line"><span class="built_in">cd</span> /var/log/sysstat <span class="comment"># check for sa files</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 -s 12:00:00 -e 13:00:00 <span class="comment"># check from time to time</span></span><br><span class="line">sar -n DEV -f /var/log/sysstat/sa10 <span class="comment"># check all traffic. default is every 10 min.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. ethtool </span></span><br><span class="line">ethtool -S &lt;interface_name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. ip link show </span></span><br><span class="line">ip -s <span class="built_in">link</span> show &lt;interface_name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Process-related-commands"><a href="#Process-related-commands" class="headerlink" title="Process related commands"></a>Process related commands</h3><ul>
+<li>List current process and show in tree form<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Syscall-related-commands"><a href="#Syscall-related-commands" class="headerlink" title="Syscall related commands"></a>Syscall related commands</h3><ul>
+<li>Follow syscall</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace + syscall_cmd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>use  -c summarize the overview of the command</p>
+</li>
+<li><p>Check kernel machine and kernel release</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -srm</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Check capability (Advanced access control)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">capsh --<span class="built_in">print</span></span><br><span class="line">grep Cap /proc/$$/status <span class="comment"># capabilities for the current process</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="cgroup-and-namespace-related-commands"><a href="#cgroup-and-namespace-related-commands" class="headerlink" title="cgroup and namespace related commands"></a>cgroup and namespace related commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo lsns <span class="comment"># check namespace</span></span><br><span class="line">systemctl status <span class="comment"># check cgroup</span></span><br></pre></td></tr></table></figure>
+<h3 id="Directory-sync-commands"><a href="#Directory-sync-commands" class="headerlink" title="Directory sync commands"></a>Directory sync commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rsync &lt;source_ip&gt; &lt;user_name&gt;@&lt;target_ip&gt;:/dir</span><br><span class="line"><span class="comment">#a -- for archive keep file group, version etc</span></span><br><span class="line"><span class="comment">#z -- for compress</span></span><br><span class="line"><span class="comment">#p -- keep permissions</span></span><br><span class="line"><span class="comment">#q -- quiet mode</span></span><br><span class="line"><span class="comment">#v -- verbose</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Input-x2F-output-related-commands"><a href="#Input-x2F-output-related-commands" class="headerlink" title="Input&#x2F;output related commands"></a>Input&#x2F;output related commands</h2><ul>
+<li>Translate with input&#x2F;outs. tr command.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">tr</span> [input] [output]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Examples</span></span><br><span class="line"><span class="comment"># Input some texts into tr command then translate to all CAPS</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">tr</span> [a-z] [A-Z] &lt; input.txt &gt;output.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete numbers in the given input</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;My UID is <span class="variable">$UID</span>&quot;</span> | <span class="built_in">tr</span> -<span class="built_in">cd</span> <span class="string">&quot;[:digit:]\n&quot;</span></span><br></pre></td></tr></table></figure>
+for detailed SETS, need to check with the <code>tr --help</code> command</li>
+</ul>
+<h3 id="Locate-file-x2F-folders"><a href="#Locate-file-x2F-folders" class="headerlink" title="Locate file&#x2F;folders"></a>Locate file&#x2F;folders</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">locate <span class="comment"># Find all files available with keyword </span></span><br><span class="line">whereis <span class="comment"># find binary file, config file and man files</span></span><br><span class="line"><span class="built_in">which</span> <span class="comment"># find the position of the command executed</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="File-content-management"><a href="#File-content-management" class="headerlink" title="File content management"></a>File content management</h3><ul>
+<li><p>Create a file using here document. “EOF”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">&#x27;EOF&#x27;</span> &gt; /some_dir/file_name</span><br><span class="line"><span class="comment"># ENDLINE with EOF</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Compare to files side by side</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff -y file1 file2</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>To see a constantly growing file</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -f sth.log</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Find-command"><a href="#Find-command" class="headerlink" title="Find command"></a>Find command</h3><ul>
+<li>For example, to find available modules in Linux.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    find /lib/modules/$(umame -r) -<span class="built_in">type</span> f -name <span class="string">&#x27;*.ko*&#x27;</span></span><br><span class="line">    <span class="comment"># find &quot;in directory - type file or else -name &#x27;&#x27; with anything related to .ko</span></span><br><span class="line">    <span class="comment"># It didn&#x27;t work on my WSL ubuntu</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#&#x27;find&#x27; command and its better version</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># example of using find and rg to find yaml files that contains &quot;sample&quot;</span></span><br><span class="line">    find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.yaml&quot;</span> -<span class="built_in">exec</span> grep <span class="string">&quot;sample&quot;</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> \; -<span class="built_in">print</span></span><br><span class="line">    rg -t <span class="string">&quot;yaml&quot;</span> sample</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>Copy&#x2F;move multiple files using wildcard with advanced find command<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">&quot;file_name*.*&quot;</span> -<span class="built_in">exec</span> <span class="built_in">mv</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> /target_dir/ \;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="To-list-modules-that-loaded-by-kernel"><a href="#To-list-modules-that-loaded-by-kernel" class="headerlink" title="To list modules that loaded by kernel"></a>To list modules that loaded by kernel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod</span><br></pre></td></tr></table></figure>
+
+<h3 id="scp-command"><a href="#scp-command" class="headerlink" title="scp command"></a>scp command</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Upload: </span></span><br><span class="line">    scp -i &lt;Path_to_key&gt;  /dir/file username@remote:/dir  </span><br><span class="line"><span class="comment">#Download: </span></span><br><span class="line">    scp -i &lt;Path_to_key&gt; username@remote/dir/file /local/dir</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Shell-and-bash-scripting-related"><a href="#Shell-and-bash-scripting-related" class="headerlink" title="Shell and bash scripting related"></a>Shell and bash scripting related</h2><h3 id="terminal-and-shell"><a href="#terminal-and-shell" class="headerlink" title="terminal and shell"></a>terminal and shell</h3><ul>
+<li>solve problem of <code>/bin/bash^m bad interpreter no such file or directory</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/\r//&#x27;</span> &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>check terminal configuration</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    infocmp</span><br><span class="line"><span class="comment">#       Reconstructed via infocmp from file: /lib/terminfo/x/xterm-256color</span></span><br><span class="line">xterm-256color|xterm with 256 colors,</span><br><span class="line">        am, bce, ccc, km, mc5i, mir, msgr, npc, xenl,</span><br><span class="line">        colors<span class="comment">#0x100, cols#80, it#8, lines#24, pairs#0x10000,</span></span><br><span class="line">        acsc=``aaffggiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz&#123;&#123;||&#125;&#125;~~,</span><br></pre></td></tr></table></figure>
+
+<p>In general, shell uses File Descriptors for input and output</p>
+<ul>
+<li>stdin (FD 0)</li>
+<li>stdout (FD 1)</li>
+<li>stderr (FD 2)</li>
+</ul>
+<p>Here is some redirect examples:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl https://sth.com &amp;&gt; /dev/null <span class="comment"># no output generated </span></span><br><span class="line"></span><br><span class="line">curl https://sth.com 1&gt; output 2&gt; curl_status <span class="comment"># generate std output and status of the execution of curl seperatelly.</span></span><br><span class="line"></span><br><span class="line">curl https://sth.com 1&gt;&amp;2 file <span class="comment"># 2 kind of outputs in one file.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p>There are <em>Shell variables</em> and <em>Environmental Variables</em> in Linux.<br>Shell variables only exist in local shell process and are not inherited by subprocesses. Env variables are shell-wide.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">MY_VAR=42 <span class="comment"># Shell variable</span></span><br><span class="line"><span class="built_in">export</span> MY_GLOBAL_VAR=250 <span class="comment"># Global variable</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">set</span> | grep MY</span><br><span class="line">MY_GLOBAL_VAR=250</span><br><span class="line">MY_VAR=42</span><br><span class="line">$ <span class="built_in">env</span> | grep MY</span><br><span class="line">MY_GLOBAL_VAR=250</span><br><span class="line">$ bash</span><br><span class="line">$ <span class="built_in">set</span> | grep MY  <span class="comment"># Shell variable only exists in current shell.</span></span><br><span class="line">MY_GLOBAL_VAR=250</span><br></pre></td></tr></table></figure>
+<p>Full environmental variable list is under <a target="_blank" rel="noopener" href="https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html">GNU bash manual</a>.</p>
+<h3 id="Exit-status"><a href="#Exit-status" class="headerlink" title="Exit status"></a>Exit status</h3><p>The result of the execution of commands are determined by the exit status code from 0-255, in which 0 means normal. To query the exit status, use <code>echo &amp;?</code> </p>
+<h3 id="Job-control"><a href="#Job-control" class="headerlink" title="Job control"></a>Job control</h3><p>We can run commands in background, and then take it back to the foreground. Also use ctrl+z is able to put command into background.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;some <span class="built_in">command</span>&gt; &amp; <span class="comment"># use &amp; to run commands in backend</span></span><br><span class="line"><span class="built_in">fg</span> <span class="comment"># bring command back to frontend</span></span><br><span class="line"><span class="built_in">jobs</span> <span class="comment"># watch current jobs in the backend</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disown</span></span><br><span class="line"><span class="built_in">nohup</span> <span class="comment"># disown and nohup</span></span><br></pre></td></tr></table></figure>
+
+<p>Terminal multiplexer, is also able to maintain multiple tasks. </p>
+<h3 id="Json-processing-command-jq"><a href="#Json-processing-command-jq" class="headerlink" title="Json processing command jq"></a>Json processing command jq</h3><p>For example, we have a following json file.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;menu&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;file&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;File&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;popup&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;menuitem&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;New&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CreateNewDoc()&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Open&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;OpenDoc()&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>dot ‘.’ followed by the object is used to access the value of jq.      </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this shows the whole file of test.json</span></span><br><span class="line">jq <span class="string">&#x27;.&#x27;</span> test.json</span><br><span class="line"><span class="comment"># use multiple dots to show the nested proterty</span></span><br><span class="line">jq <span class="string">&#x27;.menu.value, .menu.id&#x27;</span> test.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;File&quot;</span><br><span class="line">&quot;file&quot;</span><br></pre></td></tr></table></figure>
+<p>It is able to use <code>[]</code> to show lists in json file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jq <span class="string">&#x27;.menu.popup.menuitem&#x27;</span> test.json | jq <span class="string">&#x27;.[]&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;New&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CreateNewDoc()&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Open&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;onclick&quot;</span><span class="punctuation">:</span> <span class="string">&quot;OpenDoc()&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span>   </span><br></pre></td></tr></table></figure>
+<p>Also, it is able to use index in the <code>[]</code> operator. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jq <span class="string">&#x27;.menu.popup.menuitem&#x27;</span> test.json | jq <span class="string">&#x27;.[0].value&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;New&quot;  </span><br></pre></td></tr></table></figure>
+
+<h3 id="Time-display"><a href="#Time-display" class="headerlink" title="Time display"></a>Time display</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show time in linux epoch</span></span><br><span class="line"><span class="built_in">date</span> +%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># linux time to human readable time</span></span><br><span class="line"><span class="built_in">date</span> -d @1707912602 <span class="string">&#x27;+%m/%d/%Y :%H:%M:%S&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Security-and-certificate-generation"><a href="#Security-and-certificate-generation" class="headerlink" title="Security and certificate generation"></a>Security and certificate generation</h2><p>Generate keys for CA.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># generate private key</span></span><br><span class="line">openssl genrsa -out ca.key 2048 </span><br><span class="line"><span class="comment"># create CSR</span></span><br><span class="line">openssl req -new -key ca.key -subj <span class="string">&quot;/CN=&quot;</span> -out ca.csr</span><br><span class="line"><span class="comment"># sign the CSR</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> ca.csr -signkey ca.key -out ca.crt</span><br></pre></td></tr></table></figure>
+
+<p>Generate keys cert for client</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out admin.key 2048</span><br><span class="line">openssl req -new -key admin.key -subj <span class="string">&quot;/CN=kube-admin/O=system:masters&quot;</span> -out admin.csr</span><br><span class="line"><span class="comment"># Sign the csr using CA&#x27;s private key</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> admin.csr -CA ca.crt -CAkey ca.key -out admin.crt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Check certificate details</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/apiserver.crt -text -noout</span><br></pre></td></tr></table></figure>
+
+<h2 id="KVM-related"><a href="#KVM-related" class="headerlink" title="KVM related"></a>KVM related</h2><ul>
+<li><p>check vm list</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all</span><br></pre></td></tr></table></figure></li>
+<li><p>login into a vm</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh console &lt;vm-name&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>to logout from vm, use <code>ctrl+5</code></p>
+</li>
+<li><p>Check VM IP nad net stack</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">virsh net-list <span class="comment"># show network name</span></span><br><span class="line">virsh net-info &lt;net_name&gt; <span class="comment"># default named default</span></span><br><span class="line">virsh net-dhcp-leases &lt;net_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker-or-container-related-command"><a href="#Docker-or-container-related-command" class="headerlink" title="Docker or container related command"></a>Docker or container related command</h3><p>Open Container Initiative</p>
+<ul>
+<li>imagespec</li>
+<li>runtimespec</li>
+</ul>
+<hr>
+<p>Support for docker on kubernetes is terminated, containerd is used instead</p>
+<p>Command <code>nerdctl</code> is similar to docker, you can use all command just replace <code>docker</code> to <code>nerdctl</code> or</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crictl pods</span><br><span class="line">crictl logs </span><br><span class="line">crictl <span class="built_in">exec</span> -it &lt;<span class="built_in">id</span>&gt; <span class="built_in">ls</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Linux-cmds/" data-id="cmko6f1rw000adeur92a03w2v" data-title="Linux cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Misc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/blog/2023/06/04/Misc/" class="article-date">
@@ -119,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cmko28ai9000bgbur5p8d7bcl" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/04/Misc/" data-id="cmko6f1rx000bdeurfr7rctpw" data-title="Misc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -188,6 +450,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2026/01/22/kubernetes-security/">kubernetes security</a>
+          </li>
+        
+          <li>
             <a href="/blog/2026/01/05/deploy-5gc-on-kubernetes/">Deploy-5gc-on-kubernetes</a>
           </li>
         
@@ -201,10 +467,6 @@
         
           <li>
             <a href="/blog/2024/02/21/linux-FS-and-pkg/">linux FS and pkg</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/">Deploy free5GC with k8s and helm</a>
           </li>
         
       </ul>
