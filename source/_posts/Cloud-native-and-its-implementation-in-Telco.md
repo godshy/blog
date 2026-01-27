@@ -10,7 +10,7 @@ category: Learning
 ## Index
 1. [What is Cloud Native？](#what-is-cloud-native)
 2. [Basic principles and components of Cloud Native](#basic-principles-and-conponents-of-cloud-native)
-3. [Cloud Native design principles](#cloud-native-design-priciples)
+3. [Cloud Native design principles](#Cloud-Native-design-principles)
     1.  [Agnosticism](#agnosticism)
     2.  [Software decomposition and Life Cycle Management](#software-decomposition-and-life-cycle-management)
 4. [Some Q&As](#qas)
