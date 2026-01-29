@@ -54,6 +54,7 @@ spec:
 ```
 
 ### Understand mountpath and host path
+
 ```hostPath```: path in the actual node
 ```mountPath```: path shown in the container
 
@@ -70,6 +71,7 @@ volumeMounts:
   mountPath: /audit
 
 ```
+
 Container only see ```/audit```. On the actual server, the path is ```/var/log/k8s-audit```
 
 __One special case is single file mapping:__
