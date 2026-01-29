@@ -4,20 +4,27 @@
   <meta charset="utf-8">
   
   
-  <title>kubernetes security | Hongyi&#39;s blog</title>
+  <title>Deploy kubernetes and datadog on AWS | Hongyi&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Pod Security Admission (PSA)Enforce a pod to follow a certain security context, otherwise it cannot be scheduled: 1234567891011apiVersion: v1kind: Namespacemetadata:  labels:    kubernetes.io&#x2F;metadata">
+  <meta name="description" content="Deploy Kubernetes cluster on AWS, then perform monitoring and enable observability using datadogIn this blog, I want to test deploying a kubernetes with 2 worker nodes and 1 master node, worker nodes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kubernetes security">
-<meta property="og:url" content="https://godshy.github.io/blog/2026/01/22/kubernetes-security/index.html">
+<meta property="og:title" content="Deploy kubernetes and datadog on AWS">
+<meta property="og:url" content="https://godshy.github.io/blog/2026/01/29/Deploy-kubernetes-and-datadog-on-AWS/index.html">
 <meta property="og:site_name" content="Hongyi&#39;s blog">
-<meta property="og:description" content="Pod Security Admission (PSA)Enforce a pod to follow a certain security context, otherwise it cannot be scheduled: 1234567891011apiVersion: v1kind: Namespacemetadata:  labels:    kubernetes.io&#x2F;metadata">
+<meta property="og:description" content="Deploy Kubernetes cluster on AWS, then perform monitoring and enable observability using datadogIn this blog, I want to test deploying a kubernetes with 2 worker nodes and 1 master node, worker nodes">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-01-21T15:16:26.000Z">
-<meta property="article:modified_time" content="2026-01-21T15:23:28.200Z">
+<meta property="og:image" content="https://s2.loli.net/2026/01/29/mtqsnkbhXKY4AVR.png">
+<meta property="og:image" content="https://s2.loli.net/2026/01/29/d2pwOvitNB3berf.png">
+<meta property="og:image" content="https://s2.loli.net/2026/01/29/senbyGNAwap6VCu.png">
+<meta property="og:image" content="https://s2.loli.net/2026/01/29/TVmNnW3XL7BFMdh.png">
+<meta property="og:image" content="https://s2.loli.net/2026/01/29/v7GNjkq9sPD1WyR.png">
+<meta property="og:image" content="https://s2.loli.net/2026/01/29/6HoTKMNCDcxfbwp.png">
+<meta property="article:published_time" content="2026-01-29T05:15:27.000Z">
+<meta property="article:modified_time" content="2026-01-29T15:22:44.776Z">
 <meta property="article:author" content="Hongyi Shen">
-<meta property="article:tag" content="K8s">
+<meta property="article:tag" content="AWS, K8s">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2026/01/29/mtqsnkbhXKY4AVR.png">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hongyi's blog" type="application/atom+xml">
   
@@ -76,14 +83,14 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-kubernetes-security" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Deploy-kubernetes-and-datadog-on-AWS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/blog/2026/01/22/kubernetes-security/" class="article-date">
-  <time class="dt-published" datetime="2026-01-21T15:16:26.000Z" itemprop="datePublished">2026-01-22</time>
+    <a href="/blog/2026/01/29/Deploy-kubernetes-and-datadog-on-AWS/" class="article-date">
+  <time class="dt-published" datetime="2026-01-29T05:15:27.000Z" itemprop="datePublished">2026-01-29</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/security/">security</a>
+    <a class="article-category-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a>
   </div>
 
   </div>
@@ -94,7 +101,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      kubernetes security
+      Deploy kubernetes and datadog on AWS
     </h1>
   
 
@@ -102,19 +109,45 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="Pod-Security-Admission-PSA"><a href="#Pod-Security-Admission-PSA" class="headerlink" title="Pod Security Admission (PSA)"></a>Pod Security Admission (PSA)</h3><p>Enforce a pod to follow a certain security context, otherwise it cannot be scheduled:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Namespace</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">kubernetes.io/metadata.name:</span> <span class="string">security_enforced</span></span><br><span class="line">    <span class="attr">pod-security.kubernetes.io/enforce:</span> <span class="string">restricted</span></span><br><span class="line">    <span class="attr">pod-security.kubernetes.io/enforce-version:</span> <span class="string">latest</span></span><br><span class="line">    <span class="attr">pod-security.kubernetes.io/warn:</span> <span class="string">restricted</span></span><br><span class="line">    <span class="attr">pod-security.kubernetes.io/warn-version:</span> <span class="string">latest</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">security_enforced</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Deploy-Kubernetes-cluster-on-AWS-then-perform-monitoring-and-enable-observability-using-datadog"><a href="#Deploy-Kubernetes-cluster-on-AWS-then-perform-monitoring-and-enable-observability-using-datadog" class="headerlink" title="Deploy Kubernetes cluster on AWS, then perform monitoring and enable observability using datadog"></a>Deploy Kubernetes cluster on AWS, then perform monitoring and enable observability using datadog</h1><p>In this blog, I want to test deploying a kubernetes with 2 worker nodes and 1 master node, worker nodes are deployed on different AZs.</p>
+<p>I will firstly set up EC-2 with the dumbest way (set up manually with all handcrafts and then set up kubernetes manually) and set datadog to try monitor the kubernetes environment. Then try using terraform, ansible to make the process easier, and temper with some fancy parts(different deploy patterns, ELBs, other services) on AWS.</p>
+<h2 id="Set-up-EC2-instance"><a href="#Set-up-EC2-instance" class="headerlink" title="Set up EC2 instance"></a>Set up EC2 instance</h2><p>Launch EC2 instance first, open console, search for EC2 and click Launch instances</p>
+<p>Configure following:</p>
+<ul>
+<li>Name and tages: Master x1 and Worker x2</li>
+<li>Application and OS image: I chose Ubuntu, but any other distribution is OK</li>
+<li>Key pair: it is used to connect to the instance remotelly, I set one for master and one for works</li>
+<li>Network settings: For one worker, change Subnet to let it placed in a different AZ from other instances. Other parameters just leave them default here. (For security group, it will create security group and allow inbound SSH only in default we can change it later.)</li>
+</ul>
+<p>Others leave the same. And click launch</p>
+<p><img src="https://s2.loli.net/2026/01/29/mtqsnkbhXKY4AVR.png" alt="ec2 launch.png"></p>
+<p><img src="https://s2.loli.net/2026/01/29/d2pwOvitNB3berf.png" alt="ec2 launch 2.png"></p>
+<p>After launch successful, we should see all three instance are up and running. By default, these 3 instances are attached with public ipv4 ip address and attached default internet gateway, so we can ssh to them using key pair created previously. Notice that one worker’s AZ is different from the others.</p>
+<p><img src="https://s2.loli.net/2026/01/29/senbyGNAwap6VCu.png" alt="1.1 3 ec2 launched on aws.png"></p>
+<p>Then we connect to them using terminal and do some initial configurations:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo hostnamectl set-hostname Master1/Worker1/Worker2</span><br><span class="line">sudo reboot</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>If you have pod violate the security policy, when restarting it will have following error:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">     kubectl rollout restart -f nginx.yaml </span><br><span class="line">Warning: would violate PodSecurity <span class="string">&quot;restricted:latest&quot;</span>: allowPrivilegeEscalation != <span class="literal">false</span> (container <span class="string">&quot;nginx&quot;</span> must <span class="built_in">set</span> securityContext.allowPrivilegeEscalation=<span class="literal">false</span>), unrestricted capabilities (container <span class="string">&quot;nginx&quot;</span> must <span class="built_in">set</span> securityContext.capabilities.drop=[<span class="string">&quot;ALL&quot;</span>]), runAsNonRoot != <span class="literal">true</span> (pod or container <span class="string">&quot;nginx&quot;</span> must <span class="built_in">set</span> securityContext.runAsNonRoot=<span class="literal">true</span>), seccompProfile (pod or container <span class="string">&quot;nginx&quot;</span> must <span class="built_in">set</span> securityContext.seccompProfile.<span class="built_in">type</span> to <span class="string">&quot;RuntimeDefault&quot;</span> or <span class="string">&quot;Localhost&quot;</span>)</span><br><span class="line">deployment.apps/nginx restarted</span><br></pre></td></tr></table></figure>
+<p>Return to console, since by default security group only allow inbound SSH, we need to configure network access with each node. Go to security groups, click create new security group and specify a good name for each instance. Firstly allow ssh from anywhere, then add new inbound rules from other instances. For example SG for mmaster should allow traffic from worker1 and worker2. After configured all of the SGs, go to instance -&gt; Actions -&gt; Security -&gt; Change security groups,<br>Unbind the default SG and attach created new SG to it.</p>
+<p><img src="https://s2.loli.net/2026/01/29/TVmNnW3XL7BFMdh.png" alt="SG.png"></p>
+<p><img src="https://s2.loli.net/2026/01/29/v7GNjkq9sPD1WyR.png" alt="sg configure.png"></p>
+<p><img src="https://s2.loli.net/2026/01/29/6HoTKMNCDcxfbwp.png" alt="SG detach.png"></p>
+<p>Check ping for each instance, no ping should get through.</p>
+<p>Modify <code>/etc/hosts</code>. add hostname for each other. So that each instance can ping with others with their hostname.</p>
+<p><em><strong>Important things to be noticed:</strong></em></p>
+<ul>
+<li>Since there is no Elastic IP attached, after instance is relaunched thru console, Public IP will change</li>
+<li>Micro EC2 (mem under 2048) may have some problem when installing kubernetes control plane components. We may need to change instance type for larger memory.</li>
+</ul>
+<p>Refer to <a href="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/">Install k8s on vm</a> for the cluster installation.</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/22/kubernetes-security/" data-id="cmkzmweot000sl4urf7c6g2t1" data-title="kubernetes security" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/29/Deploy-kubernetes-and-datadog-on-AWS/" data-id="cmkzmweom0005l4ur99ua9str" data-title="Deploy kubernetes and datadog on AWS" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/AWS-K8s/" rel="tag">AWS, K8s</a></li></ul>
 
     </footer>
   </div>
@@ -122,19 +155,10 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2026/01/29/Deploy-kubernetes-and-datadog-on-AWS/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Deploy kubernetes and datadog on AWS
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2026/01/05/deploy-5gc-on-kubernetes/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2026/01/22/kubernetes-security/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Deploy-5gc-on-kubernetes</div>
+      <div class="article-nav-title">kubernetes security</div>
     </a>
   
 </nav>

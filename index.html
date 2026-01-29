@@ -73,6 +73,80 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Deploy-kubernetes-and-datadog-on-AWS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2026/01/29/Deploy-kubernetes-and-datadog-on-AWS/" class="article-date">
+  <time class="dt-published" datetime="2026-01-29T05:15:27.000Z" itemprop="datePublished">2026-01-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/DIY-and-lab/">DIY and lab</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/blog/2026/01/29/Deploy-kubernetes-and-datadog-on-AWS/">Deploy kubernetes and datadog on AWS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Deploy-Kubernetes-cluster-on-AWS-then-perform-monitoring-and-enable-observability-using-datadog"><a href="#Deploy-Kubernetes-cluster-on-AWS-then-perform-monitoring-and-enable-observability-using-datadog" class="headerlink" title="Deploy Kubernetes cluster on AWS, then perform monitoring and enable observability using datadog"></a>Deploy Kubernetes cluster on AWS, then perform monitoring and enable observability using datadog</h1><p>In this blog, I want to test deploying a kubernetes with 2 worker nodes and 1 master node, worker nodes are deployed on different AZs.</p>
+<p>I will firstly set up EC-2 with the dumbest way (set up manually with all handcrafts and then set up kubernetes manually) and set datadog to try monitor the kubernetes environment. Then try using terraform, ansible to make the process easier, and temper with some fancy parts(different deploy patterns, ELBs, other services) on AWS.</p>
+<h2 id="Set-up-EC2-instance"><a href="#Set-up-EC2-instance" class="headerlink" title="Set up EC2 instance"></a>Set up EC2 instance</h2><p>Launch EC2 instance first, open console, search for EC2 and click Launch instances</p>
+<p>Configure following:</p>
+<ul>
+<li>Name and tages: Master x1 and Worker x2</li>
+<li>Application and OS image: I chose Ubuntu, but any other distribution is OK</li>
+<li>Key pair: it is used to connect to the instance remotelly, I set one for master and one for works</li>
+<li>Network settings: For one worker, change Subnet to let it placed in a different AZ from other instances. Other parameters just leave them default here. (For security group, it will create security group and allow inbound SSH only in default we can change it later.)</li>
+</ul>
+<p>Others leave the same. And click launch</p>
+<p><img src="https://s2.loli.net/2026/01/29/mtqsnkbhXKY4AVR.png" alt="ec2 launch.png"></p>
+<p><img src="https://s2.loli.net/2026/01/29/d2pwOvitNB3berf.png" alt="ec2 launch 2.png"></p>
+<p>After launch successful, we should see all three instance are up and running. By default, these 3 instances are attached with public ipv4 ip address and attached default internet gateway, so we can ssh to them using key pair created previously. Notice that one worker’s AZ is different from the others.</p>
+<p><img src="https://s2.loli.net/2026/01/29/senbyGNAwap6VCu.png" alt="1.1 3 ec2 launched on aws.png"></p>
+<p>Then we connect to them using terminal and do some initial configurations:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo hostnamectl set-hostname Master1/Worker1/Worker2</span><br><span class="line">sudo reboot</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Return to console, since by default security group only allow inbound SSH, we need to configure network access with each node. Go to security groups, click create new security group and specify a good name for each instance. Firstly allow ssh from anywhere, then add new inbound rules from other instances. For example SG for mmaster should allow traffic from worker1 and worker2. After configured all of the SGs, go to instance -&gt; Actions -&gt; Security -&gt; Change security groups,<br>Unbind the default SG and attach created new SG to it.</p>
+<p><img src="https://s2.loli.net/2026/01/29/TVmNnW3XL7BFMdh.png" alt="SG.png"></p>
+<p><img src="https://s2.loli.net/2026/01/29/v7GNjkq9sPD1WyR.png" alt="sg configure.png"></p>
+<p><img src="https://s2.loli.net/2026/01/29/6HoTKMNCDcxfbwp.png" alt="SG detach.png"></p>
+<p>Check ping for each instance, no ping should get through.</p>
+<p>Modify <code>/etc/hosts</code>. add hostname for each other. So that each instance can ping with others with their hostname.</p>
+<p><em><strong>Important things to be noticed:</strong></em></p>
+<ul>
+<li>Since there is no Elastic IP attached, after instance is relaunched thru console, Public IP will change</li>
+<li>Micro EC2 (mem under 2048) may have some problem when installing kubernetes control plane components. We may need to change instance type for larger memory.</li>
+</ul>
+<p>Refer to <a href="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/">Install k8s on vm</a> for the cluster installation.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://godshy.github.io/blog/2026/01/29/Deploy-kubernetes-and-datadog-on-AWS/" data-id="cmkzmweom0005l4ur99ua9str" data-title="Deploy kubernetes and datadog on AWS" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/AWS-K8s/" rel="tag">AWS, K8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-kubernetes-security" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/blog/2026/01/22/kubernetes-security/" class="article-date">
@@ -107,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/22/kubernetes-security/" data-id="cmkwqypgj000oy2ur4pebddv2" data-title="kubernetes security" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/22/kubernetes-security/" data-id="cmkzmweot000sl4urf7c6g2t1" data-title="kubernetes security" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -183,7 +257,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/05/deploy-5gc-on-kubernetes/" data-id="cmkwqypgh000fy2ur347g8dcf" data-title="Deploy-5gc-on-kubernetes" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/05/deploy-5gc-on-kubernetes/" data-id="cmkzmweos000ll4ur4usw0y88" data-title="Deploy-5gc-on-kubernetes" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -249,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/" data-id="cmkwqypgd0004y2ura6bp2t0k" data-title="Deploy kubernetes cluster on virtual machine" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2026/01/05/Deploy-k8s-cluster/" data-id="cmkzmweol0004l4ur5exc33mw" data-title="Deploy kubernetes cluster on virtual machine" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -326,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmkwqypgi000hy2urdj2l81ts" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/" data-id="cmkzmweor000hl4ur6hedgmmn" data-title="PKI and encryption explained step by step" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -471,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmkwqypgk000ty2ur0g41ceyc" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2024/02/21/linux-FS-and-pkg/" data-id="cmkzmweou000ul4uratj9bd4q" data-title="linux FS and pkg" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -554,7 +628,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmkwqypgb0001y2urc50n23uq" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/10/23/Deploy-free5GC-with-k8s-and-helm/" data-id="cmkzmweoj0001l4ur32li8es0" data-title="Deploy free5GC with k8s and helm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -644,7 +718,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmkwqypg80000y2ur4cuzd3xw" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/08/24/Cloud-native-and-its-implementation-in-Telco/" data-id="cmkzmweog0000l4urf2yr24sp" data-title="Cloud native and its implementation in Telco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -776,7 +850,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmkwqypgj000my2urdy89hmf2" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/k8s-templates/" data-id="cmkzmweos000nl4urbl2j51ta" data-title="k8s templates" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -833,7 +907,10 @@
 <li>check logs under <code>/var/log/container</code></li>
 <li>use <code>crictl</code> command <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crictl ps -a</span><br><span class="line">crictl logs container-id</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">docker ps </span><br><span class="line">docker logs</span><br><span class="line"><span class="comment"># </span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="Understand-mountpath-and-host-path"><a href="#Understand-mountpath-and-host-path" class="headerlink" title="Understand mountpath and host path"></a>Understand mountpath and host path</h3><figure class="highlight plaintext"><figcaption><span>path in the actual node</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">```mountPath```: path shown in the container</span><br><span class="line"></span><br><span class="line">Here is the example:</span><br><span class="line"></span><br><span class="line">``` yaml</span><br><span class="line">volumes:</span><br><span class="line">- name: audit-log</span><br><span class="line">  hostPath:</span><br><span class="line">    path: /var/log/k8s-audit</span><br><span class="line"></span><br><span class="line">volumeMounts:</span><br><span class="line">- name: audit-log</span><br><span class="line">  mountPath: /audit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Understand-mountpath-and-host-path"><a href="#Understand-mountpath-and-host-path" class="headerlink" title="Understand mountpath and host path"></a>Understand mountpath and host path</h3><p>Here is the example:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">audit-log</span></span><br><span class="line">  <span class="attr">hostPath:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/var/log/k8s-audit</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumeMounts:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">audit-log</span></span><br><span class="line">  <span class="attr">mountPath:</span> <span class="string">/audit</span></span><br></pre></td></tr></table></figure>
+
+<p>From the above example,<br><em><strong>hostPath</strong></em> is the path in the actual node,<br> <em><strong>mountPath</strong></em> is path shown in the container</p>
 <p>Container only see <code>/audit</code>. On the actual server, the path is <code>/var/log/k8s-audit</code></p>
 <p><strong>One special case is single file mapping:</strong></p>
 <p>Warning: mounting path to a file or vice versa will crash the pod</p>
@@ -843,321 +920,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmkwqypge0005y2ur8kuscc1g" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-K8s-cmds" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/blog/2023/06/05/K8s-cmds/" class="article-date">
-  <time class="dt-published" datetime="2023-06-05T01:57:16.000Z" itemprop="datePublished">2023-06-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/commands/">commands</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/blog/2023/06/05/K8s-cmds/">K8s cmds</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Basic-K8s-Commands"><a href="#Basic-K8s-Commands" class="headerlink" title="Basic K8s-Commands"></a>Basic K8s-Commands</h1><h2 id="Cluster-logs"><a href="#Cluster-logs" class="headerlink" title="Cluster logs"></a>Cluster logs</h2><ul>
-<li>Get cluster nodes logs <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl cluster-info dump --output-directory cluster_info_dump_$(<span class="built_in">uname</span> -n)  -A</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="View-and-modify-kubectl-configs"><a href="#View-and-modify-kubectl-configs" class="headerlink" title="View and modify kubectl configs"></a>View and modify kubectl configs</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl config view</span><br><span class="line"><span class="comment"># file is located in ~/.kube/config</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>change to use other context to access the cluster<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config use-context &lt;name&gt;@&lt;cluster&gt; --kubeconfig /path_to_config_file</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="ETCD-related-commands"><a href="#ETCD-related-commands" class="headerlink" title="ETCD related commands"></a>ETCD related commands</h2><ul>
-<li><p>ETCDCTL version 2</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl backup</span><br><span class="line">etcdctl cluster-health</span><br><span class="line">etcdctl mk</span><br><span class="line">etcdctl <span class="built_in">mkdir</span></span><br><span class="line">etcdctl <span class="built_in">set</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ETCDCTL version 3</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">etcdctl snapshot save </span><br><span class="line">etcdctl endpoint health</span><br><span class="line">etcdctl get</span><br><span class="line">etcdctl put</span><br><span class="line">etcdctl member list  <span class="comment"># check how many nodes are managed by etcd server</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Set version of version</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ETCDCTL_API = 3</span><br></pre></td></tr></table></figure>
-<p><strong>When API version is not set, it is assumed to be set to version 2.</strong></p>
-</li>
-<li><p>For ETCDCTL to authenticate to the ETCD API server, the certificate files are available in the etcd-master.</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--cacert /etc/kubernetes/pki/etcd/ca.crt     </span><br><span class="line">--cert /etc/kubernetes/pki/etcd/server.crt     </span><br><span class="line">--key /etc/kubernetes/pki/etcd/server.key</span><br></pre></td></tr></table></figure>
-
-<p>In total:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> etcd-master -n kube-system -- sh -c <span class="string">&quot;ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key&quot;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>set ETCD snapshot<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># create snapshot for ETCD</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot save snahpshot.db</span><br><span class="line">    <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check status of ETCD</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot status snapshot.db</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>Procedures to restore ETCD from snapshot</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stop api-server</span></span><br><span class="line">    service kube-apiserver stop</span><br><span class="line"><span class="comment"># restore ETCD from snapshot, this created a brand new ETCD cluster</span></span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot restore &lt;snapshot_name&gt; \ </span><br><span class="line">        --data-dir /var/lib/etcd-from-backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify etcd.service under defination file to use the assigned data-dir</span></span><br><span class="line">--data-dir=/var/lib/etcd-from-back-up</span><br><span class="line"></span><br><span class="line">    systemctl daemon-reload</span><br><span class="line">    service kube-apiserver start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>Restore etcd as external server</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># Execute restore on etcd server, same</span></span><br><span class="line">    </span><br><span class="line">    ETCDCTL_API=3 etcdctl \</span><br><span class="line">        snapshot restore &lt;snapshot_name&gt; \ </span><br><span class="line">        --data-dir /var/lib/etcd-from-backup</span><br><span class="line"><span class="comment"># Modify data-dir, make sure owner is correct</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">chown</span> -R etcd:etcd /var/lib/etcd-from-backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Modify configurations</span></span><br><span class="line">    vi etc/systemd/system/etcd.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restart</span></span><br><span class="line">    systemctl daemon-reload</span><br><span class="line">    systemctl restart etcd</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>Check if ETCD is stacked or external server</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n kube-system</span><br><span class="line"><span class="comment"># If etcd is shown as pods in kube-system, then it is stacked ETCD.</span></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">kubectl describe apiserver -n kube-system</span><br><span class="line"><span class="comment"># URL in it shows hos apiserver communicate with ETCD</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Check status on external server</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep -i nels</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Kube-API-commands"><a href="#Kube-API-commands" class="headerlink" title="Kube-API commands"></a>Kube-API commands</h2><ul>
-<li>View api-server thru kubeadm, kubeadm deploys kube-api as a pod in the kube-system namespace on the master node.</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n kube-system</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>view api-server options with kubeadmin</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernets/manifests/kube-apiserver.yaml</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>view api-server options without kubeadmin</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/systemd/system/kube-apiserver.service</span><br></pre></td></tr></table></figure>
-
-<p>checking active process of apiserver by</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-apiserver</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>add username&#x2F;password or token and securely access to api-server (most insecure)</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># add username/password info in .csv</span></span><br><span class="line"><span class="comment"># then specify the related file</span></span><br><span class="line"><span class="string">--basic-auth-file=user_info.csv</span></span><br><span class="line"><span class="comment"># kube-apiserver.service</span></span><br><span class="line"><span class="comment"># or pod defination file under /etc/kubernetes/manifests</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use curl command to securely access to api server</span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url_to_api_server:6443/api/v1/pods</span> <span class="string">--header</span> <span class="string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line"><span class="string">curl</span> <span class="string">-v</span> <span class="string">-k</span> <span class="string">&lt;url&gt;</span> <span class="string">-u</span> <span class="string">&quot;user:pass&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>RBAC related commands</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl get roles</span><br><span class="line">kubectl get rolebindings</span><br><span class="line">kubectl describe role developer</span><br><span class="line">kubectl auth can-i &lt;<span class="built_in">command</span> &gt; --as &lt;usergroup&gt; <span class="comment"># for example create deployments</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Kube-controller-manager"><a href="#Kube-controller-manager" class="headerlink" title="Kube controller manager"></a>Kube controller manager</h2><ul>
-<li>check status with the deployment by kubeadmin</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kube get pods -n kube-system</span><br></pre></td></tr></table></figure>
-<ul>
-<li>view options with kubeadmin</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernetes/manifests/kube-controller-manager.yaml</span><br></pre></td></tr></table></figure>
-<ul>
-<li>view options without kubeadmin</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/systemd/system/kube-controller-manaer.service</span><br></pre></td></tr></table></figure>
-<ul>
-<li>check process of kube controller manager</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-controller-manager</span><br></pre></td></tr></table></figure>
-<ul>
-<li>CSR related command</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get csr</span><br><span class="line">kubectl certificate approve</span><br><span class="line">kubectl get csr &lt;name&gt; -o yaml</span><br></pre></td></tr></table></figure>
-<h2 id="Kube-scheduler"><a href="#Kube-scheduler" class="headerlink" title="Kube-scheduler"></a>Kube-scheduler</h2><ul>
-<li>View kube scheduler thru kubeadm</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/kubernetes/manifests/kube-scheduler.yaml</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Check thru process</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kube-scheduler</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Run-pods"><a href="#Run-pods" class="headerlink" title="Run pods"></a>Run pods</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;name&gt; --image=&lt;image_name&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Check pods location</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o wide</span><br></pre></td></tr></table></figure></li>
-<li><p>Check pods manifest (able to export as yaml) </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods &lt;pods_name&gt; -o yaml</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>apply changes to pod </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f </span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Work-with-replicasets"><a href="#Work-with-replicasets" class="headerlink" title="Work with replicasets"></a>Work with replicasets</h2><ul>
-<li>Create&#x2F;update replicaset</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f desfilename.yaml</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Check status of replicaset</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset &lt;name_of_replicaset&gt;</span><br><span class="line">kubectl describe replicaset name_of_replicaset</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>scale up&#x2F;down without modifying the yaml file.</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale --replicas=6 replicaset (<span class="built_in">type</span>) myapp-replicaset (name <span class="keyword">in</span> the metadata) <span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">kubectl scale --replicas=6 -f desfilename.yaml</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>scale up&#x2F;down by modifying the yaml file first <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get replicaset &lt;name_of_replicaset&gt; -o yaml &gt; something.yaml</span><br><span class="line"></span><br><span class="line">kubectl replace/apply -f something.yaml <span class="comment"># able to recreate node</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Kubelet"><a href="#Kubelet" class="headerlink" title="Kubelet"></a>Kubelet</h2><p>Configuration file of kubelet is located at </p>
-<figure class="highlight plaintext"><figcaption><span>``` or</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```/etc/kubernetes/kubelet.conf ```</span><br><span class="line"></span><br><span class="line">## Deployment</span><br><span class="line"></span><br><span class="line">- create deployment by commands</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">    kubectl create deployment --image=&lt;image_name&gt; &lt;deploy_name&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>by configuration file</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f deploy_des_file.yml</span><br><span class="line">kubectl get deployments</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>edit deployment</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit deployement &lt;name&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>Note that only the following is editable when pod is running.</strong></p>
-<p>  spec.containers[*].image</p>
-<p>  spec.initContainers[*].image</p>
-<p>  spec.activeDeadlineSeconds</p>
-<p>  spec.tolerations</p>
-<p>  spec.terminationGracePeriodSeconds</p>
-</li>
-</ul>
-<h3 id="Generate-deployment-yaml-file-without-creating-it"><a href="#Generate-deployment-yaml-file-without-creating-it" class="headerlink" title="Generate deployment yaml file without creating it"></a>Generate deployment yaml file without creating it</h3><ul>
-<li><p>POD manifest</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;pod_name&gt; --image=&lt;image_name&gt; --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Create Deployment YAML file</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment &lt;deployment_name&gt; --image=&lt;image_name&gt; --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
-
-<h3 id="Check-deployment-rollout-and-update-pods"><a href="#Check-deployment-rollout-and-update-pods" class="headerlink" title="Check deployment rollout and update pods"></a>Check deployment rollout and update pods</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout status deployment/&lt;deployment_name&gt;</span><br><span class="line"></span><br><span class="line">kubectl rollout <span class="built_in">history</span> deployment/&lt;deployment_name&gt; <span class="comment">#Check rollout history</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># update pods</span></span><br><span class="line">kubectl apply -f deployment-definition.yml <span class="comment"># after edit image spec in definination, apply it</span></span><br><span class="line"></span><br><span class="line">kubectl <span class="built_in">set</span> image deployment &lt;deployment_name&gt; \ &lt;image_name:version&gt;</span><br><span class="line"></span><br><span class="line">kubectl rollout undo deployment &lt;deployment_name&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Service-creation"><a href="#Service-creation" class="headerlink" title="Service creation"></a>Service creation</h2><ul>
-<li><p>Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml <span class="comment"># automatically use pods labels as selectors</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Create a Service named nginx of type NodePort to expose pod nginx’s port 80 on port 30080 on the nodes:</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose pod nginx --<span class="built_in">type</span>=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>create service in a imperative way</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose deployment &lt;deploy_name&gt; --port 80</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>able to enable service while creating pods</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run &lt;name&gt; --image=&lt;image_name&gt; --port=&lt;port_name&gt; --expose</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Namaespaces"><a href="#Namaespaces" class="headerlink" title="Namaespaces"></a>Namaespaces</h2><ul>
-<li>To create namespace</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create namespace dev <span class="comment"># or</span></span><br><span class="line">kubectl create -f &lt;namespace_definition.yml&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>To add pod in the certain namespace:</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--namespace=&lt;namespace_name&gt;</span><br></pre></td></tr></table></figure>
-
-<p> Or to add <code>namespace:</code> under  <code>metadata: </code> in the pod definition file.</p>
-<ul>
-<li>To change to other namespace so that no need to add <code>-n &lt;namespace&gt;</code> to see the pods<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl config set-context $(kubectl config current-context) --namespace=dev</span><br></pre></td></tr></table></figure></li>
-<li>To see all the pods in all name space</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods --all-namespaces</span><br></pre></td></tr></table></figure>
-
-<h2 id="Schedulers"><a href="#Schedulers" class="headerlink" title="Schedulers"></a>Schedulers</h2><ul>
-<li>Filter objects by specifying selectors<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get &lt;sth&gt; --selector &lt;sth.&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>-Create configmap</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create configmap --name &lt;configmap_name&gt; --from-file=&lt;PATH_TO_FILE&gt; -n &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="Taint-Node"><a href="#Taint-Node" class="headerlink" title="Taint - Node"></a>Taint - Node</h2><ul>
-<li><p>add taints to nodes</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes &lt;node_name&gt; &lt;keys=values&gt;:&lt;taint-effect&#123;NoSchedule|PreferNoSchedule|NoExecute&#125;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>add tolerations on pods</p>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">tolerations:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;&lt;key&gt;&quot;</span></span><br><span class="line">    <span class="attr">operator:</span> <span class="string">&quot;Equal&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;&lt;value&gt;&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;&lt;taint-effect&gt;&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Node-affinity"><a href="#Node-affinity" class="headerlink" title="Node affinity"></a>Node affinity</h2><h3 id="Node-selector"><a href="#Node-selector" class="headerlink" title="Node selector:"></a>Node selector:</h3><ul>
-<li><p>one way to assign nodes for specific pods by setting label on nodes </p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;pod&gt;</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">nodeSelector:</span></span><br><span class="line">    <span class="attr">size:</span> <span class="string">Large</span></span><br></pre></td></tr></table></figure></li>
-<li><p>then label a node by</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl label nodes &lt;node-name&gt; &lt;label-key&gt;=&lt;label-value&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Node affinity provide more complicated assignment and placement for nodes</p>
-</li>
-</ul>
-<p><strong>Values can be set to blank if operator uses Exists.</strong></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pod definition</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">affinity:</span></span><br><span class="line">    <span class="attr">nodeAffinity:</span></span><br><span class="line">      <span class="attr">requiredDuringSchedulingIgnoredDuringExectuion:</span></span><br><span class="line">        <span class="attr">nodeSelectorTerms:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">matchExpressions:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">size</span></span><br><span class="line">            <span class="attr">operator:</span> <span class="string">In</span>  <span class="comment"># placed on any nodes with values under in </span></span><br><span class="line">            <span class="attr">values:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Large</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Resource-requests"><a href="#Resource-requests" class="headerlink" title="Resource requests"></a>Resource requests</h3><ul>
-<li>allocate resources desirable for pods:<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">&quot;4Gi&quot;</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">2</span></span><br><span class="line">    <span class="attr">limits:</span></span><br><span class="line">      <span class="attr">memory:</span></span><br><span class="line">      <span class="attr">cpu:</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Pod-monitoring"><a href="#Pod-monitoring" class="headerlink" title="Pod monitoring"></a>Pod monitoring</h2><ul>
-<li><p>check memory, cpu</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl top node/pods</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>check logs</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl logs -f &lt;pod_name&gt;</span><br><span class="line">kubectl previous -f &lt;pod_name&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Node-execution"><a href="#Node-execution" class="headerlink" title="Node execution"></a>Node execution</h2><ul>
-<li><p>enable shell in kubernetes</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> --stdin --<span class="built_in">tty</span> &lt;pod_name&gt; &lt;container_name&gt; -n &lt;namespace&gt; -- /bin./bash</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>copy files from local to pods vice versa.</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copy file from pods to local director</span></span><br><span class="line">    kubectl <span class="built_in">cp</span> &lt;namespace&gt;/&lt;pod_name&gt;:/PATH/FILE /LOCAL_PATH/FILE_NAME</span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy file from local to pods</span></span><br><span class="line">    kubectl <span class="built_in">cp</span> /LOCAL_PATH/FILE_NAME &lt;namespace&gt;/&lt;pod_name&gt;:/PATH/FILE </span><br></pre></td></tr></table></figure>
-
-<h2 id="ENV-VAR-and-ConfigMap"><a href="#ENV-VAR-and-ConfigMap" class="headerlink" title="ENV VAR and ConfigMap"></a>ENV VAR and ConfigMap</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">kubectl create configmap \</span><br><span class="line">&lt;config-name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;</span><br><span class="line"></span><br><span class="line">kubectl create configmap \</span><br><span class="line">&lt;config-name&gt; --from-file=&lt;configmap_file_name&gt;</span><br><span class="line"></span><br><span class="line">kubectl create -f cfgmap_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># display configmaps</span></span><br><span class="line">kubectl get/describe &lt;configmap_name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Secrets"><a href="#Secrets" class="headerlink" title="Secrets"></a>Secrets</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create secret using command</span></span><br><span class="line">kubectl create secret generic &lt;secret-name&gt; \</span><br><span class="line">--from-literal=&lt;key&gt;=&lt;value&gt;</span><br><span class="line"></span><br><span class="line">kubectl create secret generic \</span><br><span class="line">&lt;secret-name&gt; --from-file=&lt;secret_file_name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker registry secret</span></span><br><span class="line">kubectl create secret docker-registry &lt;secret-name&gt; \</span><br><span class="line">--docker-server= \</span><br><span class="line">--docker-username= \</span><br><span class="line">--docker-password= \</span><br><span class="line">--docker-email=</span><br></pre></td></tr></table></figure>
-
-<h2 id="Service-account"><a href="#Service-account" class="headerlink" title="Service account"></a>Service account</h2><ul>
-<li>A service account is an account for services like jenkins and Prometheus to perform tasks on clusters<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create service account</span></span><br><span class="line">kubectl create serviceaccount &lt;account_name&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Procedure-for-pods-when-executing-node-graceful-restart"><a href="#Procedure-for-pods-when-executing-node-graceful-restart" class="headerlink" title="Procedure for pods when executing node graceful restart"></a>Procedure for pods when executing node graceful restart</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># drain pod on the nodes you want to perform reboot procedure</span></span><br><span class="line">    kubectl drain --ignore-daemonsets --delete-emptydir-data</span><br><span class="line">    kubectl describe nodes &lt;node-name&gt;</span><br><span class="line">    <span class="comment"># perform node reboot</span></span><br><span class="line">    kubectl uncordon &lt;node_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Kube-storage"><a href="#Kube-storage" class="headerlink" title="Kube storage"></a>Kube storage</h2><ul>
-<li>default directory for docker:</li>
-</ul>
-<p><code>/var/lib/docker </code></p>
-<ul>
-<li>To preserve data for container, always create persistent volume for it<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker volume create &lt;name&gt;</span><br><span class="line">docker run -v &lt;volume_name&gt;:&lt;dir_in_container&gt; &lt;container_name&gt; <span class="comment">#volume mounted on /var/lib/docker/volumes or binding mounting on any directories</span></span><br><span class="line">docker run -v &lt;mounted_path&gt;:&lt;dir_in_container&gt; &lt;container_name&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><ul>
-<li>view kubelet option about CNI<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep kubelet</span><br><span class="line"><span class="built_in">ls</span> /opt/cni/bin</span><br><span class="line"><span class="built_in">ls</span> /etc/cni/net.d</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="JsonPath"><a href="#JsonPath" class="headerlink" title="JsonPath"></a>JsonPath</h2><ol>
-<li>what information you need?<br><code> kubectl get ?</code></li>
-<li>output as json</li>
-<li>check the info and check JSON PATH<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o=json=<span class="string">&#x27;&#123;JSON_PATH&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">kubectl get pods -o=jsonpath=<span class="string">&#x27;&#123; .items[*].metadata.name&#125;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="Prometheus-related-command"><a href="#Prometheus-related-command" class="headerlink" title="Prometheus related command"></a>Prometheus related command</h2><ul>
-<li>View prometheus rules</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get prometheusrules -A </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>View service monitor</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get servicemonitor -A <span class="comment"># Service monitor is attached to service to enable prometheus retrieve metrics for core kubernetes components </span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Helm-related-command"><a href="#Helm-related-command" class="headerlink" title="Helm related command"></a>Helm related command</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">helm list</span><br><span class="line">helm <span class="built_in">history</span> &lt;release_name&gt;</span><br><span class="line">helm upgrade &lt;release_name&gt;</span><br><span class="line">helm rollback &lt;release_name&gt; &lt;version_no&gt; <span class="comment"># helm rollback nginx-release 1 # create a new version with same config as version 1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="List-all-resources-and-explain"><a href="#List-all-resources-and-explain" class="headerlink" title="List all resources and explain"></a>List all resources and explain</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl api-resources</span><br><span class="line">kubectl explain &lt;res&gt;</span><br><span class="line">kubectl explain &lt;res.subfield&gt;</span><br><span class="line">kubectl explain &lt;res&gt; --recursive</span><br><span class="line"><span class="comment"># e.g. kubectl explain pod.spec</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Some-fancy-custom-listing-examples"><a href="#Some-fancy-custom-listing-examples" class="headerlink" title="Some fancy custom listing examples:"></a>Some fancy custom listing examples:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o custom-columns=<span class="string">&quot;NAME:.metadata.name,PRIORITY:.spec.priorityClassName&quot;</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-cmds/" data-id="cmkwqypge0006y2ur6tml2291" data-title="K8s cmds" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://godshy.github.io/blog/2023/06/05/K8s-TS-hints/" data-id="cmkzmweon0006l4ur6fy50nrn" data-title="K8s TS hints" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1196,7 +959,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Cloud-native/" rel="tag">Cloud native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PKI-encryption-TLS/" rel="tag">PKI, encryption, TLS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s-helm/" rel="tag">k8s, helm</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/AWS-K8s/" rel="tag">AWS, K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Cloud-native/" rel="tag">Cloud native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/K8s/" rel="tag">K8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PKI-encryption-TLS/" rel="tag">PKI, encryption, TLS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s-helm/" rel="tag">k8s, helm</a></li></ul>
     </div>
   </div>
 
@@ -1206,7 +969,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/blog/tags/PKI-encryption-TLS/" style="font-size: 10px;">PKI, encryption, TLS</a> <a href="/blog/tags/k8s-helm/" style="font-size: 15px;">k8s, helm</a>
+      <a href="/blog/tags/AWS-K8s/" style="font-size: 10px;">AWS, K8s</a> <a href="/blog/tags/Cloud-native/" style="font-size: 10px;">Cloud native</a> <a href="/blog/tags/K8s/" style="font-size: 20px;">K8s</a> <a href="/blog/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/blog/tags/PKI-encryption-TLS/" style="font-size: 10px;">PKI, encryption, TLS</a> <a href="/blog/tags/k8s-helm/" style="font-size: 15px;">k8s, helm</a>
     </div>
   </div>
 
@@ -1228,6 +991,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2026/01/29/Deploy-kubernetes-and-datadog-on-AWS/">Deploy kubernetes and datadog on AWS</a>
+          </li>
+        
+          <li>
             <a href="/blog/2026/01/22/kubernetes-security/">kubernetes security</a>
           </li>
         
@@ -1241,10 +1008,6 @@
         
           <li>
             <a href="/blog/2024/07/18/PKI-and-encryption-explained-step-by-step/">PKI and encryption explained step by step</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2024/02/21/linux-FS-and-pkg/">linux FS and pkg</a>
           </li>
         
       </ul>
