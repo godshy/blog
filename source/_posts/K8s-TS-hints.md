@@ -55,10 +55,9 @@ spec:
 
 ### Understand mountpath and host path
 
-```hostPath```: path in the actual node
-```mountPath```: path shown in the container
 
 Here is the example:
+
 
 ``` yaml
 volumes:
@@ -69,8 +68,11 @@ volumes:
 volumeMounts:
 - name: audit-log
   mountPath: /audit
-
 ```
+
+From the above example,
+___hostPath___ is the path in the actual node,
+ ___mountPath___ is path shown in the container
 
 Container only see ```/audit```. On the actual server, the path is ```/var/log/k8s-audit```
 
