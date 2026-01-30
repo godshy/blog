@@ -355,6 +355,7 @@ init_config:
      file_system_global_exclude:
        - tmpfs
        - overlay
+       - tracefs
 
 
 ```
@@ -365,33 +366,154 @@ systemctl restart datadog-agent
 journactl -f -u datadog-agent
 ```
 
+Check dashboard is able to display metrics.
+![datadog dashboard.png](https://s2.loli.net/2026/01/30/UkGBAKfHna2jbQM.png)
 
-Another problem I met is 
-![stuck.png](https://s2.loli.net/2026/01/30/6e4njV5OwYlMZtT.png)
-Agent cannot connect to datadog site..
-I am using ap1.datadoghq.com but looks like ap1 is not reachable...
-So I changed to other datadog site
+We can test monitor to see if threshold alarm will be triggered.
+
+![datadog monitor.png](https://s2.loli.net/2026/01/30/Fz5dvWEpJOGRbxk.png)
+
+Click CPU usage list, then click edit, adjust aler level and warning level to 50 and 40.
+![monitor setting.png](https://s2.loli.net/2026/01/30/OgtLkmsnvHGTQqp.png)
+
+On master node execute following command then wait and see status
+``` bash
+yes > /dev/null &
+```
+
+Warning is triggered successfully.
+![monitor warn.png](https://s2.loli.net/2026/01/30/ML9prvAbZ2fGKlU.png)
+
+Alert is triggered successfully.
+
+![alert cpu.png](https://s2.loli.net/2026/01/30/ZDxqNMbSV4KicAT.png)
+
+Edit datadog agent config file  ``` /etc/datadog-agent/datadog.yaml ```
+
+Uncomment following contents and restart agent, live process should be also able to monitored on dashboard.
+``` bash
+#
+ process_config:
+
+#   # @param process_collection - custom object - optional
+#   # Specifies settings for collecting processes.
+   process_collection:
+#     # @param enabled - boolean - optional - default: false
+#     # Enables collection of information about running processes.
+     enabled: true
+
+```
+![live process.png](https://s2.loli.net/2026/01/30/k4TWFeUPijrS5BO.png)
+#### Datadog agent installation on kubernetes
+Go to integrations -> install agents, choose container platforms then choose self managed(because we are deploying on self-made kubernetes cluster instead of EKS), select a API key and follow the command
+
+![install new agents.png](https://s2.loli.net/2026/01/30/hzJnq6lQjTBaLo7.png)
+![kubernetes agent install.png](https://s2.loli.net/2026/01/30/nNs5oiRFSEdJxqg.png)
+
+
+On master node, execute following command:
+
+``` bash
+### Install helm
+ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+ chmod 700 get_helm.sh
+ ./get_helm.sh
+
+ ### Pull datadog deployment
+ubuntu@ec2-master:~$ helm repo add datadog https://helm.datadoghq.com
+helm install datadog-operator datadog/datadog-operator
+kubectl create secret generic datadog-secret --from-literal api-key=<API-KEY>
+"datadog" has been added to your repositories
+NAME: datadog-operator
+LAST DEPLOYED: Fri Jan 30 12:57:36 2026
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+##############################################################################
+####               WARNING: Upcoming metadata change in Operator 1.21.    ####
+##############################################################################
+
+We are changing Datadog Agent daemonset and pod metadata handling in upcoming releases.
+Please check Operator README for more details https://github.com/DataDog/datadog-operator/blob/main/README.md
+secret/datadog-secret created
+```
+
+Modify observability to add some fancy features. Like pod traffic monitoring.
+![customize observability coverage.png](https://s2.loli.net/2026/01/30/mQxZ7EqYdHW4nUJ.png)
+
+Create a yaml file on master node and copy paste what was generated automatically 
+
+``` yaml
+kind: "DatadogAgent"
+apiVersion: "datadoghq.com/v2alpha1"
+metadata:
+  name: "datadog"
+spec:
+  global:
+    clusterName: "your-cluster-name-here"
+    site: "ap1.datadoghq.com"
+    credentials:
+      apiSecret:
+        secretName: "datadog-secret"
+        keyName: "api-key"
+    tags:
+      - "env:dev"
+  features:
+    clusterChecks:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+    apm:
+      instrumentation:
+        enabled: true
+        targets:
+          - name: "default-target"
+            ddTraceVersions:
+              java: "1"
+              python: "4"
+              js: "5"
+              php: "1"
+              dotnet: "3"
+              ruby: "2"
+            ddTraceConfigs:
+              - name: "DD_DATA_STREAMS_ENABLED"
+                value: "true"
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+    usm:
+      enabled: true
+    npm:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+```
+
+Then apply the yaml, pod should be up and running
 ``` bash
 
-root@ec2-master:/etc/datadog-agent# cat datadog.yaml | grep -i ap1
-## Set to 'ap1.datadoghq.com' to send data to the AP1 site.
-site: ap1.datadoghq.com
-## The site parameter must be set to enable your agent with Remote Configuration.
-## Set to 'datadoghq.eu' to send data to the EU site.
-## Set to 'us3.datadoghq.com' to send data to the US3 site.
-## Set to 'us5.datadoghq.com' to send data to the US5 site.
-## Set to 'ap1.datadoghq.com' to send data to the AP1 site.
-## Set to 'ddog-gov.com' to send data to the US1-FED site.
+kubectl apply -f datadog-agent.yaml
+ubuntu@ec2-master:~$ kubectl get daemonset
+NAME            DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+datadog-agent   2         2         0       2            0           <none>          42s
+ubuntu@ec2-master:~$ kubectl get pod -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE     IP                NODE      NOMINATED NODE   READINESS GATES
+datadog-agent-mf9sh                    4/4     Running   0          52s     192.168.235.134   worker1   <none>           <none>
+datadog-agent-tgdj8                    4/4     Running   0          52s     192.168.189.70    worker2   <none>           <none>
+datadog-cluster-agent-bcc776fb-bbzqw   1/1     Running   0          52s     192.168.235.133   worker1   <none>           <none>
+datadog-operator-546f64898c-2p56c      1/1     Running   0          5m58s   192.168.189.69    worker2   <none>           <none
+```
 
-PING ap1.datadoghq.com (43.206.164.131) 56(84) bytes of data.
-^C
---- ap1.datadoghq.com ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
+Check datadog-agent pod logs, found a lot of error, seems it cannot connect to kubelet:
+``` bash
+2026-01-30 13:11:40 UTC | CORE | WARN | (pkg/collector/corechecks/containers/kubelet/kubelet.go:161 in Run) | check:kubelet | Error initialising check: temporary failure in kubeutil, will retry later: impossible to reach Kubelet with host: 172.31.17.126. Please check if your setup requires kubelet_tls_verify = false. Activate debug logs to see all attempts made
+2026-01-30 13:11:40 UTC | CORE | ERROR | (pkg/collector/worker/check_logger.go:71 in Error) | check:kubelet | Error running check: temporary failure in kubeutil, will retry later: impossible to reach Kubelet with host: 172.31.17.126. Please check if your setup requires kubelet_tls_verify = false. Activate debug logs to see all attempts made
+```
 
-root@ec2-master:/etc/datadog-agent# ping us5.datadoghq.com
-PING us5.datadoghq.com (34.149.66.147) 56(84) bytes of data.
-64 bytes from 147.66.149.34.bc.googleusercontent.com (34.149.66.147): icmp_seq=1 ttl=114 time=1.03 ms
-64 bytes from 147.66.149.34.bc.googleusercontent.com (34.149.66.147): icmp_seq=2 ttl=114 time=1.02 ms
-^C
-
+I added following env value in datadog agent daemonset environment value settings. Errors were stopped
+``` bash
+        - name: DD_KUBELET_TLS_VERIFY
+          value: "false"
 ```
